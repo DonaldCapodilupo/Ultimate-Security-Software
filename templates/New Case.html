@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Case</title>
+
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/Witness-Statement-Form.css">
+    <script src="../static/js/main.js"></script>
+
+</head>
+<body>
+
+<form action="{{ url_for('create_New_Case') }}" enctype=multipart/form-data method="POST">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center" id="Business Header"></div>
+        </div>
+
+        <div class="row mt-3 border border-dark text-center">
+            <h1><b>Create New Case</b></h1>
+        </div>
+
+        <div class="row mt-3">
+
+            <div class="col">
+
+                <label for="Returning Customer Name">Enter Customer Name:</label>
+                <input type="text" id="Returning Customer Name" list="Returning Customer Names"/>
+
+                <datalist id="Returning Customer Names">
+                    {% for customer in list_of_customers %}
+                        <option>{{ customer }}</option>
+                    {% endfor %}
+
+
+                </datalist>
+            </div>
+
+
+            <div class="col">
+                <label for="Investigation Type">Investigation Type?</label>
+                <select id="Investigation Type" class="form-select">
+                    <option value="BGINV">Background Investigation</option>
+                    <option value="INTINV">Internal Investigation</option>
+                    <option value="EXINV">External Investigation</option>
+                    <option value="EVIDENCE">Evidence Gathering</option>
+                    <option value="ASSETLOC">Asset Location</option>
+                </select>
+            </div>
+
+            <div class="row mt-2">
+                <div class="row text-center">
+                    <h5><u>What is the purpose of the investigation?</u></h5>
+                </div>
+                <div class="row">
+                    <textarea name="" id="case-purpose" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="row text-center">
+                    <h5><u>What is the scope of the investigation?</u></h5>
+                </div>
+                <div class="row">
+                    <textarea name="" id="case-scope" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+
+
+            <div class="row mt-2">
+                <div class="row text-center">
+                    <h5><u>Are their any legal framework issues that everyone should be aware of?</u></h5>
+                </div>
+                <div class="row">
+                    <textarea name="" id="case-legal-framework" cols="30" rows="5"></textarea>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="row text-center">
+                    <h5><u>Are their any available resources that everyone should be aware of?</u></h5>
+                </div>
+                <div class="row">
+                    <textarea name="" id="case-available-resources" cols="30" rows="5"></textarea>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="row text-center">
+                    <h5><u>Their any risks that everyone should be aware of?</u></h5>
+                </div>
+                <div class="row">
+                    <textarea name="" id="case-risks" cols="30" rows="5"></textarea>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="row text-center">
+                    <h5><u>Are their any recommended investigation techniques?</u></h5>
+                </div>
+                <div class="row">
+                    <textarea name="" id="case-recommended-investigation-techniques" cols="30" rows="5"></textarea>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="row text-center">
+                    <h5><u>What is the communication plan?</u></h5>
+                </div>
+                <div class="row">
+                    <textarea name="" id="case-communication-plan" cols="30" rows="5"></textarea>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</form>
+<script>
+    create_Business_Header();
+</script>
+
+</body>
+</html>

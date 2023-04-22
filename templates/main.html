@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Menu</title>
+
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/Witness-Statement-Form.css">
+    <script src="../static/js/bootstrap.js"></script>
+    <script src="../static/js/main.js"></script>
+
+</head>
+<body>
+
+
+<form action="{{ url_for('main_Menu') }}" enctype=multipart/form-data method="POST">
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col text-center" id="Business Header"></div>
+        </div>
+
+        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="personnel-tab" data-bs-toggle="tab" data-bs-target="#home"
+                        type="button"
+                        role="tab" aria-controls="home" aria-selected="true">Personnel Database
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="car-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                        type="button"
+                        role="tab" aria-controls="profile" aria-selected="false">Vehicle Database
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="other-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                        type="button"
+                        role="tab" aria-controls="contact" aria-selected="false">Investigative Tools
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active grid justify-content-center" id="home" role="tabpanel"
+                 aria-labelledby="personnel-tab">
+                <!--Upload New User -->
+                <h1 class="display-5">Personnel Database</h1>
+                <div class="row">
+                    <div class="col">
+                        <p>Add a new user into the personnel database.
+                            Name is the minimum required to create a new file.
+                        </p>
+
+                    </div>
+                    <div class="col">
+
+                        <button type="submit" name="submit_button" value="add_user"
+                                class="btn btn-primary btn-block mb-4">
+                            Upload New User
+                        </button>
+                    </div>
+                </div>
+                <!--View Users -->
+                <div class="row">
+                    <div class="col">
+                        <p>Choose between all available personnel and see the information available.
+                        </p>
+
+                    </div>
+                    <div class="col">
+                        <button type="submit" name="submit_button" value="view_users"
+                                class="btn btn-primary btn-block mb-4">
+                            View Users
+                        </button>
+                    </div>
+                </div>
+                <!--Update User -->
+                <div class="row">
+                    <div class="col">
+                        <p>Choose between all available personnel and be given the option to update the information.
+                            <b>You can also delete users.</b>
+                        </p>
+
+                    </div>
+                    <div class="col">
+                        <button type="submit" name="submit_button" value="update_user"
+                                class="btn btn-primary btn-block mb-4">
+                            Update User
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="car-tab">
+                <h1 class="display-5">Vehicle Database</h1>
+                <!--Access Vehicle Database User -->
+                <div class="row">
+                    <div class="col">
+                        <p>Access the car database that allows you to upload total vehicle information.</p>
+                    </div>
+                    <div class="col">
+                        <button type="submit" name="submit_button" value="upload_plates_button"
+                                class="btn btn-primary btn-block mb-4">
+                            Upload Plates
+                        </button>
+                    </div>
+                </div>
+                <!--Scan Plates -->
+                <div class="row">
+                    <div class="col">
+                        <p>Run the scanning software to capture plate images and OCR the data..</p>
+                    </div>
+                    <div class="col">
+                        <button type="submit" name="submit_button" value="scan_plates"
+                                class="btn btn-primary btn-block mb-4">
+                            Scan Plates
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!--Other Investigative Functions Tab -->
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="other-tab">
+                <!--Scrape Facebook Likes -->
+                <h1 class="display-5">Other Investigative Tools</h1>
+                <div class="row">
+                    <div class="col">
+                        <p>Run the scanning software to capture plate images and OCR the data.</p>
+                    </div>
+                    <div class="col">
+                        <button type="submit" name="submit_button" value="record_likes_button"
+                                class="btn btn-primary btn-block mb-4">
+                            Record Facebook Likes
+                        </button>
+                    </div>
+                </div>
+
+                <!--Scrape Newspaper Websites -->
+                <div class="row">
+                    <div class="col">
+                        <p>Input newspapers website URL and scrape the text within. Avoids paywalls.</p>
+                    </div>
+                    <div class="col">
+                        <button type="submit" name="submit_button" value="scrape_news_paper"
+                                class="btn btn-primary btn-block mb-4">
+                            Scrape Newspaper Site
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    create_Business_Header()
+</script>
+
+</body>
+</html>

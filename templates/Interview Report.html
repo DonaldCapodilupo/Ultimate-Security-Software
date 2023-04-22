@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interview Report</title>
+
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/Witness-Statement-Form.css">
+    <script src="../static/js/bootstrap.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+
+    <div class="row mt-3 border border-dark p-5">
+
+        <div class="row">
+            <div class="row text-center">
+                <h1><b>Interview Report</b></h1>
+            </div>
+
+            <div class="col text-center">
+                <h3>Capodilupo Investigation's</h3>
+                <h5>15 Elizabeth Rd, Billerica MA 01821</h5>
+            </div>
+
+            <div class="col align-self-end">
+                <h4>Case Number: B17-11201992</h4>
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+            <div class="col-sm-auto">
+                <ul>
+                    <li>
+                        <label for="interviewee">Interviewee</label>
+                        <input type="text" id="interviewee">
+                    </li>
+                    <li>
+                        <label for="interviewer">Conducted By</label>
+                        <input type="text" id="interviewer">
+                    </li>
+                    <li>
+                        <label for="transcriber">Transcribed By</label>
+                        <input type="text" id="transcriber">
+                    </li>
+
+                    <li>
+                        <label for="date">Date</label>
+                        <input type="date" id="date">
+                    </li>
+                </ul>
+
+
+            </div>
+            <div class="col"></div>
+
+            <div class="col">
+                <label for="location">Location</label>
+                <input type="text" id="location">
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-sm-auto">
+                <label for="formFileMultiple" class="form-label"><b>Upload Files Here</b></label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <label for="interview-transcription"><b>Interview Transcription</b></label>
+            <textarea name="" id="interview-transcription" cols="30" rows="10"></textarea>
+        </div>
+
+
+    </div>
+
+</div>
+
+<script>
+
+    function get_Current_Time() {
+        const date = new Date();
+
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        // This arrangement can be altered based on how we want the date's format to appear.
+        let today = year + "-" + month + "-" + day;
+        console.log(today); // "17-6-2022"
+
+        return today;
+    }
+
+    document.getElementById("date").value = get_Current_Time();
+
+
+</script>
+
+
+</body>
+</html>

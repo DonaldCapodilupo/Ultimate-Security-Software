@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BOLO Report</title>
+
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/Witness-Statement-Form.css">
+    <script src="../static/js/bootstrap.js"></script>
+    <script src="../static/js/main.js"></script>
+
+</head>
+<body>
+
+
+<form action="{{ url_for('create_BOLO') }}" enctype=multipart/form-data method="POST">
+    <div class="container">
+        <!--Business Title Row-->
+        <div class="row text-center mt-3" >
+            <div id="Business Header"></div>
+        </div>
+
+        <!--Photo and Information Row-->
+        <div class="row mt-3 border border-dark p-5">
+            <div class="row text-center">
+                <h1>BE ON LOOKOUT FOR</h1>
+                <div class="col align-self-end text-center">
+                    <h5>Incident # {{ data["Incident Number"] }}</h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <img src="../static/images/No%20Photo%20Found.jpg" class="mx-auto d-block" alt=""
+                         style="width:225px;height:375px;">
+                </div>
+
+                <div class="col align-self-center">
+                    <img src="../static/images/No%20Car%20Found.jpg" class="mx-auto d-block" alt=""
+                         style="width:500px;height:300px;">
+                </div>
+
+            </div>
+
+            <div class="row mt-3 text-center">
+                <h2><b>Expires: </b> Upon Interaction</h2>
+                <h3><b>Status: </b> Active</h3>
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <div class="BOLO-Details-Table" id="BOLO Person Details"></div>
+
+                </div>
+
+                <div class="col">
+                    <div class="BOLO-Details-Table" id="BOLO Car Details"></div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!--Submit Button-->
+        <div class="row mt-3 mb-5 text-center">
+            <div class="col"></div>
+            <div class="col">
+                <button class="btn btn-dark mr-2" type="submit" name="submit_button" value="Submit BOLO">
+                    Submit BOLO
+                </button>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+
+</form>
+
+
+<script>
+    create_Business_Header()
+    setup_BOLO_HTML()
+</script>
+
+
+</body>
+</html>
