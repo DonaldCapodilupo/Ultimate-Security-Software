@@ -1,16 +1,14 @@
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, insert
 from sqlalchemy_utils import database_exists, create_database
-from getpass import getpass
 import os
-
-#Required Databases: Cases, People, Vehicles, Activity
 
 def setup_Databases():
     # join the inputs into a complete database url.
     urls = ["sqlite+pysqlite:///Customers.db",
             "sqlite+pysqlite:///Cases.db",
             "sqlite+pysqlite:///Vehicles.db",
-            "sqlite+pysqlite:///People of Interest.db"]
+            "sqlite+pysqlite:///People of Interest.db",
+            "sqlite+pysqlite:///BOLOs.db"]
 
     for url in urls:
         # Create an engine object.
@@ -22,7 +20,7 @@ def setup_Databases():
             meta = MetaData()
 
             if "Customers" in url:
-                new_table = Table(
+                customers_table = Table(
                     'Customer', meta,
                     Column('id', Integer, primary_key=True),
                     Column('first_name', String),
@@ -42,16 +40,17 @@ def setup_Databases():
 
             elif "Cases" in url:
 
-                new_table = Table(
+                cases_table  = Table(
                     'Cases', meta,
                     Column('id', Integer, primary_key=True),
+                    Column('customer', String),
                     Column('case_number', String),
                     Column('investigation_type', String),
 
                 )
 
             elif "Vehicles" in url:
-                new_table = Table(
+                vehicles_table = Table(
                     'Vehicles', meta,
                     Column('id', Integer, primary_key=True),
                     Column('address', String),
@@ -61,8 +60,39 @@ def setup_Databases():
                     Column('license_plate_number', String),
                 )
 
+            elif "BOLOs" in url:
+                bolo_table = Table(
+                    'BOLOs', meta,
+                    Column('id', Integer, primary_key=True),
+                    Column('name', String),
+                    Column('alias', String),
+                    Column('DOB', String),
+                    Column('sex', String),
+                    Column('race', String),
+                    Column('ethnicity', String),
+                    Column('height', String),
+                    Column('weight', String),
+                    Column('hair', String),
+                    Column('eyes', String),
+                    Column('DLB', String),
+                    Column('SSN', String),
+                    Column('LKA', String),
+                    Column('know_associates', String),
+                    Column('vehicle_make', String),
+                    Column('vehicle_model', String),
+                    Column('vehicle_color', String),
+                    Column('vehicle_LKA', String),
+                    Column('vehicle_notable_markings', String),
+                    Column('vehicle_date_last_seen', String),
+                    Column('vehicle_considered_dangerous', String),
+                    Column('vehicle_owner', String),
+                    Column('vehicle_VIN', String),
+
+
+                )
+
             elif "People" in url:
-                new_table = Table(
+                people_table = Table(
                     'People', meta,
                     Column('id', Integer, primary_key=True),
                     Column('last_name', String),
@@ -100,8 +130,6 @@ def setup_Databases():
                     Column('length_of_employment', String),
                     Column('occupation', String),
 
-
-
                 )
 
             meta.create_all(engine)
@@ -112,28 +140,152 @@ def setup_Databases():
 
 
 
-def create_Case(customer, investigation_type):
-    #Get input Case information. Customer - Investigation Type - Numeric Investigation
+def create_Case_Database_Row(customer, investigation_type, case_number):
+    meta_data = MetaData()
+    cases_table = Table(
+        'Cases', meta_data,
+        Column('id', Integer, primary_key=True),
+        Column('customer', String),
+        Column('case_number', String),
+        Column('investigation_type', String),
 
-    investigation_types = {
-        "Background Check":"BGCK",
-        "Political Corruption": "POLCUR",
-        "Gather Dirt":"INTEL"
-    }
+    )
 
-    case_num = 1
+    # db_connection = 'mysql+pymysql://username:pasword@hostname/db_name'
 
-    #Create Case Number Based on case information.
-    case_number = customer[0:3].upper() + "-" + investigation_types[investigation_type] + "-" + str(case_num)
-    print("Creating Case Number: " + case_number)
+    db_connection = 'sqlite+pysqlite:///Cases.db'
+    engine = create_engine(db_connection)
 
-    #Create a case folder. Within case folder create Images folder, DAR's, Relevant BOLO's, Witness statements, POI,
-    os.mkdir(case_number)
+    try:
 
-    case_directories = ["Daily Activity Reports", "Witness Statements", "Images", "People of Interest",
-                        "Vehicles of Interest", "External Evidence"]
+        conn = engine.connect()
 
-    os.chdir(case_number)
+        print('db connected')
 
-    for directory in case_directories:
-        os.mkdir(directory)
+        print('connection object is :{}'.format(conn))
+
+    except:
+
+        print('db not connected')
+
+    meta_data.create_all(engine)
+
+    stmt = (
+        insert(cases_table).
+            values(customer=customer, investigation_type=investigation_type,case_number=case_number )
+    )
+    conn.execute(stmt)
+    conn.commit()
+    #with create_engine("sqlite+pysqlite:///Cases.db", ).connect() as conn:
+    #    result = conn.execute(
+
+def create_BOLO_Database_Row(data_dict):
+    meta_data = MetaData()
+    bolo_table = Table(
+        'BOLOs', meta,
+        Column('id', Integer, primary_key=True),
+        Column('name', String),
+        Column('alias', String),
+        Column('DOB', String),
+        Column('sex', String),
+        Column('race', String),
+        Column('ethnicity', String),
+        Column('height', String),
+        Column('weight', String),
+        Column('hair', String),
+        Column('eyes', String),
+        Column('DLB', String),
+        Column('SSN', String),
+        Column('LKA', String),
+        Column('know_associates', String),
+        Column('vehicle_make', String),
+        Column('vehicle_model', String),
+        Column('vehicle_color', String),
+        Column('vehicle_LKA', String),
+        Column('vehicle_notable_markings', String),
+        Column('vehicle_date_last_seen', String),
+        Column('vehicle_considered_dangerous', String),
+        Column('vehicle_owner', String),
+        Column('vehicle_VIN', String),)
+
+    db_connection = 'sqlite+pysqlite:///BOLOs.db'
+    engine = create_engine(db_connection)
+
+    try:
+
+        conn = engine.connect()
+
+        print('db connected')
+
+        print('connection object is :{}'.format(conn))
+
+    except:
+
+        print('db not connected')
+
+    meta_data.create_all(engine)
+
+    stmt = (
+        insert(bolo_table).
+            values(customer=customer, investigation_type=investigation_type, case_number=case_number)
+    )
+    conn.execute(stmt)
+    conn.commit()
+
+
+def create_Case(case_number):
+        # Get input Case information. Customer - Investigation Type - Numeric Investigation
+
+
+
+
+        print("Creating Case Number: " + case_number)
+
+        # Create a case folder. Within case folder create Images folder, DAR's, Relevant BOLO's, Witness statements, POI,
+        os.mkdir(case_number)
+
+        case_directories = ["Daily Activity Reports", "Witness Statements", "Images", "People of Interest",
+                            "Vehicles of Interest", "External Evidence"]
+
+        os.chdir(case_number)
+
+        for directory in case_directories:
+            os.mkdir(directory)
+
+
+
+class HTML_To_Database:
+    def __init__(self, table_name, dict_of_values):
+        self.table_name = table_name
+        self.dict_of_values = {column_title.replace(" ","_"): value for column_title, value in dict_of_values.items()}
+        meta_data = MetaData()
+
+        print(self.dict_of_values)
+
+
+        db_connection = 'sqlite+pysqlite:///'+self.table_name+'.db'
+        engine = create_engine(db_connection)
+
+
+
+        table = Table(
+            self.table_name, meta_data,
+            Column('id', Integer, primary_key=True),
+            *(Column(rowname.replace(" ","_"), String()) for rowname in dict_of_values.keys()),
+
+        )
+
+
+        # Create database if it does not exist.
+        if not database_exists(engine.url):
+            meta_data.create_all(engine)
+
+        conn = engine.connect()
+
+        stmt = (
+            insert(table).
+                values(self.dict_of_values)
+        )
+        conn.execute(stmt)
+        conn.commit()
+

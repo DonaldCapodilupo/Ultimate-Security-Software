@@ -26,7 +26,8 @@
             <div class="col">
 
                 <label for="Returning Customer Name">Enter Customer Name:</label>
-                <input type="text" id="Returning Customer Name" list="Returning Customer Names"/>
+                <input type="text" id="Returning Customer Name" name="Customer Name" list="Returning Customer Names"
+                       onclick="case_Number_Generator()"/>
 
                 <datalist id="Returning Customer Names">
                     {% for customer in list_of_customers %}
@@ -40,7 +41,7 @@
 
             <div class="col">
                 <label for="Investigation Type">Investigation Type?</label>
-                <select id="Investigation Type" class="form-select">
+                <select id="Investigation Type" name="Investigation Type" class="form-select" onchange="case_Number_Generator()">
                     <option value="BGINV">Background Investigation</option>
                     <option value="INTINV">Internal Investigation</option>
                     <option value="EXINV">External Investigation</option>
@@ -54,7 +55,7 @@
                     <h5><u>What is the purpose of the investigation?</u></h5>
                 </div>
                 <div class="row">
-                    <textarea name="" id="case-purpose" cols="30" rows="10"></textarea>
+                    <textarea name="case-purpose" id="case-purpose" cols="30" rows="10"></textarea>
                 </div>
             </div>
 
@@ -63,7 +64,7 @@
                     <h5><u>What is the scope of the investigation?</u></h5>
                 </div>
                 <div class="row">
-                    <textarea name="" id="case-scope" cols="30" rows="10"></textarea>
+                    <textarea name="case-scope" id="case-scope" cols="30" rows="10"></textarea>
                 </div>
             </div>
 
@@ -73,7 +74,7 @@
                     <h5><u>Are their any legal framework issues that everyone should be aware of?</u></h5>
                 </div>
                 <div class="row">
-                    <textarea name="" id="case-legal-framework" cols="30" rows="5"></textarea>
+                    <textarea name="case-legal-framework" id="case-legal-framework" cols="30" rows="5"></textarea>
                 </div>
             </div>
 
@@ -82,7 +83,7 @@
                     <h5><u>Are their any available resources that everyone should be aware of?</u></h5>
                 </div>
                 <div class="row">
-                    <textarea name="" id="case-available-resources" cols="30" rows="5"></textarea>
+                    <textarea name="case-available-resources" id="case-available-resources" cols="30" rows="5"></textarea>
                 </div>
             </div>
 
@@ -91,7 +92,7 @@
                     <h5><u>Their any risks that everyone should be aware of?</u></h5>
                 </div>
                 <div class="row">
-                    <textarea name="" id="case-risks" cols="30" rows="5"></textarea>
+                    <textarea name="case-risks" id="case-risks" cols="30" rows="5"></textarea>
                 </div>
             </div>
 
@@ -100,7 +101,7 @@
                     <h5><u>Are their any recommended investigation techniques?</u></h5>
                 </div>
                 <div class="row">
-                    <textarea name="" id="case-recommended-investigation-techniques" cols="30" rows="5"></textarea>
+                    <textarea name="case-recommended-investigation-techniques" id="case-recommended-investigation-techniques" cols="30" rows="5"></textarea>
                 </div>
             </div>
 
@@ -109,10 +110,25 @@
                     <h5><u>What is the communication plan?</u></h5>
                 </div>
                 <div class="row">
-                    <textarea name="" id="case-communication-plan" cols="30" rows="5"></textarea>
+                    <textarea name="case-communication-plan" id="case-communication-plan" cols="30" rows="5"></textarea>
                 </div>
             </div>
 
+            <div class="row">
+                <input type="text" style="visibility: hidden" name="Case Number" id="generated_case_number">
+            </div>
+
+
+            <!--Submit Button-->
+            <div class="row mt-3 mb-5 text-center">
+                <div class="col"></div>
+                <div class="col">
+                    <button class="btn btn-dark mr-2" type="submit" name="submit_button" value="Submit New Case">
+                        Submit New Case
+                    </button>
+                </div>
+                <div class="col"></div>
+            </div>
 
         </div>
 
@@ -121,6 +137,9 @@
 </form>
 <script>
     create_Business_Header();
+    setup_Case_Number_Generator()
+    case_Number_Generator();
+
 </script>
 
 </body>

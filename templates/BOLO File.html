@@ -13,7 +13,7 @@
 <body>
 
 
-<form action="{{ url_for('create_BOLO') }}" enctype=multipart/form-data method="POST">
+<form action="{{ url_for('create_BOLO', case_number=case_num) }}" enctype=multipart/form-data method="POST">
     <div class="container">
         <!--Business Title Row-->
         <div class="row text-center mt-3" >
@@ -25,7 +25,7 @@
             <div class="row text-center">
                 <h1>BE ON LOOKOUT FOR</h1>
                 <div class="col align-self-end text-center">
-                    <h5>Incident # {{ data["Incident Number"] }}</h5>
+                    <h5>Incident # {{ case_num }}</h5>
                 </div>
             </div>
 
