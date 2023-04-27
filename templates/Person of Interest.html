@@ -13,463 +13,478 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="row text-center mt-3">
+<form action="{{ url_for('create_Person_Of_Interest_Report', case_number=case_num) }}" enctype=multipart/form-data
+      method="POST">>
+
+    <div class="container">
+        <div class="row text-center mt-3">
 
 
-        <div id="Business Header"></div>
-
-
-    </div>
-
-    <div class="row mt-3 border border-dark p-5">
-        <div class="row">
-            <div class="col">
-                <h1>Person of Interest</h1>
-            </div>
-
-            <div class="col align-self-end text-center">
-                <h5>Incident # B17-11201992</h5>
-            </div>
+            <div id="Business Header"></div>
 
 
         </div>
 
-        <div class="row mt-3">
-            <div class="col">
-                <label for="last-name">Last Name</label>
-                <input type="text" id="last-name">
+        <div class="row mt-3 border border-dark p-5">
+            <div class="row">
+                <div class="col">
+                    <h1>Person of Interest</h1>
+                </div>
+
+                <div class="col align-self-end text-center">
+                    <h5>Incident # {{ case_num }}</h5>
+                </div>
+
 
             </div>
 
-            <div class="col">
-                <label for="first-name">First Name</label>
-                <input type="text" id="first-name">
+            <div class="row mt-3">
+                <div class="col">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name">
+
+                </div>
+
+                <div class="col">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name">
+
+                </div>
+
+                <div class="col">
+                    <label for="middle-name">Middle Name</label>
+                    <input type="text" id="middle-name">
+
+                </div>
 
             </div>
 
-            <div class="col">
-                <label for="middle-name">Middle Name</label>
-                <input type="text" id="middle-name">
+            <div class="row mt-3">
+                <div class="col">
+                    <label for="home-address">Home Address</label>
+                    <input type="text" id="home-address">
+
+                </div>
+
+                <div class="col">
+                    <label for="city">City</label>
+                    <input type="text" id="city">
+
+                </div>
+
+                <div class="col">
+                    <label for="state">State</label>
+                    <input type="text" id="state">
+
+                </div>
+
+            </div>
+
+            <div class="row mt-3">
+                <div class="col">
+                    <label for="phone-number">Phone Number</label>
+                    <input type="text" id="phone-number">
+
+                </div>
+
+                <div class="col">
+                    <label for="drivers-licence">Drivers License Number</label>
+                    <input type="text" id="drivers-licence">
+
+                </div>
+
+                <div class="col">
+                    <label for="marital-status">Marital Status</label>
+                    <input type="text" id="marital-status">
+
+                </div>
+                <div class="col">
+                    <label for="date-of-birth">Date of Birth</label>
+                    <input type="date" id="date-of-birth">
+
+                </div>
+
+                <div class="col">
+                    <label for="place-of-birth">Place of Birth</label>
+                    <input type="text" id="place-of-birth">
+
+                </div>
+
+
+            </div>
+
+            <div class="row mt-3">
+                <div class="col">
+                    <label for="age">Age</label>
+                    <input type="text" id="age">
+
+                </div>
+
+                <div class="col">
+                    <label for="sex">Sex</label>
+                    <select name="sex" id="sex" class="form-select">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                </div>
+
+                <div class="col">
+                    <label for="ethnicity">Race</label>
+                    <select name="ethnicity" id="ethnicity" class="form-select">
+                        <option value="white">White</option>
+                        <option value="african-american">African American</option>
+                        <option value="asian">Asian</option>
+                        <option value="native-american">Native American</option>
+                        <option value="native-american">Pacific Islander</option>
+                    </select>
+
+                </div>
+
+                <div class="col">
+                    <label for="height">Height</label>
+                    <input type="text" id="height">
+
+                </div>
+
+                <div class="col">
+                    <label for="weight">Weight</label>
+                    <input type="text" id="weight">
+
+                </div>
+
+                <div class="col">
+                    <label for="hair-color">Hair Color</label>
+                    <input type="text" id="hair-color">
+
+                </div>
+
+
+                <div class="col">
+                    <label for="eye-color">Eye Color</label>
+                    <select name="ethnicity" id="eye-color" class="form-select">
+                        <option value="amber">Amber</option>
+                        <option value="blue">Blue</option>
+                        <option value="brown">Brown</option>
+                        <option value="gray">Gray</option>
+                        <option value="green">Green</option>
+                        <option value="hazel">Hazel</option>
+                        <option value="red">Red</option>
+                    </select>
+
+                </div>
+
+
+                <div class="col">
+                    <label for="shoe-size">Shoe Size</label>
+                    <input type="number" id="shoe-size">
+
+                </div>
+
+
+                <div class="col">
+                    <label for="dominant-hand">Dominant Hand</label>
+                    <select name="ethnicity" id="dominant-hand" class="form-select">
+                        <option value="left">Right</option>
+                        <option value="right">Left</option>
+                    </select>
+
+                </div>
+
+                <div class="col">
+                    <label for="disability">Disability</label>
+                    <input type="text" id="disability">
+
+                </div>
+
+                <div class="col">
+                    <label for="identifiable-marks">Scars - Marks - Tattoos</label>
+                    <input type="text" id="identifiable-marks">
+
+                </div>
+
+
+            </div>
+
+            <div class="row mt-3">
+                <div class="col">
+                    <label for="prior-military-experience">Prior Military Experience</label>
+                    <input type="text" id="prior-military-experience">
+
+                </div>
+
+                <div class="col">
+                    <label for="martial-arts-experience">Martial Arts/Combat Experience</label>
+                    <input type="text" id="martial-arts-experience">
+
+                </div>
+
+
+                <div class="col">
+                    <label for="firearm-owner">Own a Firearm</label>
+                    <input type="text" id="firearm-owner" value="None">
+
+                </div>
+
+                <div class="col">
+                    <label for="prior-arrest">Prior Arrest</label>
+                    <input type="text" id="prior-arrest">
+
+                </div>
+
+            </div>
+
+            <div class="row mt-3">
+
+                <div class="col-sm-auto">
+                    <label for="prior-felony">Prior Felony</label>
+                    <input type="text" id="prior-felony">
+
+                </div>
+
+                <div class="col-sm-auto">
+                    <label for="outstanding-warrants">Outstanding Warrants</label>
+                    <input type="text" id="outstanding-warrants">
+
+                </div>
+
+                <div class="col-sm-auto">
+                    <label for="is-currently-under-investigation">Currently Under Investigation</label>
+                    <input type="text" id="is-currently-under-investigation">
+
+                </div>
+
+            </div>
+
+            <div class="row mt-3">
+                <div class="col">
+                    <label for="employer">Employer</label>
+                    <input type="text" id="employer">
+                </div>
+
+                <div class="col">
+                    <label for="work-phone">Work Phone</label>
+                    <input type="text" id="work-phone">
+                </div>
+
+
+                <div class="col">
+                    <label for="employer-address">Employer's Address</label>
+                    <input type="text" id="employer-address">
+                </div>
+
+                <div class="col">
+                    <label for="employment-length">Length of Employment</label>
+                    <input type="number" id="employment-length" step='0.1' value='0.0' placeholder='0.0'>
+                </div>
+
+                <div class="col">
+                    <label for="occupation">Occupation</label>
+                    <input type="text" id="occupation">
+                </div>
+
+            </div>
+
+            <div class="row mt-3">
+                <div class="row text-center">
+                    <h5>MOTOR VEHICLE</h5>
+                </div>
+
+                <div class="col">
+                    <label for="vehicle-year">Year</label>
+                    <input type="text" id="vehicle-year">
+
+                </div>
+                <div class="col">
+                    <label for="vehicle-make">Make</label>
+                    <input type="text" id="vehicle-make">
+
+                </div>
+
+                <div class="col">
+                    <label for="vehicle-model">Model</label>
+                    <input type="text" id="vehicle-year">
+
+                </div>
+
+
+                <div class="col">
+                    <label for="vehicle-license-plate-number">License Plate</label>
+                    <input type="text" id="vehicle-license-plate-number">
+
+                </div>
+
+                <div class="col">
+                    <label for="vehicle-VIN">VIN</label>
+                    <input type="text" id="vehicle-VIN">
+
+                </div>
+
 
             </div>
 
         </div>
 
-        <div class="row mt-3">
-            <div class="col">
-                <label for="home-address">Home Address</label>
-                <input type="text" id="home-address">
+        <div class="row mt-3 border border-dark p-5">
+            <div class="row">
+                <div class="col-sm-auto">
+                    <h5><b>INDIVIDUAL STATEMENT</b></h5>
+                </div>
+                <div class="col">
+                    <p>In the space below, describe your whereabouts on the date and the time of the incident.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-auto">
+                    <label for="incident-date">Date of Incident</label>
+                    <input type="text" id="incident-date">
+                </div>
+
+                <div class="col-sm-auto">
+                    <label for="incident-time">Time of Incident</label>
+                    <input type="time" id="incident-time">
+                </div>
 
             </div>
 
-            <div class="col">
-                <label for="city">City</label>
-                <input type="text" id="city">
-
+            <div class="row mt-2">
+                <label for="incident-description">Description</label>
+                <textarea name="" id="incident-description" cols="30" rows="10"></textarea>
             </div>
 
-            <div class="col">
-                <label for="state">State</label>
-                <input type="text" id="state">
+            <div class="row mt-3">
+                <div class="row text-center">
+                    <h5>Individual(s) who can confirm your whereabouts at the date and time of the incident.</h5>
+                </div>
+
+                <div class="col">
+                    <label for="eye-witness-1-name">Name</label>
+                    <input type="text" id="eye-witness-1-name">
+                </div>
+
+                <div class="col">
+                    <label for="eye-witness-1-relationship">Relationship</label>
+                    <input type="text" id="eye-witness-1-relationship">
+                </div>
+
+                <div class="col">
+                    <label for="eye-witness-1-phone-number">Phone Number</label>
+                    <input type="text" id="eye-witness-1-phone-number">
+                </div>
+
+                <div class="col">
+                    <label for="eye-witness-1-address">Address</label>
+                    <input type="text" id="eye-witness-1-address">
+                </div>
+
+                <div class="col">
+                    <label for="eye-witness-1-notes">Notes</label>
+                    <input type="text" id="eye-witness-1-notes">
+                </div>
 
             </div>
+            <div class="row mt-3">
 
-        </div>
+                <div class="col">
+                    <label for="eye-witness-2-name">Name</label>
+                    <input type="text" id="eye-witness-2-name">
+                </div>
 
-        <div class="row mt-3">
-            <div class="col">
-                <label for="phone-number">Phone Number</label>
-                <input type="text" id="phone-number">
+                <div class="col">
+                    <label for="eye-witness-2-relationship">Relationship</label>
+                    <input type="text" id="eye-witness-2-relationship">
+                </div>
 
-            </div>
+                <div class="col">
+                    <label for="eye-witness-2-phone-number">Phone Number</label>
+                    <input type="text" id="eye-witness-2-phone-number">
+                </div>
 
-            <div class="col">
-                <label for="drivers-licence">Drivers License Number</label>
-                <input type="text" id="drivers-licence">
+                <div class="col">
+                    <label for="eye-witness-2-address">Address</label>
+                    <input type="text" id="eye-witness-2-address">
+                </div>
 
-            </div>
-
-            <div class="col">
-                <label for="marital-status">Marital Status</label>
-                <input type="text" id="marital-status">
-
-            </div>
-            <div class="col">
-                <label for="date-of-birth">Date of Birth</label>
-                <input type="date" id="date-of-birth">
-
-            </div>
-
-            <div class="col">
-                <label for="place-of-birth">Place of Birth</label>
-                <input type="text" id="place-of-birth">
-
-            </div>
-
-
-        </div>
-
-        <div class="row mt-3">
-            <div class="col">
-                <label for="age">Age</label>
-                <input type="text" id="age">
-
-            </div>
-
-            <div class="col">
-                <label for="sex">Sex</label>
-                <select name="sex" id="sex" class="form-select">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-
-            </div>
-
-            <div class="col">
-                <label for="ethnicity">Race</label>
-                <select name="ethnicity" id="ethnicity" class="form-select">
-                    <option value="white">White</option>
-                    <option value="african-american">African American</option>
-                    <option value="asian">Asian</option>
-                    <option value="native-american">Native American</option>
-                    <option value="native-american">Pacific Islander</option>
-                </select>
-
-            </div>
-
-            <div class="col">
-                <label for="height">Height</label>
-                <input type="text" id="height">
-
-            </div>
-
-            <div class="col">
-                <label for="weight">Weight</label>
-                <input type="text" id="weight">
-
-            </div>
-
-            <div class="col">
-                <label for="hair-color">Hair Color</label>
-                <input type="text" id="hair-color">
-
-            </div>
-
-
-            <div class="col">
-                <label for="eye-color">Eye Color</label>
-                <select name="ethnicity" id="eye-color" class="form-select">
-                    <option value="amber">Amber</option>
-                    <option value="blue">Blue</option>
-                    <option value="brown">Brown</option>
-                    <option value="gray">Gray</option>
-                    <option value="green">Green</option>
-                    <option value="hazel">Hazel</option>
-                    <option value="red">Red</option>
-                </select>
-
-            </div>
-
-
-            <div class="col">
-                <label for="shoe-size">Shoe Size</label>
-                <input type="number" id="shoe-size">
-
-            </div>
-
-
-            <div class="col">
-                <label for="dominant-hand">Dominant Hand</label>
-                <select name="ethnicity" id="dominant-hand" class="form-select">
-                    <option value="left">Right</option>
-                    <option value="right">Left</option>
-                </select>
-
-            </div>
-
-            <div class="col">
-                <label for="disability">Disability</label>
-                <input type="text" id="disability">
-
-            </div>
-
-            <div class="col">
-                <label for="identifiable-marks">Scars - Marks - Tattoos</label>
-                <input type="text" id="identifiable-marks">
-
-            </div>
-
-
-        </div>
-
-        <div class="row mt-3">
-            <div class="col">
-                <label for="prior-military-experience">Prior Military Experience</label>
-                <input type="text" id="prior-military-experience">
-
-            </div>
-
-            <div class="col">
-                <label for="martial-arts-experience">Martial Arts/Combat Experience</label>
-                <input type="text" id="martial-arts-experience">
-
-            </div>
-
-
-            <div class="col">
-                <label for="firearm-owner">Own a Firearm</label>
-                <input type="text" id="firearm-owner" value="None">
-
-            </div>
-
-            <div class="col">
-                <label for="prior-arrest">Prior Arrest</label>
-                <input type="text" id="prior-arrest">
+                <div class="col">
+                    <label for="eye-witness-2-notes">Notes</label>
+                    <input type="text" id="eye-witness-2-notes">
+                </div>
 
             </div>
 
         </div>
 
-        <div class="row mt-3">
 
-            <div class="col-sm-auto">
-                <label for="prior-felony">Prior Felony</label>
-                <input type="text" id="prior-felony">
-
-            </div>
-
-            <div class="col-sm-auto">
-                <label for="outstanding-warrants">Outstanding Warrants</label>
-                <input type="text" id="outstanding-warrants">
-
-            </div>
-
-            <div class="col-sm-auto">
-                <label for="is-currently-under-investigation">Currently Under Investigation</label>
-                <input type="text" id="is-currently-under-investigation">
-
-            </div>
-
-        </div>
-
-        <div class="row mt-3">
-            <div class="col">
-                <label for="employer">Employer</label>
-                <input type="text" id="employer">
-            </div>
-
-            <div class="col">
-                <label for="work-phone">Work Phone</label>
-                <input type="text" id="work-phone">
-            </div>
-
-
-            <div class="col">
-                <label for="employer-address">Employer's Address</label>
-                <input type="text" id="employer-address">
-            </div>
-
-            <div class="col">
-                <label for="employment-length">Length of Employment</label>
-                <input type="number" id="employment-length" step='0.1' value='0.0' placeholder='0.0'>
-            </div>
-
-            <div class="col">
-                <label for="occupation">Occupation</label>
-                <input type="text" id="occupation">
-            </div>
-
-        </div>
-
-        <div class="row mt-3">
+        <div class="row mt-3 border border-dark p-5">
             <div class="row text-center">
-                <h5>MOTOR VEHICLE</h5>
+                <h3><u>Internal Use Only</u></h3>
             </div>
 
-            <div class="col">
-                <label for="vehicle-year">Year</label>
-                <input type="text" id="vehicle-year">
+            <div class="row">
 
-            </div>
-            <div class="col">
-                <label for="vehicle-make">Make</label>
-                <input type="text" id="vehicle-make">
+                <div class="col">
+                    <label for="agent-receiving">Agent Receiving</label>
+                    <input type="text" id="agent-receiving">
+                </div>
+                <div class="col">
+                    <b><u>Investigating Agency</u></b>
+                    <p>Capodilupo Investigation's 123 Main St, Disney Land, FL 90210</p>
+                </div>
 
-            </div>
-
-            <div class="col">
-                <label for="vehicle-model">Model</label>
-                <input type="text" id="vehicle-year">
-
-            </div>
-
-
-            <div class="col">
-                <label for="vehicle-license-plate-number">License Plate</label>
-                <input type="text" id="vehicle-license-plate-number">
+                <div class="col">
+                    <b><u>Agency Phone Number</u></b>
+                    <p>978/424/5947</p>
+                </div>
 
             </div>
 
-            <div class="col">
-                <label for="vehicle-VIN">VIN</label>
-                <input type="text" id="vehicle-VIN">
+
+            <div class="row mt-1">
+                <div class="col">
+                    <label for="investigating-agent">Investigating Agent</label>
+                    <input type="text" id="investigating-agent">
+                </div>
+
+                <div class="col">
+                    <label for="investigating-agent-title">Agent Title</label>
+                    <input type="text" id="investigating-agent-title">
+                </div>
+
+                <div class="col">
+                    <label for="ID-number">ID Number</label>
+                    <input type="text" id="ID-number">
+                </div>
+
+                <div class="col">
+                    <label for="manager-reviewing">Manager Reviewing</label>
+                    <input type="text" id="manager-reviewing">
+                </div>
+
+                <div class="col">
+                    <label for="case-lead-investigator">Case Lead Investigator</label>
+                    <input type="text" id="case-lead-investigator">
+                </div>
 
             </div>
-
 
         </div>
+        <!--Submit Button-->
+        <div class="row mt-3 mb-5 text-center">
+            <div class="col"></div>
+            <div class="col">
+                <button class="btn btn-dark mr-2" type="submit" name="submit_button" value="Submit Interview Report">
+                    Submit Interview Report
+                </button>
+            </div>
+            <div class="col"></div>
+        </div>
+
 
     </div>
+</form>
 
-    <div class="row mt-3 border border-dark p-5">
-        <div class="row">
-            <div class="col-sm-auto">
-                <h5><b>INDIVIDUAL STATEMENT</b></h5>
-            </div>
-            <div class="col">
-                <p>In the space below, describe your whereabouts on the date and the time of the incident.</p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-auto">
-                <label for="incident-date">Date of Incident</label>
-                <input type="text" id="incident-date">
-            </div>
-
-            <div class="col-sm-auto">
-                <label for="incident-time">Time of Incident</label>
-                <input type="time" id="incident-time">
-            </div>
-
-        </div>
-
-        <div class="row mt-2">
-            <label for="incident-description">Description</label>
-            <textarea name="" id="incident-description" cols="30" rows="10"></textarea>
-        </div>
-
-        <div class="row mt-3">
-            <div class="row text-center">
-                <h5>Individual(s) who can confirm your whereabouts at the date and time of the incident.</h5>
-            </div>
-
-            <div class="col">
-                <label for="eye-witness-1-name">Name</label>
-                <input type="text" id="eye-witness-1-name">
-            </div>
-
-            <div class="col">
-                <label for="eye-witness-1-relationship">Relationship</label>
-                <input type="text" id="eye-witness-1-relationship">
-            </div>
-
-            <div class="col">
-                <label for="eye-witness-1-phone-number">Phone Number</label>
-                <input type="text" id="eye-witness-1-phone-number">
-            </div>
-
-            <div class="col">
-                <label for="eye-witness-1-address">Address</label>
-                <input type="text" id="eye-witness-1-address">
-            </div>
-
-            <div class="col">
-                <label for="eye-witness-1-notes">Notes</label>
-                <input type="text" id="eye-witness-1-notes">
-            </div>
-
-        </div>
-        <div class="row mt-3">
-
-            <div class="col">
-                <label for="eye-witness-2-name">Name</label>
-                <input type="text" id="eye-witness-2-name">
-            </div>
-
-            <div class="col">
-                <label for="eye-witness-2-relationship">Relationship</label>
-                <input type="text" id="eye-witness-2-relationship">
-            </div>
-
-            <div class="col">
-                <label for="eye-witness-2-phone-number">Phone Number</label>
-                <input type="text" id="eye-witness-2-phone-number">
-            </div>
-
-            <div class="col">
-                <label for="eye-witness-2-address">Address</label>
-                <input type="text" id="eye-witness-2-address">
-            </div>
-
-            <div class="col">
-                <label for="eye-witness-2-notes">Notes</label>
-                <input type="text" id="eye-witness-2-notes">
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="row mt-3 border border-dark p-5">
-        <div class="row text-center">
-            <h3><u>Internal Use Only</u></h3>
-        </div>
-
-        <div class="row">
-
-            <div class="col">
-                <label for="agent-receiving">Agent Receiving</label>
-                <input type="text" id="agent-receiving">
-            </div>
-            <div class="col">
-                <b><u>Investigating Agency</u></b>
-                <p>Capodilupo Investigation's 123 Main St, Disney Land, FL 90210</p>
-            </div>
-
-            <div class="col">
-                <b><u>Agency Phone Number</u></b>
-                <p>978/424/5947</p>
-            </div>
-
-        </div>
-
-
-        <div class="row mt-1">
-            <div class="col">
-                <label for="investigating-agent">Investigating Agent</label>
-                <input type="text" id="investigating-agent">
-            </div>
-
-            <div class="col">
-                <label for="investigating-agent-title">Agent Title</label>
-                <input type="text" id="investigating-agent-title">
-            </div>
-
-            <div class="col">
-                <label for="ID-number">ID Number</label>
-                <input type="text" id="ID-number">
-            </div>
-
-            <div class="col">
-                <label for="manager-reviewing">Manager Reviewing</label>
-                <input type="text" id="manager-reviewing">
-            </div>
-
-            <div class="col">
-                <label for="case-lead-investigator">Case Lead Investigator</label>
-                <input type="text" id="case-lead-investigator">
-            </div>
-
-        </div>
-
-    </div>
-
-
-</div>
 <script>
     create_Business_Header();
 </script>

@@ -23,7 +23,6 @@ def main_Menu():
             "Person of Interest": "create_Person_Of_Interest_Report",
             "Witness Statement": "create_Witness_Statement_Report",
             "Create BOLO":"create_BOLO",
-
         }
 
         reports_that_require_case_numbers = ["Daily Activity Report", "Check Case Status", "Witness Statement",
@@ -52,7 +51,7 @@ def create_BOLO(case_number):
             HTML_To_Database("BOLOs", data_dict)
 
 
-            return redirect(url_for(main_Menu))
+            return redirect(url_for("main_Menu"))
     else:
 
         return render_template("BOLO File.html", case_num=escape(case_number))
@@ -86,7 +85,7 @@ def create_Initial_Customer_Report():
         data_dict = request.form.to_dict()
 
         HTML_To_Database("Intital Customer Report", data_dict)
-        return redirect(url_for(main_Menu))
+        return redirect(url_for("main_Menu"))
 
     else:
         return render_template("Initial Report.html")
@@ -117,7 +116,7 @@ def create_Daily_Activity_Report(case_number):
         data_dict = request.form.to_dict()
 
         HTML_To_Database("Daily Activity Reports", data_dict)
-        return redirect(url_for(main_Menu))
+        return redirect(url_for("main_Menu"))
 
     else:
         return render_template("Daily Activity Report.html", case_num=case_number)
@@ -126,7 +125,11 @@ def create_Daily_Activity_Report(case_number):
 @app.route('/Create-Interview-Report/<string:case_number>', methods=["POST", "GET"])
 def create_Interview_Report(case_number):
     if request.method == "POST":
-        pass
+        from Backend import HTML_To_Database
+        data_dict = request.form.to_dict()
+
+        HTML_To_Database("Interview Reports", data_dict)
+        return redirect(url_for("main_Menu"))
 
     else:
         return render_template("Interview Report.html", case_num=case_number)
@@ -135,7 +138,11 @@ def create_Interview_Report(case_number):
 @app.route('/Create-Person-Of-Interest-Report/<string:case_number>', methods=["POST", "GET"])
 def create_Person_Of_Interest_Report(case_number):
     if request.method == "POST":
-        pass
+        from Backend import HTML_To_Database
+        data_dict = request.form.to_dict()
+
+        HTML_To_Database("Person of Interest", data_dict)
+        return redirect(url_for("main_Menu"))
 
     else:
         return render_template("Person of Interest.html", case_num=case_number)
@@ -144,7 +151,11 @@ def create_Person_Of_Interest_Report(case_number):
 @app.route('/Create-Witness-Statement-Report/<string:case_number>', methods=["POST", "GET"])
 def create_Witness_Statement_Report(case_number):
     if request.method == "POST":
-        pass
+        from Backend import HTML_To_Database
+        data_dict = request.form.to_dict()
+
+        HTML_To_Database("Witness Statements", data_dict)
+        return redirect(url_for("main_Menu"))
 
     else:
         return render_template("Witness Statement Form.html", case_num=case_number)

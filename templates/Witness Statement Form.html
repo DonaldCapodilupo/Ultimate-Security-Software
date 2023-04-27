@@ -11,107 +11,122 @@
 </head>
 <body>
 
-<div class="container mt-3 border border-dark p-5">
+<form action="{{ url_for('create_Witness_Statement_Report', case_number=case_num) }}" enctype=multipart/form-data
+      method="POST">
 
-    <div class="row mt-3">
+    <div class="container mt-3 border border-dark p-5">
 
-        <div class="col text-center">
-            <div id="Business Header"></div>
-        </div>
+        <div class="row mt-3">
 
-        <div class="col align-self-end text-center">
-            <h5>Incident # B17-11201992</h5>
-        </div>
-
-    </div>
-
-
-    <div class="row">
-        <div class="col text-center">
-            <h1>Witness Statement</h1>
-        </div>
-    </div>
-
-
-
-    <div class="row mt-3">
-
-        <div class="col">
-            <div class="row">
-
-                <label for="witness name">Name</label>
-                <input name="witness name" id="witness name" type="text">
-
-
-                <label for="Address">Address</label>
-                <input name="Address" id="Address" type="text">
-
-
-                <label for="date-of-birth">Date of Birth</label>
-                <input name="date-of-birth" id="date-of-birth" type="date">
+            <div class="col text-center">
+                <div id="Business Header"></div>
             </div>
-        </div>
 
-        <div class="col"></div>
-
-
-        <div class="col">
-            <div class="row">
-                <label for="date">Today's Date</label>
-                <input name="date" id="date" type="date">
-
-
-                <label for="time">Time</label>
-                <input name="time" id="time" type="time" step="1">
-
-
-                <label for="phone">Telephone #</label>
-                <input id="phone" type="tel">
+            <div class="col align-self-end text-center">
+                <h5>Incident # B17-11201992</h5>
             </div>
 
         </div>
 
 
-    </div>
-
-
-    <div class="row mt-3">
-
-        <div class="col">
-            <p>I make the below statement voulntairily. This account is true to the besto of my knowledge and belief,
-                and
-                represents my observations in the case currently under investigation. I understand that making false
-                statements or reports pursuant to an investigation can be a criminal offense.</p>
-        </div>
-
-    </div>
-
-    <div class="row mt-3">
-
-        <div class="col">
-            <div class="row">
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+        <div class="row">
+            <div class="col text-center">
+                <h1>Witness Statement</h1>
             </div>
         </div>
 
+
+        <div class="row mt-3">
+
+            <div class="col">
+                <div class="row">
+
+                    <label for="witness name">Name</label>
+                    <input name="witness name" id="witness name" type="text">
+
+
+                    <label for="Address">Address</label>
+                    <input name="Address" id="Address" type="text">
+
+
+                    <label for="date-of-birth">Date of Birth</label>
+                    <input name="date-of-birth" id="date-of-birth" type="date">
+                </div>
+            </div>
+
+            <div class="col"></div>
+
+
+            <div class="col">
+                <div class="row">
+                    <label for="date">Today's Date</label>
+                    <input name="date" id="date" type="date">
+
+
+                    <label for="time">Time</label>
+                    <input name="time" id="time" type="time" step="1">
+
+
+                    <label for="phone">Telephone #</label>
+                    <input id="phone" type="tel">
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="row mt-3">
+
+            <div class="col">
+                <p>I make the below statement voulntairily. This account is true to the besto of my knowledge and
+                    belief,
+                    and
+                    represents my observations in the case currently under investigation. I understand that making false
+                    statements or reports pursuant to an investigation can be a criminal offense.</p>
+            </div>
+
+        </div>
+
+        <div class="row mt-3">
+
+            <div class="col">
+                <div class="row">
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row mt-5">
+
+            <div class="col d-flex justify-content-center">
+                <input type="text" id="witness signature" class="signature"/>
+                <label for="witness signature">Witness Signature</label>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <input type="text" id="investigator signature" class="signature"/>
+                <label for="investigator signature">Investigator Signature</label>
+
+            </div>
+
+        </div>
+
     </div>
 
-
-    <div class="row mt-5">
-
-        <div class="col d-flex justify-content-center">
-            <input type="text" id="witness signature" class="signature"/>
-            <label for="witness signature">Witness Signature</label>
+    <!--Submit Button-->
+        <div class="row mt-3 mb-5 text-center">
+            <div class="col"></div>
+            <div class="col">
+                <button class="btn btn-dark mr-2" type="submit" name="submit_button" value="Submit Interview Report">
+                    Submit Interview Report
+                </button>
+            </div>
+            <div class="col"></div>
         </div>
-        <div class="col d-flex justify-content-center">
-            <input type="text" id="investigator signature" class="signature"/>
-            <label for="investigator signature">Investigator Signature</label>
-
-        </div>
-
-    </div>
-</div>
-
+</form>
 </body>
 
 
