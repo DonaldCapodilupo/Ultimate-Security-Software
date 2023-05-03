@@ -1,11 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from markupsafe import escape
 
-
-
 app = Flask(__name__)
-
-
 
 
 @app.route('/', methods=["POST", "GET"])
@@ -22,7 +18,7 @@ def main_Menu():
             "Interview Report": "create_Interview_Report",
             "Person of Interest": "create_Person_Of_Interest_Report",
             "Witness Statement": "create_Witness_Statement_Report",
-            "Create BOLO":"create_BOLO",
+            "Create BOLO": "create_BOLO",
         }
 
         reports_that_require_case_numbers = ["Daily Activity Report", "Check Case Status", "Witness Statement",
@@ -35,23 +31,18 @@ def main_Menu():
             return redirect(url_for(redirect_dict[button_clicked]))
 
     else:
-        return render_template("main.html" )
+        return render_template("main.html")
 
 
 @app.route('/BOLO-Create/<string:case_number>', methods=["POST", "GET"])
 def create_BOLO(case_number):
     if request.method == "POST":
+        from Backend import HTML_To_Database
+        data_dict = request.form.to_dict()
 
-        button_clicked = request.form['submit_button']
+        HTML_To_Database("BOLOs", data_dict)
 
-        if button_clicked == "Submit BOLO":
-            from Backend import HTML_To_Database
-            data_dict = request.form.to_dict()
-
-            HTML_To_Database("BOLOs", data_dict)
-
-
-            return redirect(url_for("main_Menu"))
+        return redirect(url_for("main_Menu"))
     else:
 
         return render_template("BOLO File.html", case_num=escape(case_number))
@@ -61,19 +52,13 @@ def create_BOLO(case_number):
 def create_New_Case():
     if request.method == "POST":
 
-        button_clicked = request.form['submit_button']
+        from Backend import HTML_To_Database, create_Case
+        data_dict = request.form.to_dict()
 
+        HTML_To_Database("Cases", data_dict)
+        create_Case(data_dict["Case Number"])
 
-        if button_clicked == "Submit New Case":
-
-            from Backend import HTML_To_Database, create_Case
-            data_dict = request.form.to_dict()
-
-            HTML_To_Database("Cases", data_dict)
-            create_Case(data_dict["Case Number"])
-
-            
-            return redirect(url_for("main_Menu"))
+        return redirect(url_for("main_Menu"))
     else:
         return render_template("New Case.html")
 

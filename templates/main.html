@@ -5,7 +5,7 @@
     <title>Main Menu</title>
 
     <link rel="stylesheet" href="../static/css/bootstrap.css">
-    <link rel="stylesheet" href="../static/css/Witness-Statement-Form.css">
+    <link rel="stylesheet" href="../static/css/main.css">
     <script src="../static/js/bootstrap.js"></script>
     <script src="../static/js/main.js"></script>
 
@@ -15,12 +15,12 @@
 
 <form action="{{ url_for('main_Menu') }}" enctype=multipart/form-data method="POST">
     <div class="container">
-        <div class="row mt-3 text-center">
-            <div id="Business Header"></div>
+        <div class="row mt-3 text-center title_div border border-success rounded">
+            <div id="Business Header" class="business_header_text"></div>
         </div>
 
         {% if condirmation %}
-            <div class="row mt-3 text-center">
+            <div class="row mt-3 text-center border border-success rounded">
                 {{ confirmation }}
             </div>
 
@@ -68,8 +68,8 @@
             </li>
         </ul>
 
-        <div class="row text-center mt-5">
-            <div class="col">
+        <div class="row text-center mt-5 mb-5">
+            <div class="col case_number_div">
                 <label for="case_number">Case Number:</label>
                 <input type="text" id="case_number" name="Case Number" required>
             </div>
@@ -77,7 +77,7 @@
 
 
         <!--Area for Showing Tab-->
-        <div class="tab-content" id="myTabContent">
+        <div class="tab-content pb-5 border border-success rounded" id="myTabContent">
 
             <!--Admin Data -->
             <div class="tab-pane fade show active grid justify-content-center"
