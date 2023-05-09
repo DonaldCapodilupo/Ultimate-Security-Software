@@ -52,10 +52,11 @@ def create_BOLO(case_number):
 def create_New_Case():
     if request.method == "POST":
 
-        from Backend import HTML_To_Database, create_Case
+        from Backend import Database_Modifier, create_Case
         data_dict = request.form.to_dict()
 
-        HTML_To_Database("Cases", data_dict)
+        new_case = Database_Modifier("Cases")
+        new_case.check_If_Table_Exists([])
         create_Case(data_dict["Case Number"])
 
         return redirect(url_for("main_Menu"))
