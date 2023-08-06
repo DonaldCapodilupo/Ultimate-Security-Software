@@ -37,10 +37,11 @@ def main_Menu():
 @app.route('/BOLO-Create/<string:case_number>', methods=["POST", "GET"])
 def create_BOLO(case_number):
     if request.method == "POST":
-        from Backend import HTML_To_Database
+        from Backend import Database_Modifier
         data_dict = request.form.to_dict()
 
-        HTML_To_Database("BOLOs", data_dict)
+        Database_Modifier("BOLOs").check_If_Table_Exists(data_dict.keys())
+        Database_Modifier("BOLOs").create_Database_Row(data_dict)
 
         return redirect(url_for("main_Menu"))
     else:
@@ -55,8 +56,9 @@ def create_New_Case():
         from Backend import Database_Modifier, create_Case
         data_dict = request.form.to_dict()
 
-        new_case = Database_Modifier("Cases")
-        new_case.check_If_Table_Exists([])
+        Database_Modifier("Cases").check_If_Table_Exists(data_dict.keys())
+        Database_Modifier("Cases").create_Database_Row(data_dict)
+
         create_Case(data_dict["Case Number"])
 
         return redirect(url_for("main_Menu"))
@@ -67,10 +69,18 @@ def create_New_Case():
 @app.route('/Initial-Customer-Report', methods=["POST", "GET"])
 def create_Initial_Customer_Report():
     if request.method == "POST":
-        from Backend import HTML_To_Database
+        from Backend import save_Admin_Form_Data, Database_Modifier
         data_dict = request.form.to_dict()
 
-        HTML_To_Database("Intital Customer Report", data_dict)
+        customer_name = data_dict["Complainant First Name"][0] + data_dict["Complainant Last Name"]
+
+
+        print(data_dict)
+        Database_Modifier("Initial_Customer_Report").check_If_Table_Exists(data_dict.keys())
+        Database_Modifier("Initial_Customer_Report").create_Database_Row(data_dict)
+
+
+        save_Admin_Form_Data(data_dict, customer_name, "Initial Customer Report")
         return redirect(url_for("main_Menu"))
 
     else:
@@ -98,10 +108,11 @@ def read_Case_Status(case_number):
 @app.route('/Daily-Activity-Report/<string:case_number>', methods=["POST", "GET"])
 def create_Daily_Activity_Report(case_number):
     if request.method == "POST":
-        from Backend import HTML_To_Database
+        from Backend import Database_Modifier
         data_dict = request.form.to_dict()
 
-        HTML_To_Database("Daily Activity Reports", data_dict)
+        Database_Modifier("Daily_Activity_Reports").check_If_Table_Exists(data_dict.keys())
+        Database_Modifier("Daily_Activity_Reports").create_Database_Row(data_dict)
         return redirect(url_for("main_Menu"))
 
     else:
@@ -111,10 +122,11 @@ def create_Daily_Activity_Report(case_number):
 @app.route('/Create-Interview-Report/<string:case_number>', methods=["POST", "GET"])
 def create_Interview_Report(case_number):
     if request.method == "POST":
-        from Backend import HTML_To_Database
+        from Backend import Database_Modifier
         data_dict = request.form.to_dict()
 
-        HTML_To_Database("Interview Reports", data_dict)
+        Database_Modifier("Interview_Reports").check_If_Table_Exists(data_dict.keys())
+        Database_Modifier("Interview_Reports").create_Database_Row(data_dict)
         return redirect(url_for("main_Menu"))
 
     else:
@@ -124,10 +136,11 @@ def create_Interview_Report(case_number):
 @app.route('/Create-Person-Of-Interest-Report/<string:case_number>', methods=["POST", "GET"])
 def create_Person_Of_Interest_Report(case_number):
     if request.method == "POST":
-        from Backend import HTML_To_Database
+        from Backend import Database_Modifier
         data_dict = request.form.to_dict()
 
-        HTML_To_Database("Person of Interest", data_dict)
+        Database_Modifier("People_Of_Interest").check_If_Table_Exists(data_dict.keys())
+        Database_Modifier("People_Of_Interest").create_Database_Row(data_dict)
         return redirect(url_for("main_Menu"))
 
     else:
@@ -137,10 +150,11 @@ def create_Person_Of_Interest_Report(case_number):
 @app.route('/Create-Witness-Statement-Report/<string:case_number>', methods=["POST", "GET"])
 def create_Witness_Statement_Report(case_number):
     if request.method == "POST":
-        from Backend import HTML_To_Database
+        from Backend import Database_Modifier
         data_dict = request.form.to_dict()
 
-        HTML_To_Database("Witness Statements", data_dict)
+        Database_Modifier("Interview_Reports").check_If_Table_Exists(data_dict.keys())
+        Database_Modifier("Interview_Reports").create_Database_Row(data_dict)
         return redirect(url_for("main_Menu"))
 
     else:
@@ -148,4 +162,4 @@ def create_Witness_Statement_Report(case_number):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0")
