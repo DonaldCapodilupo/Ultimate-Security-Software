@@ -17,6 +17,26 @@ def create_Case(case_number):
         os.mkdir(case_number + "/" + directory)
 
 
+def save_Admin_Form_Data(form_data, customer, report_type):
+    import json, datetime
+
+    data = {}
+
+
+
+    os.mkdir("Admin/" + customer)
+
+
+
+
+
+    for key, value in form_data.items():
+        data[key] = value
+
+
+    with open("Admin/"+ customer+"/" + report_type + '.json', 'w') as f:
+        json.dump(data, f)
+
 class Database_Modifier:
     def __init__(self, table_name):
         self.table_name = table_name
