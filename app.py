@@ -56,10 +56,10 @@ def create_New_Case():
         from Backend import Database_Modifier, create_Case
         data_dict = request.form.to_dict()
 
-        Database_Modifier("Cases").check_If_Table_Exists(data_dict.keys())
-        Database_Modifier("Cases").create_Database_Row(data_dict)
+        Database_Modifier().check_If_Table_Exists("New_Case", data_dict.keys())
+        Database_Modifier().create_Database_Row("New_Case",data_dict)
 
-        create_Case(data_dict["Case Number"])
+        create_Case(data_dict["id_case_number"])
 
         return redirect(url_for("main_Menu"))
     else:
@@ -76,8 +76,8 @@ def create_Initial_Customer_Report():
 
 
         print(data_dict)
-        Database_Modifier("Initial_Customer_Report").check_If_Table_Exists(data_dict.keys())
-        Database_Modifier("Initial_Customer_Report").create_Database_Row(data_dict)
+        Database_Modifier().check_If_Table_Exists("Initial_Customer_Report",data_dict.keys())
+        Database_Modifier().create_Database_Row("Initial_Customer_Report",data_dict)
 
 
         save_Admin_Form_Data(data_dict, customer_name, "Initial Customer Report")
@@ -111,8 +111,8 @@ def create_Daily_Activity_Report(case_number):
         from Backend import Database_Modifier
         data_dict = request.form.to_dict()
 
-        Database_Modifier("Daily_Activity_Reports").check_If_Table_Exists(data_dict.keys())
-        Database_Modifier("Daily_Activity_Reports").create_Database_Row(data_dict)
+        Database_Modifier().check_If_Table_Exists("Daily_Activity_Reports", data_dict.keys())
+        Database_Modifier().create_Database_Row("Daily_Activity_Reports", data_dict)
         return redirect(url_for("main_Menu"))
 
     else:
@@ -125,8 +125,8 @@ def create_Interview_Report(case_number):
         from Backend import Database_Modifier
         data_dict = request.form.to_dict()
 
-        Database_Modifier("Interview_Reports").check_If_Table_Exists(data_dict.keys())
-        Database_Modifier("Interview_Reports").create_Database_Row(data_dict)
+        Database_Modifier().check_If_Table_Exists("Interview_Reports", data_dict.keys())
+        Database_Modifier().create_Database_Row("Interview_Reports", data_dict)
         return redirect(url_for("main_Menu"))
 
     else:
@@ -139,8 +139,8 @@ def create_Person_Of_Interest_Report(case_number):
         from Backend import Database_Modifier
         data_dict = request.form.to_dict()
 
-        Database_Modifier("People_Of_Interest").check_If_Table_Exists(data_dict.keys())
-        Database_Modifier("People_Of_Interest").create_Database_Row(data_dict)
+        Database_Modifier().check_If_Table_Exists("People_Of_Interest", data_dict.keys())
+        Database_Modifier().create_Database_Row("People_Of_Interest", data_dict)
         return redirect(url_for("main_Menu"))
 
     else:
@@ -153,8 +153,8 @@ def create_Witness_Statement_Report(case_number):
         from Backend import Database_Modifier
         data_dict = request.form.to_dict()
 
-        Database_Modifier("Interview_Reports").check_If_Table_Exists(data_dict.keys())
-        Database_Modifier("Interview_Reports").create_Database_Row(data_dict)
+        Database_Modifier().check_If_Table_Exists("Interview_Reports", data_dict.keys())
+        Database_Modifier().create_Database_Row("Interview_Reports", data_dict)
         return redirect(url_for("main_Menu"))
 
     else:
