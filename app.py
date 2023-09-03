@@ -31,7 +31,7 @@ def main_Menu():
             return redirect(url_for(redirect_dict[button_clicked]))
 
     else:
-        return render_template("main.html")
+        return render_template("Capture Data/main.html")
 
 
 @app.route('/BOLO-Create/<string:case_number>', methods=["POST", "GET"])
@@ -46,7 +46,7 @@ def create_BOLO(case_number):
         return redirect(url_for("main_Menu"))
     else:
 
-        return render_template("BOLO File.html", case_num=escape(case_number))
+        return render_template("Capture Data/BOLO File.html", case_num=escape(case_number))
 
 
 @app.route('/Create-New-Case', methods=["POST", "GET"])
@@ -63,7 +63,7 @@ def create_New_Case():
 
         return redirect(url_for("main_Menu"))
     else:
-        return render_template("New Case.html")
+        return render_template("Capture Data/New Case.html")
 
 
 @app.route('/Initial-Customer-Report', methods=["POST", "GET"])
@@ -84,7 +84,7 @@ def create_Initial_Customer_Report():
         return redirect(url_for("main_Menu"))
 
     else:
-        return render_template("Initial Report.html")
+        return render_template("Capture Data/Initial Report.html")
 
 
 @app.route('/Invoice', methods=["POST", "GET"])
@@ -116,7 +116,7 @@ def create_Daily_Activity_Report(case_number):
         return redirect(url_for("main_Menu"))
 
     else:
-        return render_template("Daily Activity Report.html", case_num=case_number)
+        return render_template("Capture Data/Daily Activity Report.html", case_num=case_number)
 
 
 @app.route('/Create-Interview-Report/<string:case_number>', methods=["POST", "GET"])
@@ -130,7 +130,7 @@ def create_Interview_Report(case_number):
         return redirect(url_for("main_Menu"))
 
     else:
-        return render_template("Interview Report.html", case_num=case_number)
+        return render_template("Capture Data/Interview Report.html", case_num=case_number)
 
 
 @app.route('/Create-Person-Of-Interest-Report/<string:case_number>', methods=["POST", "GET"])
@@ -144,7 +144,7 @@ def create_Person_Of_Interest_Report(case_number):
         return redirect(url_for("main_Menu"))
 
     else:
-        return render_template("Person of Interest.html", case_num=case_number)
+        return render_template("Capture Data/Person of Interest.html", case_num=case_number)
 
 
 @app.route('/Create-Witness-Statement-Report/<string:case_number>', methods=["POST", "GET"])
@@ -155,10 +155,10 @@ def create_Witness_Statement_Report(case_number):
 
         Database_Modifier().check_If_Table_Exists("Interview_Reports", data_dict.keys())
         Database_Modifier().create_Database_Row("Interview_Reports", data_dict)
-        return redirect(url_for("main_Menu"))
+        return redirect(url_for("main_Menu", case_num=case_number))
 
     else:
-        return render_template("Witness Statement Form.html", case_num=case_number)
+        return render_template("Capture Data/Witness Statement Form.html", case_num=case_number)
 
 
 if __name__ == '__main__':

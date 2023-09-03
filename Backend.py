@@ -1,4 +1,6 @@
 import os, sqlite3
+import requests
+from bs4 import BeautifulSoup
 
 
 def create_Case(case_number):
@@ -27,6 +29,22 @@ def save_Admin_Form_Data(form_data, customer, report_type):
 
     with open("Admin/" + customer + "/" + report_type + '.json', 'w') as f:
         json.dump(data, f)
+
+def create_License_Plate_Image(plate_num):
+    htmldata = requests.get("https://www.acme.com/licensemaker/licensemaker.cgi?state=Massachusetts&text=" +plate_num +"&plate=1988&r=1675049699").text
+    soup = BeautifulSoup(htmldata, 'html.parser')
+    image =  soup.find_all('img')[2].get("src")
+
+    data = requests.get("https://www.acme.com/licensemaker/" + image).content
+
+    # Opening a new file named img with extension .jpg
+    # This file would store the data of the image file
+    f = open(plate_num + '.jpg', 'wb')
+
+    # Storing the image data inside the data variable to the file
+    f.write(data)
+    f.close()
+
 
 
 class Database_Modifier:
@@ -64,8 +82,29 @@ class Database_Modifier:
         db.execute(insert_sql, values)
         db.commit()
 
-    def read_Database_Single_Table(self, table_name):
-        pass
+    def read_Database_Single_Table(self, table_name, case_number):
+        import sqlite3
+        import pandas as pd
+
+        sqliteConnection = sqlite3.connect(self.database_name)
+
+
+        df = pd.read_sql_query("SELECT * FROM " + table_name, sqliteConnection)
+
+
+
+        return_dict = {case_number:{table_name:{}}}
+
+        for index, row in df.iterrows():
+            if row.get(key="Case_Number") == case_number:
+                return_dict[case_number][table_name][
+                    str(row["Basic_Details_First_Name"] + " " + row["Basic_Details_Last_Name"])] = {}
+                for data_name, data_value in row.items():
+                    return_dict[case_number][table_name][
+                        str(row["Basic_Details_First_Name"] + " " + row["Basic_Details_Last_Name"])][
+                        str(data_name)] = str(data_value)
+
+        return return_dict
 
     def read_Database_All_Tables(self, case_number):
         import sqlite3
@@ -92,24 +131,23 @@ class Database_Modifier:
             # executing our sql query
             list_of_table_names = [table_name[0] for table_name in cursor.execute(sql_query).fetchall()]
 
-            test_names = {case_number: {}}
+            return_dict = {case_number: {}}
 
             for database_table in list_of_table_names:
                 df = pd.read_sql('SELECT * FROM ' + database_table, sqliteConnection)
 
                 if str(database_table) != "sqlite_sequence" :
-                    test_names[case_number][database_table] = {}
+                    return_dict[case_number][database_table] = {}
+                print("Table Name: " + str(database_table))
 
                 for index, row in df.iterrows():
+                    print("Row : " + str(row.get(key="Case_Number")))
                     if row.get(key="Case_Number") == case_number:
 
-                        test_names[case_number][database_table][
+                        return_dict[case_number][database_table][
                             str(row["Basic_Details_First_Name"] + " " + row["Basic_Details_Last_Name"])] = {}
                         for data_name, data_value in row.items():
-                            print("data_name: " + str(data_name))
-                            print("data_value: " + str(data_value))
-
-                            test_names[case_number][database_table][str(row["Basic_Details_First_Name"] + " " + row["Basic_Details_Last_Name"])][str(data_name)] = str(data_value)
+                            return_dict[case_number][database_table][str(row["Basic_Details_First_Name"] + " " + row["Basic_Details_Last_Name"])][str(data_name)] = str(data_value)
 
         except AttributeError as error:
             print("Failed to execute the above query", error)
@@ -126,6 +164,7 @@ class Database_Modifier:
                 # will print "the sqlite connection is
                 # closed"
                 print("the sqlite connection is closed")
+                return return_dict
 
     def update_Database_Table(self):
         pass
@@ -139,4 +178,6 @@ class Database_Modifier:
         db.commit()
 
 
-#Database_Modifier("Information.db").read_Database_All_Tables("AB1234")
+#print(Database_Modifier().read_Database_All_Tables("AB1234"))
+#print(Database_Modifier().read_Database_Single_Table("People_Of_Interest", "AB1234"))
+create_License_Plate_Image("POOHUT")
