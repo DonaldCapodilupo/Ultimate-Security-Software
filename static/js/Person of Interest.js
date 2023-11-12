@@ -85,10 +85,7 @@ class Table_Creator {
     create_Table_Header() {
         console.log(this.div_to_be_filled);
         this.div_to_be_filled.innerHTML +=
-            '<div class="Input-Table">' +
-            '   <div class="Title-Row">' +
-            '       <p>' + this.title + '</p>' +
-            '   </div>' +
+            '<div class="Input-Table col col-sm-auto text-float-right mt-4">' +
             '   <table id="' + this.table_name + '"> </table>' +
             '</div>';
     }
@@ -215,6 +212,12 @@ function populateLists() {
         }
     }
 
+}
+
+
+function populateLists_NEW(){
+    let list_to_populate = ["Identifying-Info-Table",""];
+    console.log(list_to_populate);
 }
 
 

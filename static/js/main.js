@@ -70,7 +70,7 @@ function setup_BOLO_HTML() {
 
 
 function case_Number_Generator() {
-    let customer_name = document.getElementById("Returning Customer Name").value;
+    let customer_name = document.getElementById("Customer Name").value;
     let case_type = document.getElementById("Investigation Type").value;
 
     case_number = customer_name.slice(0, 3) + "-" + case_type + "-001";
