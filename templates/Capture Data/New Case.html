@@ -25,23 +25,20 @@
 
             <div class="col">
 
-                <label for="Returning Customer Name">Enter Customer Name:</label>
-                <input type="text" id="Returning Customer Name" name="Customer Name" list="Returning Customer Names"
-                       onclick="case_Number_Generator()"/>
-
-                <datalist id="Returning Customer Names">
-                    {% for customer in list_of_customers %}
-                        <option>{{ customer }}</option>
+                <label for="Customer Name">Enter Customer Name:</label>
+                <select class="form-select" aria-label="Default select example" id="Customer Name"
+                        name="Customer Name" onchange="case_Number_Generator()">
+                    {% for value in infoDict["Customer Name"] %}
+                        <option value="{{ value }}">{{ value }}</option>
                     {% endfor %}
-
-
-                </datalist>
+                </select>
             </div>
 
 
             <div class="col">
                 <label for="Investigation Type">Investigation Type?</label>
-                <select id="Investigation Type" name="Investigation-Type" class="form-select" onchange="case_Number_Generator()">
+                <select id="Investigation Type" name="Investigation Type" class="form-select"
+                        onchange="case_Number_Generator()">
                     <option value="BGINV">Background Investigation</option>
                     <option value="INTINV">Internal Investigation</option>
                     <option value="EXINV">External Investigation</option>
@@ -50,72 +47,61 @@
                 </select>
             </div>
 
-            <div class="row mt-2">
-                <div class="row text-center">
-                    <h5><u>What is the purpose of the investigation?</u></h5>
-                </div>
-                <div class="row">
-                    <textarea name="id-purpose" id="case-purpose" cols="30" rows="10"></textarea>
-                </div>
+            <div class="row text-center mt-2">
+                <h5><label for="Case Purpose"><u>What is the purpose of the investigation?</u></label></h5>
+                <textarea name="Case Purpose" id="Case Purpose" cols="30" rows="10"></textarea>
+
             </div>
 
             <div class="row mt-2">
-                <div class="row text-center">
-                    <h5><u>What is the scope of the investigation?</u></h5>
-                </div>
-                <div class="row">
-                    <textarea name="id-scope" id="case-scope" cols="30" rows="10"></textarea>
-                </div>
+                <h5><label for="Case Scope"><u>What is the scope of the investigation?</u></label></h5>
+                <textarea name="Case Scope" id="Case Scope" cols="30" rows="10"></textarea>
             </div>
 
 
             <div class="row mt-2">
-                <div class="row text-center">
-                    <h5><u>Are their any legal framework issues that everyone should be aware of?</u></h5>
-                </div>
-                <div class="row">
-                    <textarea name="id-legal-framework" id="case-legal-framework" cols="30" rows="5"></textarea>
-                </div>
+                <h5>
+                    <label for="Legal Frameworks"><u>Are their any legal framework issues that everyone should be aware
+                    of?</u></label>
+                </h5>
+                <textarea name="Legal Frameworks" id="Legal Frameworks" cols="30" rows="10"></textarea>
             </div>
 
             <div class="row mt-2">
-                <div class="row text-center">
-                    <h5><u>Are their any available resources that everyone should be aware of?</u></h5>
-                </div>
-                <div class="row">
-                    <textarea name="id-available-resources" id="case-available-resources" cols="30" rows="5"></textarea>
-                </div>
+
+                <h5><label for="Available Resources">
+                    <u>Are their any available resources that everyone should be aware of?</u>
+                </label></h5>
+                <textarea name="Available Resources" id="Available Resources" cols="30" rows="10"></textarea>
             </div>
 
             <div class="row mt-2">
-                <div class="row text-center">
-                    <h5><u>Their any risks that everyone should be aware of?</u></h5>
-                </div>
-                <div class="row">
-                    <textarea name="id-risks" id="case-risks" cols="30" rows="5"></textarea>
-                </div>
+
+                <h5><label for="Known Risks">
+                    <u>Are There any risks that everyone should be aware of?</u>
+                </label></h5>
+                <textarea name="Known Risks" id="Known Risks" cols="30" rows="10"></textarea>
+
             </div>
 
             <div class="row mt-2">
-                <div class="row text-center">
-                    <h5><u>Are their any recommended investigation techniques?</u></h5>
-                </div>
-                <div class="row">
-                    <textarea name="id-recommended-investigation-techniques" id="case-recommended-investigation-techniques" cols="30" rows="5"></textarea>
-                </div>
+
+                <h5><label for="Recommended Techniques">
+                    <u>Are their any recommended investigation techniques?</u>
+                </label></h5>
+                <textarea name="Recommended Techniques" id="Recommended Techniques" cols="30" rows="10"></textarea>
             </div>
 
             <div class="row mt-2">
-                <div class="row text-center">
-                    <h5><u>What is the communication plan?</u></h5>
-                </div>
-                <div class="row">
-                    <textarea name="id-communication-plan" id="case-communication-plan" cols="30" rows="5"></textarea>
-                </div>
+
+                <h5><label for="Communication Plan">
+                    <u>What is the communication plan?</u>
+                </label></h5>
+                <textarea name="Communication Plan" id="Communication Plan" cols="30" rows="10"></textarea>
             </div>
 
             <div class="row">
-                <input type="text" style="visibility: hidden" name="id_case_number" id="generated_case_number">
+                <input type="text" style="visibility: hidden" name="Case Number" id="generated_case_number">
             </div>
 
 

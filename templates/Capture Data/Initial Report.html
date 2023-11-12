@@ -16,6 +16,7 @@
 
     <div class="container mt-3">
 
+        <!--Complainant Information-->
         <div class="row mt-3 border border-dark p-5">
 
             <div class="col text-center">
@@ -23,12 +24,12 @@
             </div>
 
         </div>
-
+        <!--Complainant Employer Information-->
         <div class="row mt-3 border border-dark p-5">
             <div class="row">
                 <h5><b><u>Complainant</u></b></h5>
             </div>
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col">
                     <label for="complainant-first-name">First Name</label>
                     <input id="complainant-first-name" name="Complainant First Name" type="text">
@@ -49,14 +50,10 @@
                     <input id="complainant-email" name="Complainant Email" type="text">
                 </div>
 
-                <div class="col">
-                    <label for="complainant-employer">Employer</label>
-                    <input id="complainant-employer" name="Complainant Employer" type="text">
-                </div>
 
             </div>
 
-            <div class="row mt-1">
+            <div class="row mt-3">
                 <div class="col">
                     <label for="complainant-address">Address</label>
                     <input id="complainant-address" name="Complainant Address" type="text">
@@ -73,51 +70,79 @@
                 </div>
             </div>
 
-            <div class="row mt-1 border border-dark p-2">
-                <div class="col">
-                    <label for="employer-is-customer">Employer is Customer?</label>
-                    <select id="employer-is-customer" class="form-select" name="Employer is Customer">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
+            <div class="row mt-2 border border-dark">
+
+                <div class="row mt-3">
+                    <div class="col">
+                        <label for="complainant-employer">Employer</label>
+                        <input id="complainant-employer" name="Complainant Employer" type="text">
+
+                    </div>
+
+                    <div class="col">
+                        <label for="complainant-employer-address">Employer Address</label>
+                        <input id="complainant-employer-address" name="Employer Address" type="text">
+                    </div>
+
+                    <div class="col">
+                        <label for="complainant-employer-phone-number">Employer Phone Number</label>
+                        <input id="complainant-employer-phone-number" name="Employer Phone Number" type="text">
+                    </div>
+
                 </div>
 
-                <div class="col">
-                    <label for="complainant-employer-address">Employer Address</label>
-                    <input id="complainant-employer-address" name="Employer Address" type="text">
-                </div>
+                <div class="row mt-3">
 
-                <div class="col">
-                    <label for="complainant-employer-phone-number">Employer Phone Number</label>
-                    <input id="complainant-employer-phone-number" name="Employer Phone Number" type="text">
-                </div>
+                    <div class="col">
+                        <label for="complainant-employer-employed-since">Employed Since</label>
+                        <input id="complainant-employer-employed-since" name="Employed Since" type="text">
+                    </div>
 
-                <div class="col">
-                    <label for="complainant-employer-employed-since">Employed Since</label>
-                    <input id="complainant-employer-employed-since" name="Employed Since" type="text">
-                </div>
+                    <div class="col">
+                        <label for="complainant-employer-job-title">Job Title</label>
+                        <input id="complainant-employer-job-title" name="Job Title" type="text">
+                    </div>
 
-                <div class="col">
-                    <label for="complainant-employer-job-title">Job Title</label>
-                    <input id="complainant-employer-job-title" name="Job Title" type="text">
+                    <div class="col">
+                        <label for="employer-is-customer">Employer is Customer?</label>
+                        <select id="employer-is-customer" class="form-select" name="Employer is Customer">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+
                 </div>
 
 
             </div>
+        </div>
+        <!---Customer Case Information-->
+        <div class="row">
 
-
-            <div class="row mt-2">
+            <div class="row mt-5">
                 <div class="row text-center">
-                    <h5><u>What led you to believe that there may be an issue that requires an investigation?</u></h5>
+                    <h5>
+                        <label for="initial-belief-need-for-investigation">
+
+                            <u>What led you to believe that there may be an issue that requires an investigation?</u>
+
+                        </label>
+                    </h5>
                 </div>
                 <div class="row">
-                    <textarea name="Initial Belief" id="initial-belief-need-for-investigation" cols="30" rows="10"></textarea>
+                    <textarea name="Initial Belief" id="initial-belief-need-for-investigation" cols="30"
+                              rows="10"></textarea>
                 </div>
             </div>
 
-            <div class="row mt-2">
+            <div class="row mt-5">
                 <div class="row text-center">
-                    <h5><u>Can you provide a brief overview of the situation or issue at hand?</u></h5>
+                    <h5>
+                        <label for="overview-of-situation">
+                            <u>Can you provide a brief overview of the situation or issue at hand?</u>
+                        </label>
+                    </h5>
                 </div>
                 <div class="row">
                     <textarea name="Brief Overview" id="overview-of-situation" cols="30" rows="10"></textarea>
@@ -125,9 +150,14 @@
             </div>
 
 
-            <div class="row mt-2">
+            <div class="row mt-5">
                 <div class="row text-center">
-                    <h5><u>When did you first become aware of this issue?</u></h5>
+                    <h5>
+                        <label for="first-became-aware-of-issue">
+                            <u>When did you first become aware of this issue?</u>
+
+                        </label>
+                    </h5>
                 </div>
                 <div class="row">
                     <textarea name="First Become Aware" id="first-became-aware-of-issue" cols="30" rows="5"></textarea>
@@ -135,39 +165,56 @@
             </div>
 
 
-            <div class="row mt-2">
+            <div class="row mt-5">
                 <div class="row text-center">
-                    <h5><u>Have you attempted to resolve this issue on your own? If so, what steps have you taken?</u>
+                    <h5>
+                        <label for="complainant-issues-taken-to-resolve">
+                            <u>Have you attempted to resolve this issue on your own? If so, what steps have you
+                                taken?</u>
+                        </label>
                     </h5>
                 </div>
                 <div class="row">
-                    <textarea name="Self Resolution Attempts" id="complainant-issues-taken-to-resolve" cols="30" rows="5"></textarea>
+                    <textarea name="Self Resolution Attempts" id="complainant-issues-taken-to-resolve" cols="30"
+                              rows="5"></textarea>
                 </div>
             </div>
 
-            <div class="row mt-2">
+            <div class="row mt-5">
                 <div class="row text-center">
-                    <h5><u>Have you discussed this issue with anyone else, such as an attorney or law enforcement?</u>
+                    <h5>
+                        <label for="complainant-other-entities-communicated-with">
+                            <u>Have you discussed this issue with anyone else, such as an attorney or law
+                                enforcement?</u>
+                        </label>
                     </h5>
                 </div>
                 <div class="row">
-                    <textarea name="Other Privy Entities" id="complainant-other-entities-communicated-with" cols="30" rows="5"></textarea>
+                    <textarea name="Other Privy Entities" id="complainant-other-entities-communicated-with" cols="30"
+                              rows="5"></textarea>
                 </div>
             </div>
 
-            <div class="row mt-2">
+            <div class="row mt-5">
                 <div class="row text-center">
-                    <h5><u>Have you identified any potential suspects or witnesses related to the issue?</u></h5>
+                    <h5>
+                        <label for="complainant-potential-suspects">
+                            <u>Have you identified any potential suspects or witnesses related to the issue?</u>
+                        </label>
+                    </h5>
                 </div>
                 <div class="row">
-                    <textarea name="People of Interest" id="complainant-potential-suspects" cols="30" rows="5"></textarea>
+                    <textarea name="People of Interest" id="complainant-potential-suspects" cols="30"
+                              rows="5"></textarea>
                 </div>
             </div>
 
-            <div class="row mt-2">
+            <div class="row mt-5">
                 <div class="row text-center">
-                    <h5><u>Do you have any documentation or evidence related to the issue, such as contracts, emails, or
-                        financial records?</u></h5>
+                    <h5>
+                        <u>Do you have any documentation or evidence related to the issue, such as contracts, emails, or
+                            financial records?</u>
+                    </h5>
                 </div>
 
                 <div class="row mb-2">
@@ -179,45 +226,58 @@
 
                 <div class="row">
                     <label for="complainant-additional-documents-text">Describe Addition Documentation Available</label>
-                    <textarea name="Additional Text" id="complainant-additional-documents-text" cols="30" rows="5"></textarea>
+                    <textarea name="Additional Text" id="complainant-additional-documents-text" cols="30"
+                              rows="5"></textarea>
                 </div>
             </div>
 
 
-            <div class="row mt-2">
+            <div class="row mt-5">
                 <div class="row text-center">
-                    <h5><u>Are there any specific concerns or allegations that you would like the investigator to focus
-                        on
-                        during the investigation?</u></h5>
+                    <h5>
+                        <label for="complainant-specific-concerns">
+                            <u>Are there any specific concerns or allegations that you would like the investigator to
+                                focus on during the investigation?</u>
+                        </label>
+                    </h5>
                 </div>
                 <div class="row">
                     <textarea name="Specific Concerns" id="complainant-specific-concerns" cols="30" rows="5"></textarea>
                 </div>
             </div>
 
-            <div class="row mt-2">
+            <div class="row mt-5">
                 <div class="row text-center">
-                    <h5><u>Do you have a desired timeline or budget for the investigation?</u></h5>
+                    <h5>
+                        <label for="complainant-timeline-and-budget">
+                            <u>Do you have a desired timeline or budget for the investigation?</u>
+                        </label>
+                    </h5>
                 </div>
                 <div class="row">
                     <textarea name="Timeline Budget" id="complainant-timeline-and-budget" cols="30" rows="5"></textarea>
                 </div>
             </div>
 
-            <div class="row mt-2">
+            <div class="row mt-5">
                 <div class="row text-center">
-                    <h5><u>Are there any other relevant details that you would like to share with the investigator?</u>
+                    <h5>
+                        <label for="complainant-other-relevant-details">
+                            <u>Are there any other relevant details that you would like to share with the
+                                investigator?</u>
+                        </label>
                     </h5>
                 </div>
                 <div class="row">
-                    <textarea name="Other Details" id="complainant-other-relevant-details" cols="30" rows="5"></textarea>
+                    <textarea name="Other Details" id="complainant-other-relevant-details" cols="30"
+                              rows="5"></textarea>
                 </div>
             </div>
 
 
         </div>
-
-        <div class="row mt-3 border border-danger p-5">
+        <!--Non Disclosure-->
+        <div class="row mt-3 border border-danger p-5 text text-black">
             <p>
                 <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                    aria-expanded="false"
@@ -340,16 +400,22 @@
 
         </div>
 
+        <!--Internal Information-->
         <div class="row mt-3 border border-dark p-5">
             <div class="row text-center">
                 <h3><u>Internal Use Only</u></h3>
             </div>
 
-            <div class="row">
+            <div class="row mt-3">
 
                 <div class="col">
                     <label for="agent-receiving">Agent Receiving</label>
-                    <input type="text" id="agent-receiving">
+                    <select class="form-select" aria-label="Default select example" id="agent-receiving"
+                            name="Agent Receiving">
+                        {% for value in infoDict["Agent Receiving"] %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="col">
                     <b><u>Investigating Agency</u></b>
@@ -361,13 +427,28 @@
                     <p>978/424/5947</p>
                 </div>
 
+                <div class="col">
+                    <label for="case-lead-investigator">Case Lead Investigator</label>
+                    <select class="form-select" aria-label="Default select example" id="case-lead-investigator"
+                            name="Case Lead Investigator">
+                        {% for value in infoDict["Case Lead Investigator"] %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
             </div>
 
 
             <div class="row mt-1">
                 <div class="col">
                     <label for="investigating-agent">Investigating Agent</label>
-                    <input type="text" id="investigating-agent">
+                    <select class="form-select" aria-label="Default select example" id="investigating-agent"
+                            name="Investigating Agent">
+                        {% for value in infoDict["Investigating Agent"] %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
 
                 <div class="col">
@@ -382,17 +463,18 @@
 
                 <div class="col">
                     <label for="manager-reviewing">Manager Reviewing</label>
-                    <input type="text" id="manager-reviewing">
+                    <select class="form-select" aria-label="Default select example" id="manager-reviewing"
+                            name="Manager Reviewing">
+                        {% for value in infoDict["Manager Reviewing"] %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
 
-                <div class="col">
-                    <label for="case-lead-investigator">Case Lead Investigator</label>
-                    <input type="text" id="case-lead-investigator">
-                </div>
 
             </div>
 
-             <!--Submit Button-->
+            <!--Submit Button-->
             <div class="row mt-3 mb-5 text-center">
                 <div class="col"></div>
                 <div class="col">
