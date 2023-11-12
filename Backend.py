@@ -7,14 +7,17 @@ def create_Case(case_number):
     # Get input Case information. Customer - Investigation Type - Numeric Investigation
     print("Creating Case Number: " + case_number)
 
+    if "Open Cases" not in os.listdir():
+        os.mkdir("Open Cases")
+
     # Create a case folder. Within case folder create Images folder, DAR's, Relevant BOLO's, Witness statements, POI,
-    os.mkdir(case_number)
+    os.mkdir("Open Cases/" + case_number)
 
     case_directories = ["Daily Activity Reports", "Witness Statements", "Images", "People of Interest",
                         "Vehicles of Interest", "External Evidence"]
 
     for directory in case_directories:
-        os.mkdir(case_number + "/" + directory)
+        os.mkdir("Open Cases/" + case_number + "/" + directory)
 
 
 def save_Admin_Form_Data(form_data, customer, report_type):
@@ -82,7 +85,7 @@ class Database_Modifier:
         db.execute(insert_sql, values)
         db.commit()
 
-    def read_Database_Single_Table(self, table_name, case_number):
+    def read_Database_Single_Table(self, table_name):
         import sqlite3
         import pandas as pd
 
@@ -93,18 +96,7 @@ class Database_Modifier:
 
 
 
-        return_dict = {case_number:{table_name:{}}}
-
-        for index, row in df.iterrows():
-            if row.get(key="Case_Number") == case_number:
-                return_dict[case_number][table_name][
-                    str(row["Basic_Details_First_Name"] + " " + row["Basic_Details_Last_Name"])] = {}
-                for data_name, data_value in row.items():
-                    return_dict[case_number][table_name][
-                        str(row["Basic_Details_First_Name"] + " " + row["Basic_Details_Last_Name"])][
-                        str(data_name)] = str(data_value)
-
-        return return_dict
+        return df
 
     def read_Database_All_Tables(self, case_number):
         import sqlite3
@@ -180,4 +172,4 @@ class Database_Modifier:
 
 #print(Database_Modifier().read_Database_All_Tables("AB1234"))
 #print(Database_Modifier().read_Database_Single_Table("People_Of_Interest", "AB1234"))
-create_License_Plate_Image("POOHUT")
+#create_License_Plate_Image("POOHUT")
