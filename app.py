@@ -3,7 +3,7 @@ from markupsafe import escape
 
 app = Flask(__name__)
 
-
+#Generic Functions
 @app.route('/', methods=["POST", "GET"])
 def main_Menu():
     if request.method == "POST":
@@ -31,8 +31,102 @@ def main_Menu():
             return redirect(url_for(redirect_dict[button_clicked]))
 
     else:
-        return render_template("Capture Data/main.html")
+        from Backend import Database_Modifier
 
+        backend_data = Database_Modifier().read_Database_Single_Table("New_Case")
+        case_numbers = backend_data["Case_Number"]
+
+        data_dict = {
+            "Case Number":case_numbers
+        }
+
+        return render_template("main.html", infoDict=data_dict)
+
+@app.route('/Check-Case-Status/<string:case_number>', methods=["POST", "GET"])
+def read_Case_Status(case_number):
+    if request.method == "POST":
+        pass
+
+    else:
+        return "Coming Soon!"
+
+
+#Admin Functions
+@app.route('/Initial-Customer-Report', methods=["POST", "GET"])
+def create_Initial_Customer_Report():
+    if request.method == "POST":
+        from Backend import save_Admin_Form_Data, Database_Modifier
+        data_dict = request.form.to_dict()
+
+
+        Database_Modifier().check_If_Table_Exists("Initial_Customer_Report",data_dict.keys())
+        Database_Modifier().create_Database_Row("Initial_Customer_Report",data_dict)
+
+
+
+        return redirect(url_for("main_Menu"))
+
+    else:
+        from Backend import Database_Modifier
+
+        backend_data = Database_Modifier().read_Database_Single_Table("Employees")
+        employee_names = backend_data["Name"].to_list()
+
+        data_to_fill = {"Agent Receiving":employee_names,
+                        "Case Lead Investigator": employee_names,
+                        "Investigating Agent":employee_names,
+                        "Manager Reviewing": employee_names,
+                        }
+
+        print(employee_names)
+
+        return render_template("Capture Data/Initial Report.html", infoDict=data_to_fill)
+
+@app.route('/Create-New-Case', methods=["POST", "GET"])
+def create_New_Case():
+    if request.method == "POST":
+
+        from Backend import Database_Modifier, create_Case
+        data_dict = request.form.to_dict()
+
+        Database_Modifier().check_If_Table_Exists("New_Case", data_dict.keys())
+        Database_Modifier().create_Database_Row("New_Case",data_dict)
+
+        create_Case(data_dict["Case Number"])
+
+        return redirect(url_for("main_Menu"))
+    else:
+        from Backend import Database_Modifier
+
+        backend_data = Database_Modifier().read_Database_Single_Table("Initial_Customer_Report")
+        first_names = backend_data["Complainant_First_Name"].to_list()
+        last_names = backend_data["Complainant_Last_Name"].to_list()
+
+        customer_names = []
+
+        for first_nam, last_nam in zip(first_names, last_names):
+            customer_names.append(first_nam + " " + last_nam)
+
+        print("Customer Names:")
+        print(customer_names)
+        data_to_fill = {
+            "Customer Name":customer_names
+        }
+        #customer_names = [first_name for first_name in zip(backend_data["Complainant_First_Name"]), backend_data["Complainant_Last_Name"] ]
+
+            #zip(backend_data["Complainant_First_Name"], backend_data["Complainant_Last_Name"])
+
+        #print(customer_names)
+
+        return render_template("Capture Data/New Case.html", infoDict=data_to_fill)
+
+@app.route('/Invoice', methods=["POST", "GET"])
+def create_Customer_Invoice():
+    if request.method == "POST":
+        pass
+
+    else:
+        return "Coming Soon!"
 
 @app.route('/BOLO-Create/<string:case_number>', methods=["POST", "GET"])
 def create_BOLO(case_number):
@@ -49,75 +143,19 @@ def create_BOLO(case_number):
         return render_template("Capture Data/BOLO File.html", case_num=escape(case_number))
 
 
-@app.route('/Create-New-Case', methods=["POST", "GET"])
-def create_New_Case():
-    if request.method == "POST":
-
-        from Backend import Database_Modifier, create_Case
-        data_dict = request.form.to_dict()
-
-        Database_Modifier().check_If_Table_Exists("New_Case", data_dict.keys())
-        Database_Modifier().create_Database_Row("New_Case",data_dict)
-
-        create_Case(data_dict["id_case_number"])
-
-        return redirect(url_for("main_Menu"))
-    else:
-        return render_template("Capture Data/New Case.html")
-
-
-@app.route('/Initial-Customer-Report', methods=["POST", "GET"])
-def create_Initial_Customer_Report():
-    if request.method == "POST":
-        from Backend import save_Admin_Form_Data, Database_Modifier
-        data_dict = request.form.to_dict()
-
-        customer_name = data_dict["Complainant First Name"][0] + data_dict["Complainant Last Name"]
-
-
-        print(data_dict)
-        Database_Modifier().check_If_Table_Exists("Initial_Customer_Report",data_dict.keys())
-        Database_Modifier().create_Database_Row("Initial_Customer_Report",data_dict)
-
-
-        save_Admin_Form_Data(data_dict, customer_name, "Initial Customer Report")
-        return redirect(url_for("main_Menu"))
-
-    else:
-        return render_template("Capture Data/Initial Report.html")
-
-
-@app.route('/Invoice', methods=["POST", "GET"])
-def create_Customer_Invoice():
-    if request.method == "POST":
-        pass
-
-    else:
-        return "Coming Soon!"
-
-
-@app.route('/Check-Case-Status/<string:case_number>', methods=["POST", "GET"])
-def read_Case_Status(case_number):
-    if request.method == "POST":
-        pass
-
-    else:
-        return "Coming Soon!"
-
-
-@app.route('/Daily-Activity-Report/<string:case_number>', methods=["POST", "GET"])
-def create_Daily_Activity_Report(case_number):
+#Investigator Functions
+@app.route('/Create-Person-Of-Interest-Report/<string:case_number>', methods=["POST", "GET"])
+def create_Person_Of_Interest_Report(case_number):
     if request.method == "POST":
         from Backend import Database_Modifier
         data_dict = request.form.to_dict()
 
-        Database_Modifier().check_If_Table_Exists("Daily_Activity_Reports", data_dict.keys())
-        Database_Modifier().create_Database_Row("Daily_Activity_Reports", data_dict)
+        Database_Modifier().check_If_Table_Exists("People_Of_Interest", data_dict.keys())
+        Database_Modifier().create_Database_Row("People_Of_Interest", data_dict)
         return redirect(url_for("main_Menu"))
 
     else:
-        return render_template("Capture Data/Daily Activity Report.html", case_num=case_number)
-
+        return render_template("Capture Data/Person of Interest.html", case_num=case_number)
 
 @app.route('/Create-Interview-Report/<string:case_number>', methods=["POST", "GET"])
 def create_Interview_Report(case_number):
@@ -132,21 +170,6 @@ def create_Interview_Report(case_number):
     else:
         return render_template("Capture Data/Interview Report.html", case_num=case_number)
 
-
-@app.route('/Create-Person-Of-Interest-Report/<string:case_number>', methods=["POST", "GET"])
-def create_Person_Of_Interest_Report(case_number):
-    if request.method == "POST":
-        from Backend import Database_Modifier
-        data_dict = request.form.to_dict()
-
-        Database_Modifier().check_If_Table_Exists("People_Of_Interest", data_dict.keys())
-        Database_Modifier().create_Database_Row("People_Of_Interest", data_dict)
-        return redirect(url_for("main_Menu"))
-
-    else:
-        return render_template("Capture Data/Person of Interest.html", case_num=case_number)
-
-
 @app.route('/Create-Witness-Statement-Report/<string:case_number>', methods=["POST", "GET"])
 def create_Witness_Statement_Report(case_number):
     if request.method == "POST":
@@ -159,6 +182,19 @@ def create_Witness_Statement_Report(case_number):
 
     else:
         return render_template("Capture Data/Witness Statement Form.html", case_num=case_number)
+
+@app.route('/Daily-Activity-Report/<string:case_number>', methods=["POST", "GET"])
+def create_Daily_Activity_Report(case_number):
+    if request.method == "POST":
+        from Backend import Database_Modifier
+        data_dict = request.form.to_dict()
+
+        Database_Modifier().check_If_Table_Exists("Daily_Activity_Reports", data_dict.keys())
+        Database_Modifier().create_Database_Row("Daily_Activity_Reports", data_dict)
+        return redirect(url_for("main_Menu"))
+
+    else:
+        return render_template("Capture Data/Daily Activity Report.html", case_num=case_number)
 
 
 if __name__ == '__main__':
