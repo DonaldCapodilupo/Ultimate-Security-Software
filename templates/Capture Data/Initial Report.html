@@ -1,29 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Initial Client Report</title>
+{% extends "layout.html" %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+    {{ super() }}
 
-    <link rel="stylesheet" href="../../static/css/bootstrap.css">
-    <link rel="stylesheet" href="../../static/css/main.css">
-    <script src="../../static/js/bootstrap.js"></script>
-    <script src="../../static/js/main.js"></script>
+    <form action="{{ url_for('create_Initial_Customer_Report') }}" enctype=multipart/form-data method="POST">
 
-</head>
-<body>
-
-<form action="{{ url_for('create_Initial_Customer_Report') }}" enctype=multipart/form-data method="POST">
-
-    <div class="container mt-3">
-
-        <!--Complainant Information-->
-        <div class="row mt-3 border border-dark p-5">
-
-            <div class="col text-center">
-                <div id="Business Header"></div>
-            </div>
-
-        </div>
         <!--Complainant Employer Information-->
         <div class="row mt-3 border border-dark p-5">
             <div class="row">
@@ -42,7 +25,7 @@
 
                 <div class="col">
                     <label for="complainant-phone-number">Phone Number</label>
-                    <input id="complainant-phone-number" name="Phone Number" type="text">
+                    <input id="complainant-phone-number" name="Complainant Phone Number" type="text">
                 </div>
 
                 <div class="col">
@@ -57,6 +40,11 @@
                 <div class="col">
                     <label for="complainant-address">Address</label>
                     <input id="complainant-address" name="Complainant Address" type="text">
+                </div>
+
+                <div class="col">
+                    <label for="complainant-town">Town</label>
+                    <input id="complainant-town" name="Complainant Town" type="text">
                 </div>
 
                 <div class="col">
@@ -487,11 +475,7 @@
 
         </div>
 
-    </div>
-</form>
 
-<script>
-    create_Business_Header();
-</script>
-</body>
-</html>
+    </form>
+{% endblock %}
+

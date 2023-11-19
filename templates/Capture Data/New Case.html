@@ -1,132 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create New Case</title>
+{% extends "layout.html" %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+    {{ super() }}
 
-    <link rel="stylesheet" href="../../static/css/bootstrap.css">
-    <link rel="stylesheet" href="../../static/css/main.css">
-    <script src="../../static/js/main.js"></script>
-
-</head>
-<body>
-
-<form action="{{ url_for('create_New_Case') }}" enctype=multipart/form-data method="POST">
-    <div class="container">
-        <div class="row">
-            <div class="col text-center" id="Business Header"></div>
-        </div>
-
-        <div class="row mt-3 border border-dark text-center">
-            <h1><b>Create New Case</b></h1>
-        </div>
-
-        <div class="row mt-3">
-
-            <div class="col">
-
-                <label for="Customer Name">Enter Customer Name:</label>
-                <select class="form-select" aria-label="Default select example" id="Customer Name"
-                        name="Customer Name" onchange="case_Number_Generator()">
-                    {% for value in infoDict["Customer Name"] %}
-                        <option value="{{ value }}">{{ value }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-
-            <div class="col">
-                <label for="Investigation Type">Investigation Type?</label>
-                <select id="Investigation Type" name="Investigation Type" class="form-select"
-                        onchange="case_Number_Generator()">
-                    <option value="BGINV">Background Investigation</option>
-                    <option value="INTINV">Internal Investigation</option>
-                    <option value="EXINV">External Investigation</option>
-                    <option value="EVIDENCE">Evidence Gathering</option>
-                    <option value="ASSETLOC">Asset Location</option>
-                </select>
-            </div>
-
-            <div class="row text-center mt-2">
-                <h5><label for="Case Purpose"><u>What is the purpose of the investigation?</u></label></h5>
-                <textarea name="Case Purpose" id="Case Purpose" cols="30" rows="10"></textarea>
-
-            </div>
-
-            <div class="row mt-2">
-                <h5><label for="Case Scope"><u>What is the scope of the investigation?</u></label></h5>
-                <textarea name="Case Scope" id="Case Scope" cols="30" rows="10"></textarea>
-            </div>
-
-
-            <div class="row mt-2">
-                <h5>
-                    <label for="Legal Frameworks"><u>Are their any legal framework issues that everyone should be aware
-                    of?</u></label>
-                </h5>
-                <textarea name="Legal Frameworks" id="Legal Frameworks" cols="30" rows="10"></textarea>
-            </div>
-
-            <div class="row mt-2">
-
-                <h5><label for="Available Resources">
-                    <u>Are their any available resources that everyone should be aware of?</u>
-                </label></h5>
-                <textarea name="Available Resources" id="Available Resources" cols="30" rows="10"></textarea>
-            </div>
-
-            <div class="row mt-2">
-
-                <h5><label for="Known Risks">
-                    <u>Are There any risks that everyone should be aware of?</u>
-                </label></h5>
-                <textarea name="Known Risks" id="Known Risks" cols="30" rows="10"></textarea>
-
-            </div>
-
-            <div class="row mt-2">
-
-                <h5><label for="Recommended Techniques">
-                    <u>Are their any recommended investigation techniques?</u>
-                </label></h5>
-                <textarea name="Recommended Techniques" id="Recommended Techniques" cols="30" rows="10"></textarea>
-            </div>
-
-            <div class="row mt-2">
-
-                <h5><label for="Communication Plan">
-                    <u>What is the communication plan?</u>
-                </label></h5>
-                <textarea name="Communication Plan" id="Communication Plan" cols="30" rows="10"></textarea>
-            </div>
-
+    <form action="{{ url_for('create_New_Case') }}" enctype=multipart/form-data method="POST">
+        <div class="container">
             <div class="row">
-                <input type="text" style="visibility: hidden" name="Case Number" id="generated_case_number">
+                <div class="col text-center" id="Business Header"></div>
             </div>
 
+            <div class="row mt-3 border border-dark text-center">
+                <h1><b>Create New Case</b></h1>
+            </div>
 
-            <!--Submit Button-->
-            <div class="row mt-3 mb-5 text-center">
-                <div class="col"></div>
+            <div class="row mt-3">
+
                 <div class="col">
-                    <button class="btn btn-dark mr-2" type="submit" name="submit_button" value="Submit New Case">
-                        Submit New Case
-                    </button>
+
+                    <label for="Customer Name">Enter Customer Name:</label>
+                    <select class="form-select" aria-label="Default select example" id="Customer Name"
+                            name="Customer Name" onchange="case_Number_Generator()">
+                        {% for value in infoDict["Customer Name"] %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-                <div class="col"></div>
+
+
+                <div class="col">
+                    <label for="Investigation Type">Investigation Type?</label>
+                    <select id="Investigation Type" name="Investigation Type" class="form-select"
+                            onchange="case_Number_Generator()">
+                        <option value="BGINV">Background Investigation</option>
+                        <option value="INTINV">Internal Investigation</option>
+                        <option value="EXINV">External Investigation</option>
+                        <option value="EVIDENCE">Evidence Gathering</option>
+                        <option value="ASSETLOC">Asset Location</option>
+                    </select>
+                </div>
+
+                <div class="row text-center mt-2">
+                    <h5><label for="Case Purpose"><u>What is the purpose of the investigation?</u></label></h5>
+                    <textarea name="Case Purpose" id="Case Purpose" cols="30" rows="10"></textarea>
+
+                </div>
+
+                <div class="row mt-2">
+                    <h5><label for="Case Scope"><u>What is the scope of the investigation?</u></label></h5>
+                    <textarea name="Case Scope" id="Case Scope" cols="30" rows="10"></textarea>
+                </div>
+
+
+                <div class="row mt-2">
+                    <h5>
+                        <label for="Legal Frameworks"><u>Are their any legal framework issues that everyone should be
+                            aware
+                            of?</u></label>
+                    </h5>
+                    <textarea name="Legal Frameworks" id="Legal Frameworks" cols="30" rows="10"></textarea>
+                </div>
+
+                <div class="row mt-2">
+
+                    <h5><label for="Available Resources">
+                        <u>Are their any available resources that everyone should be aware of?</u>
+                    </label></h5>
+                    <textarea name="Available Resources" id="Available Resources" cols="30" rows="10"></textarea>
+                </div>
+
+                <div class="row mt-2">
+
+                    <h5><label for="Known Risks">
+                        <u>Are There any risks that everyone should be aware of?</u>
+                    </label></h5>
+                    <textarea name="Known Risks" id="Known Risks" cols="30" rows="10"></textarea>
+
+                </div>
+
+                <div class="row mt-2">
+
+                    <h5><label for="Recommended Techniques">
+                        <u>Are their any recommended investigation techniques?</u>
+                    </label></h5>
+                    <textarea name="Recommended Techniques" id="Recommended Techniques" cols="30" rows="10"></textarea>
+                </div>
+
+                <div class="row mt-2">
+
+                    <h5><label for="Communication Plan">
+                        <u>What is the communication plan?</u>
+                    </label></h5>
+                    <textarea name="Communication Plan" id="Communication Plan" cols="30" rows="10"></textarea>
+                </div>
+
+                <div class="row">
+                    <input type="text" style="visibility: hidden" name="Case Number" id="generated_case_number">
+                </div>
+
+
+                <!--Submit Button-->
+                <div class="row mt-3 mb-5 text-center">
+                    <div class="col"></div>
+                    <div class="col">
+                        <button class="btn btn-dark mr-2" type="submit" name="submit_button" value="Submit New Case">
+                            Submit New Case
+                        </button>
+                    </div>
+                    <div class="col"></div>
+                </div>
+
             </div>
+
 
         </div>
-
-
-    </div>
-</form>
-<script>
-    create_Business_Header();
-    setup_Case_Number_Generator()
-    case_Number_Generator();
-
-</script>
-
-</body>
-</html>
+    </form>
+{% endblock %}
