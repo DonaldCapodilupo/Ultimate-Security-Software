@@ -109,10 +109,7 @@
                             </button>
                         </div>
                         <div class="col">
-                            <button class="btn btn-dark mr-2" type="submit" name="submit_button"
-                                    value="Check Case Status" formnovalidate>
-                                Check Case Status
-                            </button>
+
                         </div>
                     </div>
 
@@ -130,9 +127,10 @@
                 <div class="row mt-5 text-center">
                     <h2><b>Investigative Functions</b></h2>
 
-                    <div class="row text-center mt-5 mb-5">
-                    <div class="col"></div>
+                    <div class="row text-center mt-5">
+                        <div class="col"></div>
                         <div class="col">
+
                             <label for="Case Number">Case Number:</label>
                             <select class="form-select" aria-label="Default select example" id="Case Number"
                                     name="Case Number">
@@ -140,11 +138,15 @@
                                     <option value="{{ value }}">{{ value }}</option>
                                 {% endfor %}
                             </select>
+                            <button class="btn btn-dark mt-3" type="submit" name="submit_button"
+                                    value="Check Case Status" formnovalidate>
+                                Check Case Status
+                            </button>
                         </div>
-                    <div class="col"></div>
+                        <div class="col"></div>
                     </div>
 
-                    <div class="row mt-5">
+                    <div class="row mt-2">
                         <div class="col">
                             <button class="btn btn-dark mr-2" type="submit" name="submit_button"
                                     value="Daily Activity Report">
