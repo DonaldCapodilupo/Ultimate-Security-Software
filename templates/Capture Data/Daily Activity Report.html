@@ -12,13 +12,12 @@
 </head>
 <body>
 
-<form action="{{ url_for('create_Daily_Activity_Report', case_number=case_num) }}" enctype=multipart/form-data method="POST">
+<form action="{{ url_for('create_Daily_Activity_Report', case_number=case_num) }}" enctype=multipart/form-data
+      method="POST">
     <div class="container">
-        <div class="row mt-3 border border-dark p-5">
+        <div class="row m-2 p-2 border border-white text-center">
+            <h1><b>Daily Activity Report</b></h1>
             <div class="row">
-                <div class="row text-center">
-                    <h1><b>Daily Activity Report</b></h1>
-                </div>
                 <div class="col">
                     <div id="Business Header"></div>
                 </div>
@@ -28,91 +27,91 @@
                 </div>
             </div>
 
+        </div>
+
+
+        <div class="row m-2 p-2 border border-white text-center">
+            <div class="col">
+                <h3><b>Investigator</b></h3>
+                <h4>Donald Capodilupo</h4>
+            </div>
+
+
+            <div class="col align-self-end">
+                <h5><label for="date"><b>Today's Date</b></label></h5>
+                <input name="date" id="date" type="date">
+            </div>
+        </div>
+
+
+        <div class="row m-2 p-2 border border-white mt-3">
+            <div class="row text-center ">
+                <h2><b>Activities</b></h2>
+            </div>
+            <div class="row">
+                <label for="DAR-interviews"><b>Interviews Conducted</b></label>
+                <textarea name="Interviews Conducted" id="DAR-interviews" cols="30" rows="10"></textarea>
+            </div>
 
             <div class="row">
-                <div class="col">
-                    <h3><b>Investigator</b></h3>
-                    <h4>Donald Capodilupo</h4>
-                </div>
-
-                <div class="col align-self-end">
-                    <h4><b>Case Number:</b> <i>{{ case_num }}</i></h4>
-                </div>
-
-                <div class="col align-self-end">
-                    <label for="date"><h3><b>Today's Date</b></h3></label>
-                    <input name="date" id="date" type="date">
-                </div>
+                <label for="DAR-documents-reviewed"><b>Documents Reviewed</b></label>
+                <textarea name="Documents Reviewed" id="DAR-documents-reviewed" cols="30" rows="10"></textarea>
             </div>
 
+            <div class="row">
+                <label for="DAR-surveillance"><b>Surveillance</b></label>
+                <textarea name="Surveillance" id="DAR-surveillance" cols="30" rows="10"></textarea>
+            </div>
+        </div>
 
-            <div class="row mt-3">
-                <div class="row text-center ">
-                    <h2><b>Activities</b></h2>
-                </div>
-                <div class="row">
-                    <label for="DAR-interviews"><b>Interviews Conducted</b></label>
-                    <textarea name="Interviews Conducted" id="DAR-interviews" cols="30" rows="10"></textarea>
-                </div>
-
-                <div class="row">
-                    <label for="DAR-documents-reviewed"><b>Documents Reviewed</b></label>
-                    <textarea name="Documents Reviewed" id="DAR-documents-reviewed" cols="30" rows="10"></textarea>
-                </div>
-
-                <div class="row">
-                    <label for="DAR-surveillance"><b>Surveillance</b></label>
-                    <textarea name="Surveillance" id="DAR-surveillance" cols="30" rows="10"></textarea>
-                </div>
+        <div class="row m-2 p-2 border border-white mt-3">
+            <div class="row text-center ">
+                <h2><b>Findings</b></h2>
+            </div>
+            <div class="row">
+                <label for="DAR-witness-statements"><b>Witness Statements</b></label>
+                <textarea name="Witness Statement Findings" id="DAR-witness-statements" cols="30"
+                          rows="10"></textarea>
             </div>
 
-            <div class="row mt-3">
-                <div class="row text-center ">
-                    <h2><b>Findings</b></h2>
-                </div>
-                <div class="row">
-                    <label for="DAR-witness-statements"><b>Witness Statements</b></label>
-                    <textarea name="Witness Statement Findings" id="DAR-witness-statements" cols="30" rows="10"></textarea>
-                </div>
-
-                <div class="row">
-                    <label for="DAR-documents-reviewed-findings"><b>Documents Reviewed</b></label>
-                    <textarea name="Document Findings" id="DAR-documents-reviewed-findings" cols="30" rows="10"></textarea>
-                </div>
-
-                <div class="row">
-                    <label for="DAR-surveillance-findings"><b>Surveillance</b></label>
-                    <textarea name="Surveillance Findings" id="DAR-surveillance-findings" cols="30" rows="10"></textarea>
-                </div>
+            <div class="row">
+                <label for="DAR-documents-reviewed-findings"><b>Documents Reviewed</b></label>
+                <textarea name="Document Findings" id="DAR-documents-reviewed-findings" cols="30"
+                          rows="10"></textarea>
             </div>
 
+            <div class="row">
+                <label for="DAR-surveillance-findings"><b>Surveillance</b></label>
+                <textarea name="Surveillance Findings" id="DAR-surveillance-findings" cols="30"
+                          rows="10"></textarea>
+            </div>
+        </div>
 
-            <div class="row mt-3">
-                <div class="row text-center ">
-                    <h2><b>Conclusion</b></h2>
-                </div>
-                <div class="row">
-                    <label for="DAR-witness-statements"><b></b></label>
-                    <textarea name="Conclusion" id="DAR-witness-statements" cols="30" rows="10">
+
+        <div class="row m-2 p-2 border border-white mt-3">
+            <div class="row text-center ">
+                <h2><b>Conclusion</b></h2>
+            </div>
+            <div class="row">
+                <label for="DAR-witness-statements"><b></b></label>
+                <textarea name="Conclusion" id="DAR-witness-statements" cols="30" rows="10">
 
 
                 </textarea>
-                </div>
             </div>
-
-            <!--Submit Button-->
-            <div class="row mt-3 mb-5 text-center">
-                <div class="col"></div>
-                <div class="col">
-                    <button class="btn btn-dark mr-2" type="submit" name="submit_button" value="Submit New Case">
-                        Submit New Case
-                    </button>
-                </div>
-                <div class="col"></div>
-            </div>
-
-
         </div>
+
+        <!--Submit Button-->
+        <div class="row mt-3 mb-5 text-center">
+            <div class="col"></div>
+            <div class="col">
+                <button class="btn btn-dark mr-2" type="submit" name="submit_button" value="Submit New Case">
+                    Submit New Case
+                </button>
+            </div>
+            <div class="col"></div>
+        </div>
+
 
     </div>
 </form>
