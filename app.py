@@ -34,10 +34,10 @@ def main_Menu():
         from Backend import Database_Modifier
 
         backend_data = Database_Modifier().read_Database_Single_Table("New_Case")
-        case_numbers = backend_data["Case_Number"]
+        case_numbers = backend_data["Case_Number"].to_list()
 
         data_dict = {
-            "Case Number":case_numbers
+            "Case Number":[case_number.replace("_","-") for case_number in case_numbers]
         }
 
         return render_template("main.html", infoDict=data_dict)
@@ -48,7 +48,50 @@ def read_Case_Status(case_number):
         pass
 
     else:
-        return "Coming Soon!"
+        from Backend import Database_Modifier
+
+        #Right now, just pulling one specific user for proof of concept.
+        #Need a way to go "Okay user wants this case number" then search all tables for anything related.
+
+        case_reports = Database_Modifier().read_Database_Single_Table("New_Case")
+
+
+
+        #for  row in case_report.items():
+        #    print(row[0])
+
+        specific_case_report_data = case_reports.loc[case_reports['Case_Number'] == case_number.replace("-","_")].values.flatten().tolist()
+
+
+        customer_name = specific_case_report_data[1].replace("_"," ").split()
+        print(customer_name)
+        print("Customer First name " + customer_name[0])
+        print("Customer Last name " + customer_name[1])
+
+
+
+        customer_data = case_reports.loc([case_reports['Case_Number'] == case_number])
+
+
+        print(first_name)
+
+        initial_report_df = Database_Modifier().read_Database_Single_Table("Initial_Customer_Report")
+        case_report_info = initial_report_df.iloc[initial_report_df['First Name'] == case_number and case_report[''] == case_number].replace("_"," ")
+
+        data_dict = {}
+
+        for key, value in case_info.items():
+
+            if key == "Complainant Email":
+                break
+            else:
+                data_dict[str(key).replace("_"," ")] = str(value).replace("_"," ")
+
+        for key, value in data_dict.items():
+            print("Key: " + key)
+            print("Value: " + value)
+
+        return render_template("View Data/Non Admin Initial Report.html", infoDict=data_dict)
 
 
 #Admin Functions
