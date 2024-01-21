@@ -2,14 +2,15 @@ const business_name = "Capodilupo Investigation's";
 const address = "123 Main St,\n Disney Land, FL 90210";
 
 
-
-
 function create_Business_Header() {
     let header_div = document.getElementById("Business Header");
-    console.log(header_div);
-    header_div.innerHTML +=
-        "<h3>" + business_name + "</h3>" +
-        "<h5>" + address + "</h5>";
+    if (header_div.textContent === "") {
+        console.log(header_div);
+        header_div.innerHTML +=
+            "<h3>" + business_name + "</h3>" +
+            "<h5>" + address + "</h5>";
+    }
+
 }
 
 function get_Current_Time() {
