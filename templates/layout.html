@@ -1,0 +1,35 @@
+{% block doc %}
+    {% block html %}
+        {% block html_attribs %}
+            <html lang="en">
+        {% endblock %}
+
+        {% block head %}
+            <meta charset="UTF-8">
+            <link rel="stylesheet" href="../static/css/bootstrap.css">
+            <link rel="stylesheet" href="../static/css/main.css">
+            <script src="../static/js/main.js"></script>
+            <script src="../static/js/bootstrap.js"></script>
+        {% endblock %}
+    {% endblock %}
+
+    <div class="container">
+
+        {% block body %}
+
+            <div class="row text-center Business Header">
+                <div id="Business Header"></div>
+            </div>
+
+        {% endblock %}
+    </div>
+
+    {% block scripts %}
+
+        <script>
+            create_Business_Header()
+        </script>
+
+
+    {% endblock %}
+{% endblock %}
