@@ -34,9 +34,10 @@ def save_Admin_Form_Data(form_data, customer, report_type):
         json.dump(data, f)
 
 def create_License_Plate_Image(plate_num):
-    htmldata = requests.get("https://www.acme.com/licensemaker/licensemaker.cgi?state=Massachusetts&text=" +plate_num +"&plate=1988&r=1675049699").text
+    htmldata = requests.get(
+        "https://www.acme.com/licensemaker/licensemaker.cgi?state=Massachusetts&text=" + plate_num + "&plate=1988&r=1675049699").text
     soup = BeautifulSoup(htmldata, 'html.parser')
-    image =  soup.find_all('img')[2].get("src")
+    image = soup.find_all('img')[2].get("src")
 
     data = requests.get("https://www.acme.com/licensemaker/" + image).content
 
@@ -48,23 +49,41 @@ def create_License_Plate_Image(plate_num):
     f.write(data)
     f.close()
 
+
 def license_Plate_Capture():
-    import pygetwindow as gw
-
-    try:
-        win = gw.getWindowsWithTitle('Fullscreen')[0] #OBS 30.0.0
-    except IndexError:
-        print("OBS Not in Full Screen")
-        return
-    win.activate()
-
-
-
-    while "Screenshot_.png" not in  os.listdir('static/images'):
+    while "Screenshot_.png" not in os.listdir('static/images'):
         continue
 
-    win = gw.getWindowsWithTitle("Plate Capture")[0]
-    win.activate()
+
+def control_OBS_Zoom(zoom_value):
+    import json,time
+    import websocket
+    ws = websocket.WebSocket()
+
+    ws.connect("ws://192.168.0.24:8888/websocket")
+
+
+
+    ws.send(json.dumps({"messageType": "setDeviceConfiguration",
+         "content": "{\"shutterSpeed\":{\"title\":\"1 / 30\",\"value\":0.029999999329447746},\"zoomLevelMin\":1,\"exposureEVmax\":8,\"isTorchAvailable\":true,\"isDevicePreviewOn\":true,\"temperature\":3500,\"deviceName\":\"iPhone\",\"resolutions\":[\"4032x3024\",\"3264x2448\",\"3840x2160\",\"2592x1944\",\"1920x1440\",\"1440x1080\",\"1920x1080\",\"1024x768\",\"1280x720\",\"960x540\",\"640x480\",\"480x360\",\"352x288\",\"192x144\"],\"isAutomaticWhiteBalanceModeEnabled\":true,\"isCustomExposureModeSupported\":true,\"isCustomWhiteBalanceModeSupported\":true,\"isoMin\":24,\"temperatureMin\":1800,\"resolution\":\"1280x720\",\"shutterSpeeds\":[{\"title\":\"1.0\",\"value\":1},{\"title\":\"1 / 2.0\",\"value\":0.5},{\"title\":\"1 / 4.0\",\"value\":0.25},{\"title\":\"1 / 8.0\",\"value\":0.12999999523162842},{\"title\":\"1 / 15\",\"value\":0.07000000029802322},{\"title\":\"1 / 30\",\"value\":0.029999999329447746},{\"title\":\"1 / 50\",\"value\":0.019999999552965164},{\"title\":\"1 / 100\",\"value\":0.009999999776482582}],\"focusConfiguration\":{\"lensPosition\":0.384313702583313,\"isLockedFocusModeSupported\":true,\"isSmoothAutoFocusSupported\":true,\"maxLensPosition\":1,\"isAutoFocusSupported\":true,\"crosshairMode\":{\"combined\":null},\"isContinuousAutoFocusSupported\":true,\"focusMode\":{\"auto\":0},\"isLockingFocusWithCustomLensPositionSupported\":true,\"isFocusPointOfInterestSupported\":true,\"minLensPosition\":0,\"isSmoothAutoFocusEnabled\":false,\"isAdjustingFocus\":false,\"isAutoFocusRangeRestrictionSupported\":true},\"iso\":800,\"isTorchEnabled\":false,\"lightingMode\":\"automatic\",\"framerates\":[\"24\",\"25\",\"30\",\"60\",\"120\",\"240\"],\"batteryState\":{\"charging\":{\"batteryLevel\":1}},\"cameras\":[{\"id\":\"com.apple.avfoundation.avcapturedevice.built-in_video:1\",\"title\":\"Front Wide Angle Camera\",\"position\":2},{\"id\":\"com.apple.avfoundation.avcapturedevice.built-in_video:0\",\"title\":\"Wide Angle Camera\",\"position\":1}],\"isoMax\":2304,\"zoomLevel\":" +str(zoom_value) +",\"zoomLevelMax\":24,\"exposureEVmin\":-8,\"exposureEV\":0.5,\"selectedCamera\":{\"id\":\"com.apple.avfoundation.avcapturedevice.built-in_video:0\",\"title\":\"Wide Angle Camera\",\"position\":1},\"isFrontCameraMirrored\":true,\"framerate\":\"30\",\"temperatureMax\":8000}"}))
+    time.sleep(.5)
+    print(ws.recv())
+
+    ws.close()
+
+
+
+def get_OBS_Zoom():
+    import websocket, json
+    ws = websocket.WebSocket()
+
+    ws.connect("ws://192.168.0.24:8888/websocket")
+    zoom_level = round(json.loads(json.loads(ws.recv())["content"])["zoomLevel"])
+
+
+    return zoom_level
+
+
 
 class Database_Modifier:
     def __init__(self):
@@ -107,10 +126,7 @@ class Database_Modifier:
 
         sqliteConnection = sqlite3.connect(self.database_name)
 
-
         df = pd.read_sql_query("SELECT * FROM " + table_name, sqliteConnection)
-
-
 
         return df
 
@@ -144,7 +160,7 @@ class Database_Modifier:
             for database_table in list_of_table_names:
                 df = pd.read_sql('SELECT * FROM ' + database_table, sqliteConnection)
 
-                if str(database_table) != "sqlite_sequence" :
+                if str(database_table) != "sqlite_sequence":
                     return_dict[case_number][database_table] = {}
                 print("Table Name: " + str(database_table))
 
@@ -155,7 +171,9 @@ class Database_Modifier:
                         return_dict[case_number][database_table][
                             str(row["Basic_Details_First_Name"] + " " + row["Basic_Details_Last_Name"])] = {}
                         for data_name, data_value in row.items():
-                            return_dict[case_number][database_table][str(row["Basic_Details_First_Name"] + " " + row["Basic_Details_Last_Name"])][str(data_name)] = str(data_value)
+                            return_dict[case_number][database_table][
+                                str(row["Basic_Details_First_Name"] + " " + row["Basic_Details_Last_Name"])][
+                                str(data_name)] = str(data_value)
 
         except AttributeError as error:
             print("Failed to execute the above query", error)

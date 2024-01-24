@@ -247,6 +247,7 @@ def read_House_Profile_Report():
 
 @app.route('/Capture-Plate/', methods=["POST", "GET"])
 def capture_Plate_Image():
+    from Backend import get_OBS_Zoom
     if request.method == "POST":
         from Backend import license_Plate_Capture
         import os,time
@@ -257,17 +258,24 @@ def capture_Plate_Image():
         elif button_clicked == "Capture Plate":
             license_Plate_Capture()
             time.sleep(2)
-            return render_template("Capture Data/Capture Plate.html",image=True)
+            return render_template("Capture Data/Capture Plate.html",image=True, zoom_level=get_OBS_Zoom())
 
         elif button_clicked == "Delete Plate":
             print(os.getcwd())
             os.remove("static/images/Screenshot_.png")
-            return render_template("Capture Data/Capture Plate.html",image=False)
+            return render_template("Capture Data/Capture Plate.html",image=False, zoom_level=get_OBS_Zoom())
+
+        elif button_clicked == "Update Zoom":
+            from Backend import control_OBS_Zoom
+
+            user_desired_zoom = request.form["Updated Zoom Level"]
+            control_OBS_Zoom(user_desired_zoom)
+            return render_template("Capture Data/Capture Plate.html",image=False, zoom_level=get_OBS_Zoom())
 
         elif button_clicked == "Save Plate":
 
             os.remove("static/images/_Screenshot.png")
-            return render_template("Capture Data/Capture Plate.html",image=True)
+            return render_template("Capture Data/Capture Plate.html",image=True, zoom_level=get_OBS_Zoom())
 
 
 
@@ -276,9 +284,9 @@ def capture_Plate_Image():
             return render_template("Capture Data/Capture Plate.html")
 
     else:
-        return render_template("Capture Data/Capture Plate.html")
+        return render_template("Capture Data/Capture Plate.html", zoom_level=get_OBS_Zoom())
 
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",debug=False)
+    app.run(host="0.0.0.0",debug=True)
