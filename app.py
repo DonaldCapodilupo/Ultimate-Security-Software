@@ -41,7 +41,12 @@ def main_Menu():
             "Case Number": [case_number.replace("_", "-") for case_number in case_numbers]
         }
 
-        return render_template("main.html", infoDict=data_dict)
+        if len(request.args) >= 1:
+            confirmation = request.args["confirmation"]
+        else:
+            confirmation = ""
+
+        return render_template("main.html", infoDict=data_dict, confirmation=confirmation)
 
 @app.route('/Check-Case-Status/<string:case_number>', methods=["POST", "GET"])
 def read_Case_Status(case_number):
@@ -243,7 +248,22 @@ def read_House_Profile_Report():
     if request.method == "POST":
         pass
     else:
-        return render_template("View Data/Non Admin House Profile.html")
+        from Backend import Database_Modifier
+        test_dict = {
+            "Complainant First Name": "Donald",
+            "Complainant Last Name": "Capodilupo",
+            "Phone Number": "978/424/5947",
+            "Complainant Address": "15 Elizabeth Rd",
+            "Complainant Town": "Billerica",
+            "Complainant State": "MA",
+            "Complainant ZIP": "01821",
+
+        }
+
+        infoDict = Database_Modifier().read_Database_Single_Table("People_Of_Interest").to_dict()
+        #est_dict = dict(infoDict[0])
+
+        return render_template("View Data/Non Admin House Profile.html", infoDict = test_dict)
 
 @app.route('/Capture-Plate/', methods=["POST", "GET"])
 def capture_Plate_Image():
@@ -272,10 +292,19 @@ def capture_Plate_Image():
             control_OBS_Zoom(user_desired_zoom)
             return render_template("Capture Data/Capture Plate.html",image=False, zoom_level=get_OBS_Zoom())
 
-        elif button_clicked == "Save Plate":
+        elif button_clicked == "Save Data":
+            import shutil
+            from Backend import Database_Modifier
 
-            os.remove("static/images/_Screenshot.png")
-            return render_template("Capture Data/Capture Plate.html",image=True, zoom_level=get_OBS_Zoom())
+            data_dict = request.form.to_dict()
+            print(data_dict)
+
+            Database_Modifier().check_If_Table_Exists("Plate_Captures",data_dict.keys())
+            Database_Modifier().create_Database_Row("Plate_Captures", data_dict)
+
+            shutil.move("static/images/Screenshot_.png", "Plates/" + data_dict["License Plate Number"]+".png")
+
+            return redirect(url_for("main_Menu", confirmation = data_dict["License Plate Number"] + " has been logged."))
 
 
 
@@ -284,7 +313,62 @@ def capture_Plate_Image():
             return render_template("Capture Data/Capture Plate.html")
 
     else:
-        return render_template("Capture Data/Capture Plate.html", zoom_level=get_OBS_Zoom())
+        try:
+            return render_template("Capture Data/Capture Plate.html", zoom_level=get_OBS_Zoom())
+        except ConnectionRefusedError as error:
+            print(error)
+            return redirect(url_for("main_Menu"))
+
+@app.route('/Plate-Lookup/', methods=["POST", "GET"])
+def read_Plate_Information():
+    from Backend import get_OBS_Zoom
+    if request.method == "POST":
+        from Backend import license_Plate_Capture
+        import os,time
+        button_clicked = request.form['submit_button']
+
+        if button_clicked == "Return Home":
+            return  redirect(url_for("main_Menu"))
+        else:
+            return render_template("Capture Data/Capture Plate.html")
+
+
+
+
+    else:
+
+        return render_template("View Data/Capture Plate.html", zoom_level=get_OBS_Zoom())
+
+
+@app.route('/POI/', methods=["POST", "GET"])
+def read_POI_Information():
+    from Backend import get_OBS_Zoom
+    if request.method == "POST":
+        from Backend import license_Plate_Capture
+        import os,time
+        button_clicked = request.form['submit_button']
+
+        if button_clicked == "Return Home":
+            return  redirect(url_for("main_Menu"))
+        else:
+            return render_template("View Data/Non Admin Person of Interest Report.html")
+
+
+
+
+    else:
+        test_dict = {
+            "Complainant First Name":"Donald",
+            "Complainant Last Name":"Capodilupo",
+            "Phone Number":"978/424/5947",
+            "Complainant Address": "15 Elizabeth Rd",
+            "Complainant Town":"Billerica",
+            "Complainant State":"MA",
+            "Complainant ZIP":"01821",
+
+        }
+
+        return render_template("View Data/Non Admin Person of Interest Report.html", infoDict=test_dict)
 
 
 

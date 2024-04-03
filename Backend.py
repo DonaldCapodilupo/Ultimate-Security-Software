@@ -83,6 +83,22 @@ def get_OBS_Zoom():
 
     return zoom_level
 
+def open_Secret_Compartment():
+    import pyfirmata
+
+    import time
+
+    board = pyfirmata.Arduino('COM3')
+
+    while True:
+        board.digital[13].write(1)
+
+        time.sleep(1)
+
+        board.digital[13].write(0)
+        time.sleep(1)
+
+
 
 
 class Database_Modifier:

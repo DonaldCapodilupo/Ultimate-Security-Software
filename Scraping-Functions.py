@@ -1,9 +1,12 @@
+import os, time
+from Backend import Database_Modifier
+
 with open("api-key.txt", "r") as file:
     key = file.read()
 
 
 def scrape_Google_Maps_Long_Lat():
-    import pyperclip, csv
+    import pyperclip
 
     pyperclip.waitForNewPaste(10)
 
@@ -112,12 +115,51 @@ def patriotProperties_Scraper(street_num, street_name):
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.hotkey('ctrl', 'c')
 
-    with open("static/Property Reports/" + street_num + " " + street_name + ".html", "w", encoding='utf-8') as f:
+    if not os.path.exists("static/Property Reports/" + street_name):
+        os.makedirs("static/Property Reports/" + street_name)
+
+    with open("static/Property Reports/" + street_name + "/" + street_num + " " + street_name + ".html", "w",
+              encoding='utf-8') as f:
         f.write(pyperclip.paste())
 
     driver.close()
 
     # Used for mass scraping
+
+
+class Information_Retrieval_Tool:
+    def __init__(self):
+        self.arrest_url_log = "https://police.billericaps.com/index.php/logs/"
+        self.home_information_url = "https://billerica.patriotproperties.com/default.asp"
+        self.billerica_map_url = "https://www.google.com/maps/place/Billerica,+MA/@42.5597003,-71.3105115,13z/data=!3m1!4b1!4m6!3m5!1s0x89e3a194a66bad0d:0x8d7e8efdb1611c11!8m2!3d42.5584218!4d-71.2689461!16zL20vMHR6emg?entry=ttu"
+        self.neighborhood_url = "https://www.google.com/maps/@42.5337476,-71.2537305,17.67z?entry=ttu"
+        self.coordinates_list = []
+        self.address_information_list = []
+
+    def scrape_home_information(self):
+        from selenium import webdriver
+        driver = webdriver.Firefox()
+
+        driver.get(self.neighborhood_url)
+        driver.maximize_window()
+
+        self.coordinates_list = scrape_Google_Maps_Long_Lat()
+
+        driver.close()
+
+        for long_lat in self.coordinates_list:
+            self.address_information_list.append(coordinates_To_Address(long_lat))
+
+        print(self.address_information_list)
+
+        for address in self.address_information_list:
+            address_number = address[0].split()[0]
+            address_street = address[0].split()[1] + " " + address[0].split()[2][:-1]
+
+            patriotProperties_Scraper(address_number, address_street)
+
+
+# Information_Retrieval_Tool().scrape_home_information()
 
 
 def jurisdiction_addresses_to_patriot_properties():
@@ -135,9 +177,7 @@ def jurisdiction_addresses_to_patriot_properties():
                 pass
 
 
-
 def arrest_Log_Loop():
-
     test_loop = []
     for directory in os.listdir("Forms/Billerica PD Arrest Records"):
         test_loop.append(scrape_Arrest_Log("Forms/Billerica PD Arrest Records/" + directory))
@@ -168,12 +208,11 @@ def scrape_Arrest_Log(pdf_file):
     for item in page:
 
         if "Name:" in item:
-            offense_text = item[: item.index("Name:")].replace("   "," ").replace("_","")
+            offense_text = item[: item.index("Name:")].replace("   ", " ").replace("_", "")
 
-            name_text = item[item.index("Name:"): item.index("Age:")].replace("   "," ")[6:].strip()
+            name_text = item[item.index("Name:"): item.index("Age:")].replace("   ", " ")[6:].strip()
 
             age_text = item[item.index("Age:"):item.index("Sex:")].strip()[5:]
-
 
             gender_text = item[item.index("Sex:"):][5:]
 
@@ -194,5 +233,58 @@ def scrape_Arrest_Log(pdf_file):
         elif item == "Charged with: ":
             return_list.append(dict(loop_dict))
 
-
     return return_list
+
+
+def scrape_Billerica_Business_Listing():
+    import requests
+    from bs4 import BeautifulSoup
+    import re
+
+    index = 2
+
+    return_Dict = {}
+    other_dict = {}
+    while True:
+        dynamic_url = "https://www.town.billerica.ma.us/BusinessDirectoryii.aspx?ysnShowAll=0&lngNewPage=" + str(
+            index) + "&txtLetter=&txtZipCode=&txtCity=&txtState=&txtBusinessName=&lngBusinessCategoryID=0&txtCustomField1=&txtCustomField2=&txtCustomField3=&txtCustomField4=&txtAreaCode="
+
+        soup = BeautifulSoup(requests.get(dynamic_url).text, 'html.parser')
+
+
+
+        for link in soup.find_all('span')[31:-28]:
+            line_item = link.text.replace("\n", "").replace("\t", "")
+
+            return_Dict[line_item] = {"Address":"","Phone Number":"","Website":"","Description":""}
+
+
+
+        try:
+            for row in soup.find_all("tr")[6:-1]:
+                business_information = row.text.replace("\n", "").replace("\t", "").strip()
+                #print(business_information)
+                business_name = row.contents[1].contents[1].contents[0]
+                address = row.contents[1].contents[3]
+                phone_number = row.contents[1].contents[10].text
+
+                other_dict[business_name] = {"Address":address,"Phone Number":phone_number}
+        except IndexError:
+            pass
+
+        index += 1
+        print(other_dict)
+        time.sleep(2)
+
+
+
+
+
+
+
+
+
+# print(soup.prettify())
+
+
+#scrape_Billerica_Business_Listing()

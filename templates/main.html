@@ -1,27 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Main Menu</title>
+{% extends "layout.html" %}
+{% block head %}
+    {{ super() }}
 
-    <link rel="stylesheet" href="../static/css/bootstrap.css">
-    <link rel="stylesheet" href="../static/css/main.css">
-    <script src="../static/js/bootstrap.js"></script>
-    <script src="../static/js/main.js"></script>
+    <style>
+        .blink-bg {
 
-</head>
-<body>
+            padding: 10px;
+
+            border-radius: 5px;
+            animation: blinkingBackground 1s;
+
+        }
+
+        @keyframes blinkingBackground {
+            0% {
+                background-color: seagreen;
+            }
+            25% {
+                background-color: #77dd77;
+            }
+            50% {
+                background-color: seagreen;
+            }
+            75% {
+                background-color: #77dd77;
+            }
+            100% {
+                background-color: #77dd77;
+            }
+        }
+    </style>
 
 
-<form action="{{ url_for('main_Menu') }}" enctype=multipart/form-data method="POST">
-    <div class="container">
+{% endblock %}
+{% block body %}
+    {{ super() }}
+
+
+
+    <form action="{{ url_for('main_Menu') }}" enctype=multipart/form-data method="POST">
+
         <div class="row mt-3 text-center title_div">
             <div id="Business Header" class="business_header_text"></div>
         </div>
 
-        {% if condirmation %}
-            <div class="row mt-3 text-center">
-                {{ confirmation }}
+        {% if confirmation %}
+            <div class="row mt-3 mb-3  blink-bg">
+                <div class="col text-center">
+
+                    <div class="display-3">{{ confirmation }}</div>
+                </div>
             </div>
 
         {% endif %}
@@ -103,7 +131,8 @@
                     <div class="row mt-5">
                         <h4>Established Customers</h4>
                         <div class="col">
-                            <button class="btn btn-dark mr-2" type="submit" name="submit_button" value="Create Invoice"
+                            <button class="btn btn-dark mr-2" type="submit" name="submit_button"
+                                    value="Create Invoice"
                                     formnovalidate>
                                 Create Invoice
                             </button>
@@ -208,10 +237,10 @@
             </div>
 
         </div>
-    </div>
 
 
-</form>
+    </form>
+{% endblock %}
 
 <script>
     create_Business_Header()
