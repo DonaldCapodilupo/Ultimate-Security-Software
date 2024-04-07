@@ -1,5 +1,5 @@
-const business_name = "Capodilupo Investigation's";
-const address = "123 Main St,\n Disney Land, FL 90210";
+const business_name = "Capodilupo Conglomerates";
+const address = "Investigation Software";
 
 
 function create_Business_Header() {

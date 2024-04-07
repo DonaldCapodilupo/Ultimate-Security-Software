@@ -8,322 +8,364 @@
     {{ super() }}
 
 
+
+
     <form action="{{ url_for('create_Person_Of_Interest_Report') }}" enctype=multipart/form-data
-          method="POST" class="border border-white">
+          method="POST" class="border border-white rounded-2">
 
         <!--Title-->
-        <div class="row mt-5 text-center">
+        <div class="row mt-2 text-center">
             <h1>New Person of Interest</h1>
         </div>
 
         <!--Image, Personal Info, Identifying Info-->
-        <div class="row mt-4 mb-5 p-3">
-
-            <!--Image Upload-->
-            <div class="col-4">
-
+        <div class="row mt-2 p-3">
+            <div class="col">
                 <div class="card bg-success">
-                    <img id="preview" alt="Uploaded file will display here." class="title3 mx-auto d-block mt-3" width="200" src="">
+                    <div class="card-header"><b>Personal Info</b></div>
                     <div class="card-body">
-                        <input type="file" id="user_img" name="user_img" accept="image/*"
-                               class="form-control form-control-lg mb-3" onchange="loadFile(event)">
+                        <div class="row">
+                            <div class="col-4">
+                                <img id="preview" alt="Uploaded file will display here."
+                                     class="title3 mx-auto d-block mt-3 mb-3"
+                                     width="200"
+                                     src="">
+
+                                <input type="file" id="user_img" name="user_img" accept="image/*"
+                                       class="form-control form-control-lg mb-3 text-center" onchange="loadFile(event)">
+                            </div>
+
+                            <div class="col">
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="text" class="form-control" id="Basic Details First Name"
+                                           placeholder="John" name="Basic Details First Name">
+                                    <label for="Basic Details First Name">First Name</label>
+                                </div>
+
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="text" class="form-control" id="Home Address" placeholder="123 Main St"
+                                    name="Home Address">
+                                    <label for="Home Address">Home Address</label>
+                                </div>
+
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="text" class="form-control" id="Contact Info Phone Number"
+                                           name="Contact Info Phone Number" placeholder="9781234567">
+                                    <label for="Contact Info Phone Number">Phone Number</label>
+                                </div>
+
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="text" class="form-control" id="Identifying Info Height"
+                                           placeholder="5'8">
+                                    <label for="Identifying Info Height">Height</label>
+
+                                </div>
+
+                                <select class="form-select mb-3" style="height: 58px"
+                                        aria-label="Default select example">
+                                    <option id="Unknown" value="Unknown">Hair Color</option>
+                                    <option id="Black">Black</option>
+                                    <option id="Brown">Brown</option>
+                                    <option id="Blonde">Blonde</option>
+                                    <option id="Red">Red</option>
+                                    <option id="Gray">Gray</option>
+                                    <option id="White">White</option>
+                                    <option id="Auburn">Auburn</option>
+                                    <option id="Chestnut">Chestnut</option>
+                                    <option id="Strawberry Blonde">Strawberry Blonde</option>
+                                    <option id="Dirty Blonde">Dirty Blonde</option>
+                                    <option id="Platinum Blonde">Platinum Blonde</option>
+                                    <option id="Silver">Silver</option>
+                                    <option id="Salt and Pepper">Salt and Pepper</option>
+                                    <option id="Blue">Blue</option>
+                                    <option id="Green">Green</option>
+                                    <option id="Pink">Pink</option>
+                                    <option id="Purple">Purple</option>
+                                    <option id="Turquoise">Turquoise</option>
+                                    <option id="Rainbow">Rainbow</option>
+                                    <option id="Ombre">Ombre</option>
+                                    <option id="Balayage">Balayage</option>
+                                    <option id="Highlights">Highlights</option>
+                                    <option id="Lowlights">Lowlights</option>
+                                    <option id="Natural">Natural</option>
+                                    <option id="Bald">Bald</option>
+                                    <option id="Balding">Balding</option>
+                                    <option id="Shaved">Shaved</option>
+                                    <option id="Salt and Pepper">Salt and Pepper</option>
+                                </select>
 
 
-                        <div class="form-floating mb-3 text-dark">
-                            <input type="text" class="form-control" id="Basic Details First Name" placeholder="John">
-                            <label for="Basic Details First Name">First Name</label>
+                            </div>
+
+
+                            <div class="col">
+                                <div class="form-floating mb-3 text-dark">
+
+                                    <input type="text" class="form-control" id="Middle Details Last Name"
+                                           placeholder="Wood">
+                                    <label for="Middle Details Last Name">Middle Name</label>
+                                </div>
+
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="text" class="form-control" id="Basic Details Town"
+                                           placeholder="Orlando">
+                                    <label for="Basic Details Town">Town</label>
+                                </div>
+
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="email" class="form-control" id="floatingInput"
+                                           placeholder="name@example.com">
+                                    <label for="floatingInput">Email address</label>
+                                </div>
+
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="text" class="form-control" id="Identifying Info Weight"
+                                           placeholder="200lbs">
+                                    <label for="Identifying Info Weight">Weight</label>
+                                </div>
+
+                                <select class="form-select mb-3" style="height: 58px"
+                                        aria-label="Default select example"
+                                        name="Identifying Info Eye Color"
+                                        id="Identifying Info Eye Color">
+                                    <option id="Eye Color" value="Unknown">Eye Color</option>
+                                    <option id="Brown">Brown</option>
+                                    <option id="Blue">Blue</option>
+                                    <option id="Green">Green</option>
+                                    <option id="Hazel">Hazel</option>
+                                    <option id="Amber">Amber</option>
+                                    <option id="Gray">Gray</option>
+                                    <option id="Black">Black</option>
+                                    <option id="Red">Red</option>
+                                    <option id="Violet">Violet</option>
+                                </select>
+
+                            </div>
+                            <div class="col">
+                                <div class="form-floating mb-3 text-dark">
+
+                                    <input type="text" class="form-control" id="Basic Details Last Name"
+                                           placeholder="Doe">
+                                    <label for="Basic Details Last Name">Last Name</label>
+                                </div>
+
+                                <select id="Basic Details State" style="height: 58px" class="form-select mb-3"
+                                        aria-label="Default select example">
+                                    <option id="State">State</option>
+                                    <option id="AL">AL</option>
+                                    <option id="AK">AK</option>
+                                    <option id="AS">AS</option>
+                                    <option id="AZ">AZ</option>
+                                    <option id="AR">AR</option>
+                                    <option id="CA">CA</option>
+                                    <option id="CO">CO</option>
+                                    <option id="CT">CT</option>
+                                    <option id="DE">DE</option>
+                                    <option id="DC">DC</option>
+                                    <option id="FM">FM</option>
+                                    <option id="FL">FL</option>
+                                    <option id="GA">GA</option>
+                                    <option id="GU">GU</option>
+                                    <option id="HI">HI</option>
+                                    <option id="ID">ID</option>
+                                    <option id="IL">IL</option>
+                                    <option id="IN">IN</option>
+                                    <option id="IA">IA</option>
+                                    <option id="KS">KS</option>
+                                    <option id="KY">KY</option>
+                                    <option id="LA">LA</option>
+                                    <option id="ME">ME</option>
+                                    <option id="MH">MH</option>
+                                    <option id="MD">MD</option>
+                                    <option id="MA">MA</option>
+                                    <option id="MI">MI</option>
+                                    <option id="MN">MN</option>
+                                    <option id="MS">MS</option>
+                                    <option id="MO">MO</option>
+                                    <option id="MT">MT</option>
+                                    <option id="NE">NE</option>
+                                    <option id="NV">NV</option>
+                                    <option id="NH">NH</option>
+                                    <option id="NJ">NJ</option>
+                                    <option id="NM">NM</option>
+                                    <option id="NY">NY</option>
+                                    <option id="NC">NC</option>
+                                    <option id="ND">ND</option>
+                                    <option id="MP">MP</option>
+                                    <option id="OH">OH</option>
+                                    <option id="OK">OK</option>
+                                    <option id="OR">OR</option>
+                                    <option id="PW">PW</option>
+                                    <option id="PA">PA</option>
+                                    <option id="PR">PR</option>
+                                    <option id="RI">RI</option>
+                                    <option id="SC">SC</option>
+                                    <option id="SD">SD</option>
+                                    <option id="TN">TN</option>
+                                    <option id="TX">TX</option>
+                                    <option id="UT">UT</option>
+                                    <option id="VT">VT</option>
+                                    <option id="VI">VI</option>
+                                    <option id="VA">VA</option>
+                                    <option id="WA">WA</option>
+                                    <option id="WV">WV</option>
+                                    <option id="WI">WI</option>
+                                    <option id="WY">WY</option>
+                                </select>
+
+                                <select id="Marital Status" style="height: 58px" class="form-select mb-3"
+                                        aria-label="Default select example">
+                                    <option id="Unknown" value="Unknown">Marital Status</option>
+                                    <option id="Single">Single</option>
+                                    <option id="In a Relationship">In a Relationship</option>
+                                    <option id="Married">Married</option>
+                                    <option id="Divorced">Divorced</option>
+                                    <option id="Infidelity">Infidelity</option>
+                                </select>
+
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="number" step=".5" class="form-control" id="Shoe Size"
+                                           placeholder="None"
+                                           name="Shoe Size">
+                                    <label for="Shoe Size">Shoe Size</label>
+                                </div>
+                                <select class="form-select mb-3" style="height: 58px"
+                                        aria-label="Default select example"
+                                        name="Identifying Info Skin Color"
+                                        id="Identifying Info Skin Color">
+                                    <option id="Hair Color" value="Unknown">Skin Color</option>
+                                    <option id="African">African</option>
+                                    <option id="Asian">Asian</option>
+                                    <option id="Caucasian">Caucasian</option>
+                                    <option id="Hispanic">Hispanic</option>
+                                    <option id="Latino">Latino</option>
+                                    <option id="Native American">Native American</option>
+                                    <option id="Pacific Islander">Pacific Islander</option>
+                                    <option id="Middle Eastern">Middle Eastern</option>
+                                    <option id="Mixed">Mixed</option>
+                                </select>
+
+                            </div>
+
+
                         </div>
-                        <div class="form-floating mb-3 text-dark">
 
-                            <input type="text" class="form-control" id="Basic Details Last Name" placeholder="Doe">
-                            <label for="Basic Details Last Name">Last Name</label>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!--Employer, Car Info-->
+        <div class="row mt mb-2 p-3">
+            <div class="col">
+                <div class="card bg-danger">
+                    <div class="card-header"><b>Employer Info</b></div>
+                    <div class="card-body">
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control" id="Employment Info Employer"
+                                   name="Employment Info Employer" placeholder="Capodilupo Conglomerates">
+                            <label for="Employment Info Employer">Employer</label>
+                        </div>
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control" id="Employment Info Employer Address"
+                                   name="Employment Info Employer Address" placeholder="123 Main St">
+                            <label for="Employment Info Employer Address">Employer Address</label>
+                        </div>
+
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="number" step=".5" class="form-control"
+                                   id="Employment Info Length of Employment"
+                                   name="Employment Info Length of Employment" placeholder="10">
+                            <label for="Employment Info Length of Employment">Length of Employment (Years)</label>
+                        </div>
+
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control" id="Employment Info Job Title"
+                                   name="Employment Info Job Title" placeholder="Operator">
+                            <label for="Employment Info Job Title">Job Title</label>
+                        </div>
+
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control"
+                                   name="Employment Info Work Phone"
+                                   id="Employment Info Work Phone" placeholder="999-999-9999">
+                            <label for="Employment Info Work Phone">Work Phone</label>
+                        </div>
+
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control"
+                                   name="Employment Info Prior Military Experience"
+                                   id="Employment Info Prior Military Experience" placeholder="Government">
+                            <label for="Employment Info Prior Military Experience">Prior Military Experience</label>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="card bg-primary">
+                    <div class="card-header"><b>Vehicle Info</b></div>
+                    <div class="card-body">
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="number" class="form-control" id="Vehicle Info Year"
+                                   name="Vehicle Info Year" placeholder="2012">
+                            <label for="Vehicle Info Year">Year</label>
+                        </div>
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control" id="Vehicle Info Make"
+                                   name="Vehicle Info Make" placeholder="Nissan">
+                            <label for="Vehicle Info Make">Make</label>
+                        </div>
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control" id="Vehicle Info Model"
+                                   name="Vehicle Info Model" placeholder="Sentra">
+                            <label for="Vehicle Info Model">Model</label>
+                        </div>
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control" id="Vehicle Info License Plate Number"
+                                   name="Vehicle Info License Plate Number" placeholder="ABC123">
+                            <label for="Vehicle Info License Plate #">License Plate #</label>
+                        </div>
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control" id="Vehicle Info VIN"
+                                   name="Vehicle Info VIN" placeholder="ABCDEFG1234567">
+                            <label for="Vehicle Info VIN">VIN</label>
                         </div>
 
                     </div>
                 </div>
 
 
-                <div class="form-floating mb-3 text-dark">
-                    <input type="text" class="form-control" id="Contact Info Phone Number"
-                           name="Contact Info Phone Number" placeholder="9781234567">
-                    <label for="Contact Info Phone Number">Phone Number</label>
-
-                </div>
-
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
-                </div>
-
             </div>
-            <!--Personal Information-->
-            <div class="col-4">
-
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="text" class="form-control" id="Basic Details Middle Name" placeholder="G">
-                    <label for="Basic Details Middle Name">Middle Name</label>
-                </div>
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="text" class="form-control" id="Home Address" placeholder="123 Main St">
-                    <label for="Home Address">Home Address</label>
-                </div>
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="text" class="form-control" id="Basic Details Town" placeholder="Orlando">
-                    <label for="Basic Details Town">Town</label>
-                </div>
-
-
-                <select id="Basic Details State" style="height: 58px" class="form-select mb-3"
-                        aria-label="Default select example">
-                    <option id="State">State</option>
-                    <option id="AL">AL</option>
-                    <option id="AK">AK</option>
-                    <option id="AS">AS</option>
-                    <option id="AZ">AZ</option>
-                    <option id="AR">AR</option>
-                    <option id="CA">CA</option>
-                    <option id="CO">CO</option>
-                    <option id="CT">CT</option>
-                    <option id="DE">DE</option>
-                    <option id="DC">DC</option>
-                    <option id="FM">FM</option>
-                    <option id="FL">FL</option>
-                    <option id="GA">GA</option>
-                    <option id="GU">GU</option>
-                    <option id="HI">HI</option>
-                    <option id="ID">ID</option>
-                    <option id="IL">IL</option>
-                    <option id="IN">IN</option>
-                    <option id="IA">IA</option>
-                    <option id="KS">KS</option>
-                    <option id="KY">KY</option>
-                    <option id="LA">LA</option>
-                    <option id="ME">ME</option>
-                    <option id="MH">MH</option>
-                    <option id="MD">MD</option>
-                    <option id="MA">MA</option>
-                    <option id="MI">MI</option>
-                    <option id="MN">MN</option>
-                    <option id="MS">MS</option>
-                    <option id="MO">MO</option>
-                    <option id="MT">MT</option>
-                    <option id="NE">NE</option>
-                    <option id="NV">NV</option>
-                    <option id="NH">NH</option>
-                    <option id="NJ">NJ</option>
-                    <option id="NM">NM</option>
-                    <option id="NY">NY</option>
-                    <option id="NC">NC</option>
-                    <option id="ND">ND</option>
-                    <option id="MP">MP</option>
-                    <option id="OH">OH</option>
-                    <option id="OK">OK</option>
-                    <option id="OR">OR</option>
-                    <option id="PW">PW</option>
-                    <option id="PA">PA</option>
-                    <option id="PR">PR</option>
-                    <option id="RI">RI</option>
-                    <option id="SC">SC</option>
-                    <option id="SD">SD</option>
-                    <option id="TN">TN</option>
-                    <option id="TX">TX</option>
-                    <option id="UT">UT</option>
-                    <option id="VT">VT</option>
-                    <option id="VI">VI</option>
-                    <option id="VA">VA</option>
-                    <option id="WA">WA</option>
-                    <option id="WV">WV</option>
-                    <option id="WI">WI</option>
-                    <option id="WY">WY</option>
-                </select>
-
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="text" class="form-control" id="Basic Details Zip" placeholder="01234">
-                    <label for="Basic Details Zip">Zip</label>
-
-                </div>
-
-
-                <select id="Marital Status" style="height: 58px" class="form-select mb-3"
-                        aria-label="Default select example">
-                    <option id="Unknown" value="Unknown">Marital Status</option>
-                    <option id="Single">Single</option>
-                    <option id="In a Relationship">In a Relationship</option>
-                    <option id="Married">Married</option>
-                    <option id="Divorced">Divorced</option>
-                    <option id="Infidelity">Infidelity</option>
-                </select>
-
-
-            </div>
-            <!--Identifying Information Upload-->
-            <div class="col-4">
-
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="text" class="form-control" id="Identifying Info Height" placeholder="5'8">
-                    <label for="Identifying Info Height">Height</label>
-
-                </div>
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="text" class="form-control" id="Identifying Info Weight" placeholder="200lbs">
-                    <label for="Identifying Info Weight">Weight</label>
-
-                </div>
-
-                <select class="form-select mb-3" style="height: 58px" aria-label="Default select example">
-                    <option id="Unknown" value="Unknown">Hair Color</option>
-                    <option id="Black">Black</option>
-                    <option id="Brown">Brown</option>
-                    <option id="Blonde">Blonde</option>
-                    <option id="Red">Red</option>
-                    <option id="Gray">Gray</option>
-                    <option id="White">White</option>
-                    <option id="Auburn">Auburn</option>
-                    <option id="Chestnut">Chestnut</option>
-                    <option id="Strawberry Blonde">Strawberry Blonde</option>
-                    <option id="Dirty Blonde">Dirty Blonde</option>
-                    <option id="Platinum Blonde">Platinum Blonde</option>
-                    <option id="Silver">Silver</option>
-                    <option id="Salt and Pepper">Salt and Pepper</option>
-                    <option id="Blue">Blue</option>
-                    <option id="Green">Green</option>
-                    <option id="Pink">Pink</option>
-                    <option id="Purple">Purple</option>
-                    <option id="Turquoise">Turquoise</option>
-                    <option id="Rainbow">Rainbow</option>
-                    <option id="Ombre">Ombre</option>
-                    <option id="Balayage">Balayage</option>
-                    <option id="Highlights">Highlights</option>
-                    <option id="Lowlights">Lowlights</option>
-                    <option id="Natural">Natural</option>
-                    <option id="Bald">Bald</option>
-                    <option id="Balding">Balding</option>
-                    <option id="Shaved">Shaved</option>
-                    <option id="Salt and Pepper">Salt and Pepper</option>
-                </select>
-
-                <select class="form-select mb-3" style="height: 58px" aria-label="Default select example"
-                        name="Identifying Info Eye Color"
-                        id="Identifying Info Eye Color">
-                    <option id="Eye Color" value="Unknown">Eye Color</option>
-                    <option id="Brown">Brown</option>
-                    <option id="Blue">Blue</option>
-                    <option id="Green">Green</option>
-                    <option id="Hazel">Hazel</option>
-                    <option id="Amber">Amber</option>
-                    <option id="Gray">Gray</option>
-                    <option id="Black">Black</option>
-                    <option id="Red">Red</option>
-                    <option id="Violet">Violet</option>
-                </select>
-
-                <select class="form-select mb-3" style="height: 58px" aria-label="Default select example"
-                        name="Identifying Info Skin Color"
-                        id="Identifying Info Skin Color">
-                    <option id="Hair Color" value="Unknown">Hair Color</option>
-                    <option id="African">African</option>
-                    <option id="Asian">Asian</option>
-                    <option id="Caucasian">Caucasian</option>
-                    <option id="Hispanic">Hispanic</option>
-                    <option id="Latino">Latino</option>
-                    <option id="Native American">Native American</option>
-                    <option id="Pacific Islander">Pacific Islander</option>
-                    <option id="Middle Eastern">Middle Eastern</option>
-                    <option id="Mixed">Mixed</option>
-                </select>
-
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="text" class="form-control" id="Identifying Info Scars - Marks - Tattoos"
-                           placeholder="None"
-                           name="Identifying Info Scars - Marks - Tattoos">
-                    <label for="Identifying Info Scars - Marks - Tattoos"> Scars - Marks - Tattoos</label>
-                </div>
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="number" step=".5" class="form-control" id="Shoe Size"
-                           placeholder="None"
-                           name="Shoe Size">
-                    <label for="Shoe Size">Shoe Size</label>
-
-
-                </div>
-            </div>
-
-
-        </div>
-
-        <!--Employer Info, Criminal History-->
-
-        <div class="row mt-4 mb-5 p-3">
-
-            <div class="col-4">
-                <div class="form-floating mb-3 text-dark">
-                    <input type="text" class="form-control" id="Employment Info Employer"
-                           name="Employment Info Employer" placeholder="Capodilupo Conglomerates">
-                    <label for="Employment Info Employer">Employer</label>
-                </div>
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="text" class="form-control" id="Employment Info Employer Address"
-                           name="Employment Info Employer Address" placeholder="123 Main St">
-                    <label for="Employment Info Employer Address">Employer Address</label>
-                </div>
-
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="number" step=".5" class="form-control" id="Employment Info Length of Employment"
-                           name="Employment Info Length of Employment" placeholder="10">
-                    <label for="Employment Info Length of Employment">Length of Employment (Years)</label>
-                </div>
-
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="text" class="form-control" id="Employment Info Job Title"
-                           name="Employment Info Job Title" placeholder="Operator">
-                    <label for="Employment Info Job Title">Job Title</label>
-                </div>
-
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control"
-                           name="Employment Info Work Phone"
-                           id="Employment Info Work Phone" placeholder="999-999-9999">
-                    <label for="Employment Info Work Phone">Work Phone</label>
-                </div>
-
-
-                <div class="form-floating mb-3 text-dark">
-                    <input type="text" class="form-control"
-                           name="Employment Info Prior Military Experience"
-                           id="Employment Info Prior Military Experience" placeholder="Government">
-                    <label for="Employment Info Prior Military Experience">Prior Military Experience</label>
-                </div>
-
-
-            </div>
-
-
         </div>
 
 
         <!--Submit Button-->
         <div class="row mt-3 mb-5 text-center">
-            <div class="col"></div>
             <div class="col">
                 <button class="btn btn-dark mr-2" type="submit" name="submit_button"
                         value="Submit Interview Report">
                     Submit Person of Interest Report
                 </button>
             </div>
-            <div class="col"></div>
+            <div class="col">
+                <button type="submit" name="submit_button" class="btn btn-dark" value="Return Home">Return Home</button>
+            </div>
         </div>
 
     </form>

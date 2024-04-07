@@ -8,7 +8,7 @@ app = Flask(__name__)
 def main_Menu():
     if request.method == "POST":
         button_clicked = request.form['submit_button']
-        case_number = request.form['Case Number']
+        #case_number = request.form['Case Number']
         redirect_dict = {
             "New Customer Report": "create_Initial_Customer_Report",
             "Create New Case": "create_New_Case",
@@ -19,17 +19,19 @@ def main_Menu():
             "Person of Interest": "create_Person_Of_Interest_Report",
             "Witness Statement": "create_Witness_Statement_Report",
             "Create BOLO": "create_BOLO",
-            "Capture Plate":"capture_Plate_Image"
+            "Capture Plate":"capture_Plate_Image",
+            "Search Database":"search_Database"
         }
 
         reports_that_require_case_numbers = ["Daily Activity Report", "Check Case Status", "Witness Statement",
                                              "Person of Interest",
                                              "Interview Report", "Create BOLO"]
+        return redirect(url_for(redirect_dict[button_clicked]))
 
-        if button_clicked in reports_that_require_case_numbers:
-            return redirect(url_for(redirect_dict[button_clicked], case_number=case_number))
-        else:
-            return redirect(url_for(redirect_dict[button_clicked]))
+        #if button_clicked in reports_that_require_case_numbers:
+        #    return redirect(url_for(redirect_dict[button_clicked], case_number=case_number))
+        #else:
+
 
     else:
         from Backend import Database_Modifier
@@ -187,18 +189,23 @@ def create_BOLO(case_number):
 
 
 # Investigator Functions
-@app.route('/Create-Person-Of-Interest-Report/<string:case_number>', methods=["POST", "GET"])
-def create_Person_Of_Interest_Report(case_number):
+@app.route('/Create-Person-Of-Interest-Report/', methods=["POST", "GET"])
+def create_Person_Of_Interest_Report():
     if request.method == "POST":
-        from Backend import Database_Modifier
-        data_dict = request.form.to_dict()
+        button_clicked = request.form['submit_button']
 
-        Database_Modifier().check_If_Table_Exists("People_Of_Interest", data_dict.keys())
-        Database_Modifier().create_Database_Row("People_Of_Interest", data_dict)
-        return redirect(url_for("main_Menu"))
+        if button_clicked == "Return Home":
+            return redirect(url_for("main_Menu"))
+        else:
+            from Backend import Database_Modifier
+            data_dict = request.form.to_dict()
+
+            Database_Modifier().check_If_Table_Exists("People_Of_Interest", data_dict.keys())
+            Database_Modifier().create_Database_Row("People_Of_Interest", data_dict)
+            return redirect(url_for("main_Menu"))
 
     else:
-        return render_template("Capture Data/Person of Interest.html", case_num=case_number)
+        return render_template("Capture Data/Person of Interest.html")
 
 
 @app.route('/Create-Interview-Report/<string:case_number>', methods=["POST", "GET"])
@@ -319,6 +326,48 @@ def capture_Plate_Image():
             print(error)
             return redirect(url_for("main_Menu"))
 
+
+
+#Read Data
+@app.route('/Search/', methods=["POST", "GET"])
+def search_Database():
+    if request.method == "POST":
+        button_clicked = request.form['submit_button']
+        if button_clicked == "Return Home":
+            return  redirect(url_for("main_Menu"))
+        elif button_clicked == "Search Person":
+            from Backend import Database_Modifier
+
+            data_dict = request.form.to_dict()
+            user = Database_Modifier().read_Database_Single_Table("People_Of_Interest")
+            print(data_dict)
+
+            personal_data_to_search = {
+                "First Name":data_dict["Basic Details First Name"],
+                "Last Name": data_dict["Basic Details Last Name"],
+                "Phone Number": data_dict["Contact Info Phone Number"],
+                "Email": data_dict["Contact Info Email Address"],
+            }
+
+
+
+            print(personal_data_to_search)
+            return  redirect(url_for("main_Menu"))
+
+        if button_clicked == "Search Person":
+            data_dict = request.form.to_dict()
+            print(data_dict)
+            return  redirect(url_for("main_Menu"))
+        else:
+            pass
+
+    else:
+
+        return render_template("View Data/Search.html")
+
+
+
+
 @app.route('/Plate-Lookup/', methods=["POST", "GET"])
 def read_Plate_Information():
     from Backend import get_OBS_Zoom
@@ -369,6 +418,9 @@ def read_POI_Information():
         }
 
         return render_template("View Data/Non Admin Person of Interest Report.html", infoDict=test_dict)
+
+
+
 
 
 
