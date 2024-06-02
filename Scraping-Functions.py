@@ -251,24 +251,20 @@ def scrape_Billerica_Business_Listing():
 
         soup = BeautifulSoup(requests.get(dynamic_url).text, 'html.parser')
 
-
-
         for link in soup.find_all('span')[31:-28]:
             line_item = link.text.replace("\n", "").replace("\t", "")
 
-            return_Dict[line_item] = {"Address":"","Phone Number":"","Website":"","Description":""}
-
-
+            return_Dict[line_item] = {"Address": "", "Phone Number": "", "Website": "", "Description": ""}
 
         try:
             for row in soup.find_all("tr")[6:-1]:
                 business_information = row.text.replace("\n", "").replace("\t", "").strip()
-                #print(business_information)
+                # print(business_information)
                 business_name = row.contents[1].contents[1].contents[0]
                 address = row.contents[1].contents[3]
                 phone_number = row.contents[1].contents[10].text
 
-                other_dict[business_name] = {"Address":address,"Phone Number":phone_number}
+                other_dict[business_name] = {"Address": address, "Phone Number": phone_number}
         except IndexError:
             pass
 
@@ -277,14 +273,260 @@ def scrape_Billerica_Business_Listing():
         time.sleep(2)
 
 
+def scrape_Facebook_Friends():
+    from bs4 import BeautifulSoup
+
+    html_file = open("C:\\Users\Don\AppData\Roaming\JetBrains\PyCharm2020.2\scratches\guitar chart.html",
+                     encoding='utf8')
+
+    soup = BeautifulSoup(html_file, 'html.parser')
+
+    list_of_friends = []
+
+    i = 0
+    for person_name in soup.find_all("div", {"class": "x1hq5gj4"}):
+        list_of_friends.append(person_name.text)
+        print(person_name.text)
+        i += 1
+    print(str(i) + " friends were scraped")
+    print(list_of_friends)
+
+    # print(soup)
+
+
+def scrape_Facebook_Copy_Paste():
+    import pyperclip
+
+    return_dict = {
+        "Full Name": [],
+        "Education History": {
+            "College": [],
+            "High School": []},
+        "Places Lived": [],
+        "Contact Info": {
+            "Phone Numbers": [],
+            "Websites & Social Medias": [],
+            "Basic Info": []
+        },
+        "Relationships": [],
+        "Family Members": [],
+
+    }
+
+    while True:
+        try:
+            print("Waiting for copy")
+            pyperclip.waitForNewPaste(10)
+
+            current_clipboard = pyperclip.paste()
+            # print("Copying: " + current_clipboard)
+
+            copied_information = current_clipboard.split("\r\n")
+
+            return_dict["Full Name"] = copied_information[3]
+
+            index = 7
+            if copied_information[6] == "Work":
+                for place_worked in copied_information[7:]:
+                    index += 1
+                    if place_worked == "College":
+                        work_history = copied_information[7:index - 1]
+                        return_dict["Work History"] = work_history
+                        break
+
+                college_index = index
+                for colleges_attended in copied_information[college_index:]:
+                    index += 1
+                    if colleges_attended == "High school":
+                        return_dict["Education History"]["College"] = copied_information[college_index:index - 1]
+                        break
+
+                high_school_index = index
+
+                for high_schools_attended in copied_information[high_school_index:]:
+                    index += 1
+                    if high_schools_attended == "Friends":
+                        return_dict["Education History"]["High School"] = copied_information[
+                                                                          high_school_index:index - 1]
+                        break
+            elif copied_information[6] == "Places lived":
+                for place_lived in copied_information[7:]:
+                    index += 1
+                    if place_lived == "Friends":
+                        work_history = copied_information[7:index - 1]
+                        return_dict["Places Lived"] = work_history
+                        break
+            elif copied_information[6] == "Contact info":
+                for phone_number in copied_information[7:]:
+                    index += 1
+                    if phone_number == "Websites and social links":
+                        contact_info = copied_information[7:index - 1]
+                        return_dict["Contact Info"]["Phone Numbers"] = contact_info
+                        break
+
+                website_index = index
+                for website_or_social in copied_information[website_index:]:
+                    index += 1
+                    if website_or_social == "Basic info":
+                        return_dict["Contact Info"]["Websites & Social Medias"] = copied_information[
+                                                                                  website_index:index - 1]
+                        break
+
+                basic_info_index = index
+                for basic_info in copied_information[basic_info_index:]:
+                    index += 1
+                    if basic_info == "Basic info":
+                        return_dict["Contact Info"]["Basic Info"] = copied_information[website_index:index - 1]
+                        break
+
+            elif copied_information[6] == "Relationship":
+                for relationship in copied_information[7:]:
+                    index += 1
+                    if relationship == "Family members":
+                        relationship_info = copied_information[7:index - 1]
+                        return_dict["Relationships"] = relationship_info
+                        break
+
+                family_members_index = index
+                for website_or_social in copied_information[family_members_index:]:
+                    index += 1
+                    if website_or_social == "Friends":
+                        return_dict["Family Members"] = copied_information[family_members_index:index - 1]
+                        break
+
+            print(return_dict)
+
+
+        except pyperclip.PyperclipTimeoutException:
+            print("Complete")
+
+            return False
+
+
+def manually_Record_Address_Vehicles():
+    for address in os.listdir("static/Property Reports/Elizabeth Rd"):
+        input("What is the first vehicle located at " + address + "?")
+
+
+def scrape_Tax_Commitment_Book():
+    from PyPDF2 import PdfReader
+    import json
+
+    reader = PdfReader("Forms/FY2021 RE Tax Commitment Book.pdf")
+
+    # print(reader.pages)
+
+    return_dict = {
+
+    }
+
+    x = 1
+    total_length = len(reader.pages)
+
+    print(total_length)
+
+    for i in range(len(reader.pages)):
+        page = reader.pages[int(i)].extract_text().split("\n")
+
+        # print(page)
+        # cat = list(page)
+
+        # print(cat[6][:cat[6].index("|")].strip())
+        # print(cat[7][:cat[7].index("|")].strip())
+        try:
+            owner1 = list(page)[6][:list(page)[6].index("|")].strip()
+            owner2 = list(page)[7][:list(page)[6].index("|")].strip()
+            owner3 = list(page)[17][:list(page)[6].index("|")].strip()
+            owner4 = list(page)[18][:list(page)[6].index("|")].strip()
+            owner5 = list(page)[28][:list(page)[6].index("|")].strip()
+            owner6 = list(page)[29][:list(page)[6].index("|")].strip()
+            owner7 = list(page)[39][:list(page)[6].index("|")].strip()
+            owner8 = list(page)[40][:list(page)[6].index("|")].strip()
+
+            # print("Owner 1:" + owner1)
+            # print("Owner 2:" + owner2)
+            # print("Owner 3:" + owner3)
+            # print("Owner 4:" + owner4)
+            # print("Owner 5:" + owner5)
+            # print("Owner 6:" + owner6)
+            # print("Owner 7:" + owner7)
+            # print("Owner 8:" + owner8)
+
+            address1 = list(page)[11][5:list(page)[6].index("|")].strip()
+            address2 = list(page)[22][5:list(page)[6].index("|")].strip()
+            address3 = list(page)[33][5:list(page)[6].index("|")].strip()
+            address4 = list(page)[44][5:list(page)[6].index("|")].strip()
+
+            # print("Address1: " + address1)
+            # print("Address2: " + address2)
+            # print("Address3: " + address3)
+            # print("Address4: " + address4)
+
+            return_dict[address1] = [owner1, owner2]
+            return_dict[address2] = [owner3, owner4]
+            return_dict[address3] = [owner5, owner6]
+            return_dict[address4] = [owner7, owner8]
+        except:
+            pass
+        # 6,7,17,18,28,29
+
+        # for result in page:
+        #
+        #    if "|Building" in result:
+        #
+        #        owner = result.split("|")[0]
+        #
+        #
+        #        print("Owner: " + owner)
+        #
+        #
+        #
+        #    if "LOC: " in result:
+        #        address = result[5:result.index("|")].strip()
+        #        # print(address)
+        #        # return_dict["Address"].append(address)
+        #
+        #        print("Address: " + address)
+        #
+        #        return_dict[address] = owner
+        #
+        #
+        print(str(x) + ":" + str(total_length))
+        x += 1
+    print(return_dict)
+    with open("C:\\Users\Don\AppData\Roaming\JetBrains\PyCharm2020.2\scratches\\test123.json", "w") as outfile:
+        json.dump(return_dict, outfile)
+
+
+def address_To_Lat_Long():
+    import requests, json, googlemaps
+    from datetime import datetime
+
+    with open("C:\\Users\Don\AppData\Roaming\JetBrains\PyCharm2020.2\scratches\\test123.json") as infile:
+        data = json.load(infile)
+
+    for i, value in data.items():
+        gmaps = googlemaps.Client(key='AIzaSyAnRJvIU0LM1tPQCKgBZntZJn04ukyvp5o')
+        geocode_result = gmaps.geocode(i + ", Billerica, MA")
+        print(str(geocode_result[0]["geometry"]["location"]["lat"]) + "," + str(geocode_result[0]["geometry"]["location"]["lng"]))
+         
+    #return geocode_result
+
+def facebook_OCR():
+    from PIL import Image
+    import pytesseract
+    
+
+    print(pytesseract.image_to_string(Image.open('test.png')))
 
 
 
 
-
+# manually_Record_Address_Vehicles()
+# scrape_Facebook_Friends()
 
 
 # print(soup.prettify())
 
 
-#scrape_Billerica_Business_Listing()
+# scrape_Billerica_Business_Listing()

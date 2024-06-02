@@ -33,6 +33,7 @@ def save_Admin_Form_Data(form_data, customer, report_type):
     with open("Admin/" + customer + "/" + report_type + '.json', 'w') as f:
         json.dump(data, f)
 
+
 def create_License_Plate_Image(plate_num):
     htmldata = requests.get(
         "https://www.acme.com/licensemaker/licensemaker.cgi?state=Massachusetts&text=" + plate_num + "&plate=1988&r=1675049699").text
@@ -56,21 +57,19 @@ def license_Plate_Capture():
 
 
 def control_OBS_Zoom(zoom_value):
-    import json,time
+    import json, time
     import websocket
     ws = websocket.WebSocket()
 
     ws.connect("ws://192.168.0.24:8888/websocket")
 
-
-
     ws.send(json.dumps({"messageType": "setDeviceConfiguration",
-         "content": "{\"shutterSpeed\":{\"title\":\"1 / 30\",\"value\":0.029999999329447746},\"zoomLevelMin\":1,\"exposureEVmax\":8,\"isTorchAvailable\":true,\"isDevicePreviewOn\":true,\"temperature\":3500,\"deviceName\":\"iPhone\",\"resolutions\":[\"4032x3024\",\"3264x2448\",\"3840x2160\",\"2592x1944\",\"1920x1440\",\"1440x1080\",\"1920x1080\",\"1024x768\",\"1280x720\",\"960x540\",\"640x480\",\"480x360\",\"352x288\",\"192x144\"],\"isAutomaticWhiteBalanceModeEnabled\":true,\"isCustomExposureModeSupported\":true,\"isCustomWhiteBalanceModeSupported\":true,\"isoMin\":24,\"temperatureMin\":1800,\"resolution\":\"1280x720\",\"shutterSpeeds\":[{\"title\":\"1.0\",\"value\":1},{\"title\":\"1 / 2.0\",\"value\":0.5},{\"title\":\"1 / 4.0\",\"value\":0.25},{\"title\":\"1 / 8.0\",\"value\":0.12999999523162842},{\"title\":\"1 / 15\",\"value\":0.07000000029802322},{\"title\":\"1 / 30\",\"value\":0.029999999329447746},{\"title\":\"1 / 50\",\"value\":0.019999999552965164},{\"title\":\"1 / 100\",\"value\":0.009999999776482582}],\"focusConfiguration\":{\"lensPosition\":0.384313702583313,\"isLockedFocusModeSupported\":true,\"isSmoothAutoFocusSupported\":true,\"maxLensPosition\":1,\"isAutoFocusSupported\":true,\"crosshairMode\":{\"combined\":null},\"isContinuousAutoFocusSupported\":true,\"focusMode\":{\"auto\":0},\"isLockingFocusWithCustomLensPositionSupported\":true,\"isFocusPointOfInterestSupported\":true,\"minLensPosition\":0,\"isSmoothAutoFocusEnabled\":false,\"isAdjustingFocus\":false,\"isAutoFocusRangeRestrictionSupported\":true},\"iso\":800,\"isTorchEnabled\":false,\"lightingMode\":\"automatic\",\"framerates\":[\"24\",\"25\",\"30\",\"60\",\"120\",\"240\"],\"batteryState\":{\"charging\":{\"batteryLevel\":1}},\"cameras\":[{\"id\":\"com.apple.avfoundation.avcapturedevice.built-in_video:1\",\"title\":\"Front Wide Angle Camera\",\"position\":2},{\"id\":\"com.apple.avfoundation.avcapturedevice.built-in_video:0\",\"title\":\"Wide Angle Camera\",\"position\":1}],\"isoMax\":2304,\"zoomLevel\":" +str(zoom_value) +",\"zoomLevelMax\":24,\"exposureEVmin\":-8,\"exposureEV\":0.5,\"selectedCamera\":{\"id\":\"com.apple.avfoundation.avcapturedevice.built-in_video:0\",\"title\":\"Wide Angle Camera\",\"position\":1},\"isFrontCameraMirrored\":true,\"framerate\":\"30\",\"temperatureMax\":8000}"}))
+                        "content": "{\"shutterSpeed\":{\"title\":\"1 / 30\",\"value\":0.029999999329447746},\"zoomLevelMin\":1,\"exposureEVmax\":8,\"isTorchAvailable\":true,\"isDevicePreviewOn\":true,\"temperature\":3500,\"deviceName\":\"iPhone\",\"resolutions\":[\"4032x3024\",\"3264x2448\",\"3840x2160\",\"2592x1944\",\"1920x1440\",\"1440x1080\",\"1920x1080\",\"1024x768\",\"1280x720\",\"960x540\",\"640x480\",\"480x360\",\"352x288\",\"192x144\"],\"isAutomaticWhiteBalanceModeEnabled\":true,\"isCustomExposureModeSupported\":true,\"isCustomWhiteBalanceModeSupported\":true,\"isoMin\":24,\"temperatureMin\":1800,\"resolution\":\"1280x720\",\"shutterSpeeds\":[{\"title\":\"1.0\",\"value\":1},{\"title\":\"1 / 2.0\",\"value\":0.5},{\"title\":\"1 / 4.0\",\"value\":0.25},{\"title\":\"1 / 8.0\",\"value\":0.12999999523162842},{\"title\":\"1 / 15\",\"value\":0.07000000029802322},{\"title\":\"1 / 30\",\"value\":0.029999999329447746},{\"title\":\"1 / 50\",\"value\":0.019999999552965164},{\"title\":\"1 / 100\",\"value\":0.009999999776482582}],\"focusConfiguration\":{\"lensPosition\":0.384313702583313,\"isLockedFocusModeSupported\":true,\"isSmoothAutoFocusSupported\":true,\"maxLensPosition\":1,\"isAutoFocusSupported\":true,\"crosshairMode\":{\"combined\":null},\"isContinuousAutoFocusSupported\":true,\"focusMode\":{\"auto\":0},\"isLockingFocusWithCustomLensPositionSupported\":true,\"isFocusPointOfInterestSupported\":true,\"minLensPosition\":0,\"isSmoothAutoFocusEnabled\":false,\"isAdjustingFocus\":false,\"isAutoFocusRangeRestrictionSupported\":true},\"iso\":800,\"isTorchEnabled\":false,\"lightingMode\":\"automatic\",\"framerates\":[\"24\",\"25\",\"30\",\"60\",\"120\",\"240\"],\"batteryState\":{\"charging\":{\"batteryLevel\":1}},\"cameras\":[{\"id\":\"com.apple.avfoundation.avcapturedevice.built-in_video:1\",\"title\":\"Front Wide Angle Camera\",\"position\":2},{\"id\":\"com.apple.avfoundation.avcapturedevice.built-in_video:0\",\"title\":\"Wide Angle Camera\",\"position\":1}],\"isoMax\":2304,\"zoomLevel\":" + str(
+                            zoom_value) + ",\"zoomLevelMax\":24,\"exposureEVmin\":-8,\"exposureEV\":0.5,\"selectedCamera\":{\"id\":\"com.apple.avfoundation.avcapturedevice.built-in_video:0\",\"title\":\"Wide Angle Camera\",\"position\":1},\"isFrontCameraMirrored\":true,\"framerate\":\"30\",\"temperatureMax\":8000}"}))
     time.sleep(.5)
     print(ws.recv())
 
     ws.close()
-
 
 
 def get_OBS_Zoom():
@@ -80,8 +79,8 @@ def get_OBS_Zoom():
     ws.connect("ws://192.168.0.24:8888/websocket")
     zoom_level = round(json.loads(json.loads(ws.recv())["content"])["zoomLevel"])
 
-
     return zoom_level
+
 
 def open_Secret_Compartment():
     import pyfirmata
@@ -97,8 +96,6 @@ def open_Secret_Compartment():
 
         board.digital[13].write(0)
         time.sleep(1)
-
-
 
 
 class Database_Modifier:
@@ -208,6 +205,39 @@ class Database_Modifier:
                 print("the sqlite connection is closed")
                 return return_dict
 
+    def read_Database_Specific_Rows_Names(self, information_tuple):
+        import sqlite3
+        import pandas as pd
+
+        sqliteConnection = sqlite3.connect(self.database_name)
+
+        print(information_tuple[0])
+        print(information_tuple[1])
+
+        exact_match = pd.read_sql("SELECT * FROM People_Of_Interest WHERE Basic_Details_Last_Name =  ? AND Basic_Details_First_Name = ?",
+                         sqliteConnection, params=information_tuple)
+
+
+        #if len(exact_match) > 0:
+
+        print(exact_match)
+        print(len(exact_match))
+
+        # exact_match = sqliteConnection.execute(
+        #    "SELECT * FROM People_Of_Interest WHERE Basic_Details_Last_Name = ? AND Basic_Details_First_Name = ?",
+        #    information_tuple)
+        #
+        # print(exact_match)
+        #
+        # results = exact_match.fetchall()
+        # print(len(results))
+        #
+        # print(exact_match)
+
+        # CASE WHEN REGEXP_REPLACE(us_1.mls0_PrimaryString, '[[:space:]]') IS NULL THEN ..
+
+        return exact_match
+
     def update_Database_Table(self):
         pass
 
@@ -218,3 +248,5 @@ class Database_Modifier:
 
         db.execute(insert_sql)
         db.commit()
+
+

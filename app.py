@@ -1,7 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for
 from markupsafe import escape
+from flask_nav import Nav
+from flask_nav.elements import Navbar, View
 
 app = Flask(__name__)
+nav = Nav()
+
+
+
+@nav.navigation()
+def mynavbar():
+    return Navbar(
+        'mysite',
+        View('Main Menu', 'main_Menu'),
+
+    )
 
 # Generic Functions
 @app.route('/', methods=["POST", "GET"])
@@ -339,22 +352,21 @@ def search_Database():
             from Backend import Database_Modifier
 
             data_dict = request.form.to_dict()
-            user = Database_Modifier().read_Database_Single_Table("People_Of_Interest")
             print(data_dict)
 
-            personal_data_to_search = {
-                "First Name":data_dict["Basic Details First Name"],
-                "Last Name": data_dict["Basic Details Last Name"],
-                "Phone Number": data_dict["Contact Info Phone Number"],
-                "Email": data_dict["Contact Info Email Address"],
-            }
+            for value in data_dict.keys():
+                if data_dict[value] == "":
+                    data_dict[value] = "IGNORE"
+
+            users = Database_Modifier().read_Database_Specific_Rows_Names((data_dict["Basic Details Last Name"],
+                                                                     data_dict["Basic Details First Name"]))
+            for user in users:
+                print(user)
 
 
-
-            print(personal_data_to_search)
             return  redirect(url_for("main_Menu"))
 
-        if button_clicked == "Search Person":
+        elif button_clicked == "Search Vehicle":
             data_dict = request.form.to_dict()
             print(data_dict)
             return  redirect(url_for("main_Menu"))
@@ -425,4 +437,5 @@ def read_POI_Information():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",debug=True)
+    nav.init_app(app)
+    app.run(host="0.0.0.0",debug=True, use_reloader=False)
