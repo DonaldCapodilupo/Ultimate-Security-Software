@@ -2,26 +2,27 @@ from flask import Flask, render_template, request, redirect, url_for
 from markupsafe import escape
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View
+import serial
+
+
+
+try:
+    ser = serial.Serial('COM3', 9600)
+    serial_port_found = True
+except serial.serialutil.SerialException:
+    serial_port_found = False
+
 
 app = Flask(__name__)
 nav = Nav()
 
-
-
-@nav.navigation()
-def mynavbar():
-    return Navbar(
-        'mysite',
-        View('Main Menu', 'main_Menu'),
-
-    )
 
 # Generic Functions
 @app.route('/', methods=["POST", "GET"])
 def main_Menu():
     if request.method == "POST":
         button_clicked = request.form['submit_button']
-        #case_number = request.form['Case Number']
+        # case_number = request.form['Case Number']
         redirect_dict = {
             "New Customer Report": "create_Initial_Customer_Report",
             "Create New Case": "create_New_Case",
@@ -32,8 +33,8 @@ def main_Menu():
             "Person of Interest": "create_Person_Of_Interest_Report",
             "Witness Statement": "create_Witness_Statement_Report",
             "Create BOLO": "create_BOLO",
-            "Capture Plate":"capture_Plate_Image",
-            "Search Database":"search_Database"
+            "Capture Plate": "capture_Plate_Image",
+            "Search Database": "search_Database"
         }
 
         reports_that_require_case_numbers = ["Daily Activity Report", "Check Case Status", "Witness Statement",
@@ -41,9 +42,9 @@ def main_Menu():
                                              "Interview Report", "Create BOLO"]
         return redirect(url_for(redirect_dict[button_clicked]))
 
-        #if button_clicked in reports_that_require_case_numbers:
+        # if button_clicked in reports_that_require_case_numbers:
         #    return redirect(url_for(redirect_dict[button_clicked], case_number=case_number))
-        #else:
+        # else:
 
 
     else:
@@ -61,7 +62,9 @@ def main_Menu():
         else:
             confirmation = ""
 
-        return render_template("main.html", infoDict=data_dict, confirmation=confirmation)
+        print(serial_port_found)
+        return render_template("main.html", infoDict=data_dict, confirmation=confirmation, serial_port_found=serial_port_found)
+
 
 @app.route('/Check-Case-Status/<string:case_number>', methods=["POST", "GET"])
 def read_Case_Status(case_number):
@@ -111,7 +114,8 @@ def read_Case_Status(case_number):
             if header == "id" or header == "submit_button":
                 continue
             else:
-                return_Dict_New_Case[header.replace("_", " ")] = specific_initial_report[header].item().replace("_", " ")
+                return_Dict_New_Case[header.replace("_", " ")] = specific_initial_report[header].item().replace("_",
+                                                                                                                " ")
 
         return render_template("View Data/View Case.html", case_number=case_number, infoDict=return_Dict_New_Case)
 
@@ -143,6 +147,7 @@ def create_Initial_Customer_Report():
         print(employee_names)
 
         return render_template("Capture Data/Initial Report.html", infoDict=data_to_fill)
+
 
 @app.route('/Create-New-Case', methods=["POST", "GET"])
 def create_New_Case():
@@ -186,8 +191,9 @@ def create_Customer_Invoice():
     else:
         return "Coming Soon!"
 
-@app.route('/BOLO-Create/<string:case_number>', methods=["POST", "GET"])
-def create_BOLO(case_number):
+
+@app.route('/BOLO-Create/', methods=["POST", "GET"])
+def create_BOLO():
     if request.method == "POST":
         from Backend import Database_Modifier
         data_dict = request.form.to_dict()
@@ -198,7 +204,7 @@ def create_BOLO(case_number):
         return redirect(url_for("main_Menu"))
     else:
 
-        return render_template("Capture Data/BOLO File.html", case_num=escape(case_number))
+        return render_template("Capture Data/BOLO File.html")
 
 
 # Investigator Functions
@@ -221,8 +227,8 @@ def create_Person_Of_Interest_Report():
         return render_template("Capture Data/Person of Interest.html")
 
 
-@app.route('/Create-Interview-Report/<string:case_number>', methods=["POST", "GET"])
-def create_Interview_Report(case_number):
+@app.route('/Create-Interview-Report/', methods=["POST", "GET"])
+def create_Interview_Report():
     if request.method == "POST":
         from Backend import Database_Modifier
         data_dict = request.form.to_dict()
@@ -232,25 +238,25 @@ def create_Interview_Report(case_number):
         return redirect(url_for("main_Menu"))
 
     else:
-        return render_template("Capture Data/Interview Report.html", case_num=case_number)
+        return render_template("Capture Data/Interview Report.html")
 
 
-@app.route('/Create-Witness-Statement-Report/<string:case_number>', methods=["POST", "GET"])
-def create_Witness_Statement_Report(case_number):
+@app.route('/Create-Witness-Statement-Report', methods=["POST", "GET"])
+def create_Witness_Statement_Report():
     if request.method == "POST":
         from Backend import Database_Modifier
         data_dict = request.form.to_dict()
 
         Database_Modifier().check_If_Table_Exists("Interview_Reports", data_dict.keys())
         Database_Modifier().create_Database_Row("Interview_Reports", data_dict)
-        return redirect(url_for("main_Menu", case_num=case_number))
+        return redirect(url_for("main_Menu"))
 
     else:
-        return render_template("Capture Data/Witness Statement Form.html", case_num=case_number)
+        return render_template("Capture Data/Witness Statement Form.html")
 
 
-@app.route('/Daily-Activity-Report/<string:case_number>', methods=["POST", "GET"])
-def create_Daily_Activity_Report(case_number):
+@app.route('/Daily-Activity-Report/', methods=["POST", "GET"])
+def create_Daily_Activity_Report():
     if request.method == "POST":
         from Backend import Database_Modifier
         data_dict = request.form.to_dict()
@@ -260,7 +266,7 @@ def create_Daily_Activity_Report(case_number):
         return redirect(url_for("main_Menu"))
 
     else:
-        return render_template("Capture Data/Daily Activity Report.html", case_num=case_number)
+        return render_template("Capture Data/Daily Activity Report.html")
 
 
 @app.route('/House-Profile/', methods=["POST", "GET"])
@@ -281,36 +287,37 @@ def read_House_Profile_Report():
         }
 
         infoDict = Database_Modifier().read_Database_Single_Table("People_Of_Interest").to_dict()
-        #est_dict = dict(infoDict[0])
+        # est_dict = dict(infoDict[0])
 
-        return render_template("View Data/Non Admin House Profile.html", infoDict = test_dict)
+        return render_template("View Data/Non Admin House Profile.html", infoDict=test_dict)
+
 
 @app.route('/Capture-Plate/', methods=["POST", "GET"])
 def capture_Plate_Image():
     from Backend import get_OBS_Zoom
     if request.method == "POST":
         from Backend import license_Plate_Capture
-        import os,time
+        import os, time
         button_clicked = request.form['submit_button']
 
         if button_clicked == "Return Home":
-            return  redirect(url_for("main_Menu"))
+            return redirect(url_for("main_Menu"))
         elif button_clicked == "Capture Plate":
             license_Plate_Capture()
             time.sleep(2)
-            return render_template("Capture Data/Capture Plate.html",image=True, zoom_level=get_OBS_Zoom())
+            return render_template("Capture Data/Capture Plate.html", image=True, zoom_level=get_OBS_Zoom())
 
         elif button_clicked == "Delete Plate":
             print(os.getcwd())
             os.remove("static/images/Screenshot_.png")
-            return render_template("Capture Data/Capture Plate.html",image=False, zoom_level=get_OBS_Zoom())
+            return render_template("Capture Data/Capture Plate.html", image=False, zoom_level=get_OBS_Zoom())
 
         elif button_clicked == "Update Zoom":
             from Backend import control_OBS_Zoom
 
             user_desired_zoom = request.form["Updated Zoom Level"]
             control_OBS_Zoom(user_desired_zoom)
-            return render_template("Capture Data/Capture Plate.html",image=False, zoom_level=get_OBS_Zoom())
+            return render_template("Capture Data/Capture Plate.html", image=False, zoom_level=get_OBS_Zoom())
 
         elif button_clicked == "Save Data":
             import shutil
@@ -319,12 +326,12 @@ def capture_Plate_Image():
             data_dict = request.form.to_dict()
             print(data_dict)
 
-            Database_Modifier().check_If_Table_Exists("Plate_Captures",data_dict.keys())
+            Database_Modifier().check_If_Table_Exists("Plate_Captures", data_dict.keys())
             Database_Modifier().create_Database_Row("Plate_Captures", data_dict)
 
-            shutil.move("static/images/Screenshot_.png", "Plates/" + data_dict["License Plate Number"]+".png")
+            shutil.move("static/images/Screenshot_.png", "Plates/" + data_dict["License Plate Number"] + ".png")
 
-            return redirect(url_for("main_Menu", confirmation = data_dict["License Plate Number"] + " has been logged."))
+            return redirect(url_for("main_Menu", confirmation=data_dict["License Plate Number"] + " has been logged."))
 
 
 
@@ -340,14 +347,13 @@ def capture_Plate_Image():
             return redirect(url_for("main_Menu"))
 
 
-
-#Read Data
+# Read Data
 @app.route('/Search/', methods=["POST", "GET"])
 def search_Database():
     if request.method == "POST":
         button_clicked = request.form['submit_button']
         if button_clicked == "Return Home":
-            return  redirect(url_for("main_Menu"))
+            return redirect(url_for("main_Menu"))
         elif button_clicked == "Search Person":
             from Backend import Database_Modifier
 
@@ -359,17 +365,16 @@ def search_Database():
                     data_dict[value] = "IGNORE"
 
             users = Database_Modifier().read_Database_Specific_Rows_Names((data_dict["Basic Details Last Name"],
-                                                                     data_dict["Basic Details First Name"]))
+                                                                           data_dict["Basic Details First Name"]))
             for user in users:
                 print(user)
 
-
-            return  redirect(url_for("main_Menu"))
+            return redirect(url_for("main_Menu"))
 
         elif button_clicked == "Search Vehicle":
             data_dict = request.form.to_dict()
             print(data_dict)
-            return  redirect(url_for("main_Menu"))
+            return redirect(url_for("main_Menu"))
         else:
             pass
 
@@ -378,18 +383,16 @@ def search_Database():
         return render_template("View Data/Search.html")
 
 
-
-
 @app.route('/Plate-Lookup/', methods=["POST", "GET"])
 def read_Plate_Information():
     from Backend import get_OBS_Zoom
     if request.method == "POST":
         from Backend import license_Plate_Capture
-        import os,time
+        import os, time
         button_clicked = request.form['submit_button']
 
         if button_clicked == "Return Home":
-            return  redirect(url_for("main_Menu"))
+            return redirect(url_for("main_Menu"))
         else:
             return render_template("Capture Data/Capture Plate.html")
 
@@ -406,11 +409,11 @@ def read_POI_Information():
     from Backend import get_OBS_Zoom
     if request.method == "POST":
         from Backend import license_Plate_Capture
-        import os,time
+        import os, time
         button_clicked = request.form['submit_button']
 
         if button_clicked == "Return Home":
-            return  redirect(url_for("main_Menu"))
+            return redirect(url_for("main_Menu"))
         else:
             return render_template("View Data/Non Admin Person of Interest Report.html")
 
@@ -419,23 +422,78 @@ def read_POI_Information():
 
     else:
         test_dict = {
-            "Complainant First Name":"Donald",
-            "Complainant Last Name":"Capodilupo",
-            "Phone Number":"978/424/5947",
+            "Complainant First Name": "Donald",
+            "Complainant Last Name": "Capodilupo",
+            "Phone Number": "978/424/5947",
             "Complainant Address": "15 Elizabeth Rd",
-            "Complainant Town":"Billerica",
-            "Complainant State":"MA",
-            "Complainant ZIP":"01821",
+            "Complainant Town": "Billerica",
+            "Complainant State": "MA",
+            "Complainant ZIP": "01821",
 
         }
 
         return render_template("View Data/Non Admin Person of Interest Report.html", infoDict=test_dict)
 
 
+@app.route('/Map/', methods=["POST", "GET"])
+def read_Map():
+    from flask import render_template_string
+    import plotly.graph_objects as go
+    import pandas as pd
+    import plotly.express as px
 
+    lat = [19.368894, 19.378639, 19.356536,
+           19.352141, 19.376943, 19.351838,
+           19.377563, 19.340928, 19.319919,
+           19.308241, 19.351663, 19.336423,
+           19.350884]
 
+    lon = [-99.005523, -99.107726, -99.101254,
+           -99.041698, -99.058977, -99.091929,
+           -99.071414, -99.061082, -99.119510,
+           -99.066347, -99.010367, -99.050018,
+           -98.996826]
 
+    territoriales = ['ACATITLA-ZARAGOZA', 'ACULCO', 'ATLALILCO-AXOMULCO',
+                     'AZTAHUACAN', 'CABEZA DE JUAREZ', 'ESTRELLA-HUIZACHEPETL',
+                     'LEYES DE REFORMA', 'LOS ANGELES-AGRARISTA', 'LOS CULHUACANES',
+                     'SAN LORENZO TEZONCO', 'SANTA CATARINA', 'SANTA CRUZ-QUETZALCOATL',
+                     'TEOTONGO-ACAHUALTEPEC']
+
+    dict_map = {'territorial': territoriales, 'lat': lat, 'lon': lon}
+    geopd = pd.DataFrame.from_dict(dict_map)
+    # print(geopd.head())
+
+    px.set_mapbox_access_token(
+        'pk.eyJ1IjoiZ2ZlbGl4IiwiYSI6ImNrZTNsbnYzMTBraG0zMnFuZXNjOWZhdDgifQ.5sMKH7NQ6_oVyU4oJlcBUw')
+
+    fig = px.scatter_mapbox(geopd, lat="lat", lon="lon", zoom=11, width=500, height=300,
+                            text="territorial", center={'lat': 19.340928, 'lon': -99.061082})
+
+    fig.update_layout(mapbox_style='outdoors', margin={"r": 0, "t": 0, "l": 0, "b": 0})
+
+    div = fig.to_html(full_html=False)
+
+    return render_template_string('''
+    <head>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>    
+    </head>
+    <body>
+    {{ div_placeholder|safe }}
+    </body>''', div_placeholder=div)
+
+@app.route('/pattern/<int:pattern_id>')
+def set_pattern(pattern_id):
+    if ser.is_open:
+        ser.write(str(pattern_id-1).encode())
+        return f'Pattern {pattern_id + 1} Activated'
+    else:
+        return 'Serial port not open'
+
+@app.route('/Light-Bar/', methods=["POST", "GET"])
+def light_Bar():
+    return render_template("Light Bar.html")
 
 if __name__ == '__main__':
     nav.init_app(app)
-    app.run(host="0.0.0.0",debug=True, use_reloader=False)
+    app.run(host="0.0.0.0", debug=True, use_reloader=False)

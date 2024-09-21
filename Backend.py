@@ -76,7 +76,7 @@ def get_OBS_Zoom():
     import websocket, json
     ws = websocket.WebSocket()
 
-    ws.connect("ws://192.168.0.24:8888/websocket")
+    ws.connect("ws://192.168.86.250:8888//websocket")
     zoom_level = round(json.loads(json.loads(ws.recv())["content"])["zoomLevel"])
 
     return zoom_level
@@ -96,6 +96,63 @@ def open_Secret_Compartment():
 
         board.digital[13].write(0)
         time.sleep(1)
+
+
+def lookup_registration_info():
+    import requests
+
+    import uncurl
+
+    # input()
+    # URL of the form submission endpoint
+    url = "https://atlas-myrmv.massdot.state.ma.us/myrmv/"
+
+    # Headers (including necessary cookies and other headers)
+    headers = {
+
+        "Host": "atlas-myrmv.massdot.state.ma.us",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate, br, zstd",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Fast-Browser-Url": "https://atlas-myrmv.massdot.state.ma.us/myrmv/_/#1",
+        "X-Requested-With": "XMLHttpRequest",
+        "Content-Length": "473",
+        "Origin": "https://atlas-myrmv.massdot.state.ma.us",
+        "Connection": "keep-alive",
+        "Referer": "https://atlas-myrmv.massdot.state.ma.us/myrmv/_/",
+        "Cookie": "tap-bi=eRFDoIKScLqD2kkwTLtibTIeG+i/NDAaO626b89pUGN/Pa70nldZFIELKTQYD9FGxs4HVzhInb1J8kmTQ9xeiuYFSRRDULAqRDE8ZNnALQINcYfv54tMnokC8+fAoOZ3EUFoIyfJA/9oM5BqVLCXpg__; tap-persist=C1hQ1fbxoY9qrVhoYiC3oHtQdN0JfN2uQ3RsTYyBaAgiRkFTVAIAARAA0wig5+Bz3lVU6o4Ed7Pxpw8/Janmw1tYzIbTzMo9jJX/ag6s6bKJ1wEs/ZieMidsxBxmjajxrdCiq1/6CnsQZFyiJGwmN0D51K0GbblIM7c_; wlb-tap-token=GesJDtdanrJuP3aUYj/XVA__; tap-session=C8DYf1DdWfLej5iylqHhQYSO1oQMjifCcUh3Loeo/E9rRkFTVAIAARAAeAllHk29hHL77Xbdvtv+ZmeH69s21IWhIuk6IJFHFIl9TOaPrberSUb5mcr8Wc3jdzG1jzkhUpR/UkmpIqdYLTv4B/o6H3c2f1UNWvGIMerZEUjs7nI1wBPNqJ6EWPuFGqjq0fZDyw6wEBTNXuc8x/XeMJnPp8FqxaOnDg4VK8cOdUi6PtsaTEG0x1o4SdibuOxbmKCQvwUm+ttBzv8D/kVy5zXS4HJ9sm5xCBqn+B5J3pql/Mu2k1e3AfrW4dUA/UGbFKbo1r1t4RdQ6XDCHO56N9TazvvhxRlccDUXolV1uWuGsjqLmIxSn32Nvgfzmgircd5kTpDN0XjHw6EAvw__; _ga=GA1.3.949740451.1710764912; _ga_37BJEZQN1V=GS1.3.1710764912.1.0.1710764912.0.0.0; _ga_B90K4HEWB4=GS1.1.1721477850.10.0.1721477850.0.0.0; _ga_E8VV9Q5Q46=GS1.1.1720956843.3.0.1720956843.0.0.0; _gid=GA1.3.1838975984.1721477851; _gat_gtag_UA_124067955_1=1",
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-origin",
+        # Include other headers like User-Agent, cookies, etc. if needed
+    }
+
+    s = requests.Session()
+
+    cat = s.get('https://atlas-myrmv.massdot.state.ma.us/myrmv/_/', headers=headers)
+
+    print(requests.get("https://atlas-myrmv.massdot.state.ma.us/myrmv/_/",).text)
+
+    print(cat.text)
+
+    # Data to be sent in the form submission (e.g., license plate information)
+    #data = uncurl.parse(
+    #    'curl "https://atlas-myrmv.massdot.state.ma.us/myrmv/_/EventOccurred" --compressed -X POST -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0" -H "Accept: application/json, text/javascript, */*; q=0.01" -H "Accept-Language: en-US,en;q=0.5" -H "Accept-Encoding: gzip, deflate, br, zstd" -H "Content-Type: application/x-www-form-urlencoded" -H "Fast-Browser-Url: https://atlas-myrmv.massdot.state.ma.us/myrmv/_/^#5" -H "X-Requested-With: XMLHttpRequest" -H "Origin: https://atlas-myrmv.massdot.state.ma.us" -H "Connection: keep-alive" -H "Referer: https://atlas-myrmv.massdot.state.ma.us/myrmv/_/" -H "Cookie: tap-bi=eRFDoIKScLqD2kkwTLtibTIeG+i/NDAaO626b89pUGN/Pa70nldZFIELKTQYD9FGxs4HVzhInb1J8kmTQ9xeiuYFSRRDULAqRDE8ZNnALQINcYfv54tMnokC8+fAoOZ3EUFoIyfJA/9oM5BqVLCXpg__; tap-persist=C1hQ1fbxoY9qrVhoYiC3oHtQdN0JfN2uQ3RsTYyBaAgiRkFTVAIAARAA0wig5+Bz3lVU6o4Ed7Pxpw8/Janmw1tYzIbTzMo9jJX/ag6s6bKJ1wEs/ZieMidsxBxmjajxrdCiq1/6CnsQZFyiJGwmN0D51K0GbblIM7c_; wlb-tap-token=cneuIyyO8hCSQHybUtVmSA__; tap-session=C3D9oTzi8OktNqh6ovOZUxeeNfpqs5B3Nd+7cgLPdEMaRkFTVAIAARAACvodu2YZQoNPEXDqV9EYo8dyxFqwblvdYr/FOFtYEIaiEKh4yeOVyHSFoJgMV7xwAWeNPJDWDG2SACYKvDCKHQSm0GMbF1XKE2/Pk+8QHUArR9D7/d8nIJST1yqAIpNAzmC2CsC/08Ais0jBwrexOc0oZmQ69uy3oklsObGt9Y8dRGhWWpQEjTArX6ZRX34sJ/in2DSQQB3Ci5kE5FHG/vxFacI6r0yL7K1BKj/et6qFkdHo4kNxAur7s91QPfLNGmK/Pz98jpM0HM6MSdfnEZ81RUtq48cz1ViEX00JeKWMv3gzW6n1/RB5ScZvZKVcDuMU11FYLVaRs2AzwnICTQ__; _ga=GA1.3.949740451.1710764912; _ga_37BJEZQN1V=GS1.3.1710764912.1.0.1710764912.0.0.0; _ga_B90K4HEWB4=GS1.1.1721308123.7.0.1721308123.0.0.0; _ga_E8VV9Q5Q46=GS1.1.1720956843.3.0.1720956843.0.0.0; _gid=GA1.3.2034723858.1721297909" -H "Sec-Fetch-Dest: empty" -H "Sec-Fetch-Mode: cors" -H "Sec-Fetch-Site: same-origin" -H "Priority: u=0" --data-raw "Dd-6=1NDJ16&Dd-7=PAN&Dd-8=PANPL&LASTFOCUSFIELD__=Dd-9&DOC_MODAL_ID__=0&EVENT__=Dd-9&TYPE__=0&CLOSECONFIRMED__=false&SCREENWIDTH__=3&FAST_SCRIPT_VER__=1&FAST_VERLAST__=10.PCI4NBO5._._.PXxW1xhiDNJdN3PUasiSIHelEbg1&FAST_VERLAST_SOURCE__=_^%^3ASetProperties^%^3A2135077096^%^20^%^40^%^202024-07-18^%^2009^%^3A26^%^3A21.1311&FAST_CLIENT_WHEN__=1721309188118&FAST_CLIENT_WINDOW__=FWDC.WND-8e40-104a-866d&FAST_CLIENT_AJAX_ID__=11&FAST_CLIENT_TRIGGER__=DocFieldLinkClick&FAST_CLIENT_SOURCE_ID__=Dd-9"')
+    #print(data)
+    #session = requests.Session()
+    #r = session.get(url, timeout=30, headers=headers, data="Dd-6=1NDJ16&Dd-7=PAN&Dd-8=PANPL&LASTFOCUSFIELD__=Dd-9&DOC_MODAL_ID__=0&EVENT__=Dd-9&TYPE__=0&CLOSECONFIRMED__=false&SCREENWIDTH__=3&FAST_SCRIPT_VER__=1&FAST_VERLAST__=9.IFRUTBW5._._.nF4ysHn3Fmb0FKFByeozXxYuY4I1&FAST_VERLAST_SOURCE__=_%3ARecalc%3A540991543%20%40%202024-07-20%2009%3A17%3A25.2544&FAST_CLIENT_WHEN__=1721481449197&FAST_CLIENT_WINDOW__=FWDC.WND-57cf-d7d0-cdcb&FAST_CLIENT_AJAX_ID__=9&FAST_CLIENT_TRIGGER__=DocFieldLinkClick&FAST_CLIENT_SOURCE_ID__=Dd-9")
+#
+    #print(r.status_code)
+
+    #response = requests.post(url, headers=headers, data='Dd-6=1NDJ16&Dd-7=PAN&Dd-8=PANPL&LASTFOCUSFIELD__=Dd-9&DOC_MODAL_ID__=0&EVENT__=Dd-9&TYPE__=0&CLOSECONFIRMED__=false&SCREENWIDTH__=3&FAST_SCRIPT_VER__=1&FAST_VERLAST__=10.PCI4NBO5._._.PXxW1xhiDNJdN3PUasiSIHelEbg1&FAST_VERLAST_SOURCE__=_^%^3ASetProperties^%^3A2135077096^%^20^%^40^%^202024-07-18^%^2009^%^3A26^%^3A21.1311&FAST_CLIENT_WHEN__=1721309188118&FAST_CLIENT_WINDOW__=FWDC.WND-8e40-104a-866d&FAST_CLIENT_AJAX_ID__=11&FAST_CLIENT_TRIGGER__=DocFieldLinkClick&FAST_CLIENT_SOURCE_ID__=Dd-9')
+    ##Check the response
+    #print("Status Code:", response.status_code)
+    #print("Response Text:", response.text)
+
+
+#lookup_registration_info()
 
 
 class Database_Modifier:
@@ -214,11 +271,11 @@ class Database_Modifier:
         print(information_tuple[0])
         print(information_tuple[1])
 
-        exact_match = pd.read_sql("SELECT * FROM People_Of_Interest WHERE Basic_Details_Last_Name =  ? AND Basic_Details_First_Name = ?",
-                         sqliteConnection, params=information_tuple)
+        exact_match = pd.read_sql(
+            "SELECT * FROM People_Of_Interest WHERE Basic_Details_Last_Name =  ? AND Basic_Details_First_Name = ?",
+            sqliteConnection, params=information_tuple)
 
-
-        #if len(exact_match) > 0:
+        # if len(exact_match) > 0:
 
         print(exact_match)
         print(len(exact_match))

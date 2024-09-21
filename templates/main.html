@@ -2,34 +2,7 @@
 {% block head %}
     {{ super() }}
 
-    <style>
-        .blink-bg {
-
-            padding: 10px;
-
-            border-radius: 5px;
-            animation: blinkingBackground 1s;
-
-        }
-
-        @keyframes blinkingBackground {
-            0% {
-                background-color: seagreen;
-            }
-            25% {
-                background-color: #77dd77;
-            }
-            50% {
-                background-color: seagreen;
-            }
-            75% {
-                background-color: #77dd77;
-            }
-            100% {
-                background-color: #77dd77;
-            }
-        }
-    </style>
+    <script src="jquery.js"></script>
 
 
 {% endblock %}
@@ -39,10 +12,6 @@
 
 
     <form action="{{ url_for('main_Menu') }}" enctype=multipart/form-data method="POST">
-
-        <div class="row mt-3 text-center title_div">
-            <div id="Business Header" class="business_header_text"></div>
-        </div>
 
         {% if confirmation %}
             <div class="row mt-3 mb-3  blink-bg">
@@ -60,26 +29,26 @@
             role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active"
-                        id="Admin-data-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#Admin"
-                        type="button"
-                        role="tab"
-                        aria-controls="home"
-                        aria-selected="true">
-                    Admin
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link"
                         id="Investigation-data-tab"
                         data-bs-toggle="tab"
                         data-bs-target="#Investigation"
                         type="button"
                         role="tab"
+                        aria-controls="home"
+                        aria-selected="true">
+                    Investigation
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link"
+                        id="Admin-data-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#Admin"
+                        type="button"
+                        role="tab"
                         aria-controls="profile"
                         aria-selected="false">
-                    Investigation
+                    Admin
                 </button>
             </li>
             <li class="nav-item" role="presentation">
@@ -99,143 +68,18 @@
 
         <!--Area for Showing Tab-->
         <div class="tab-content pb-5" id="myTabContent">
+            {% include "Main Menu/Admin Data.html" %}
+            {% include "Main Menu/Investigation Data.html" %}
+            {% include "Main Menu/Management Data.html" %}
 
-            <!--Admin Data -->
-            <div class="tab-pane fade show active grid justify-content-center"
-                 id="Admin"
-                 role="tabpanel"
-                 aria-labelledby="Admin-data-tab">
-
-
-                <div class="row mt-5 text-center">
-                    <h2><b>Administrative Functions</b></h2>
-
-
-                    <div class="row mt-3">
-                        <h4>New Customer</h4>
-                        <div class="col">
-                            <button class="btn btn-dark mr-2" type="submit" name="submit_button"
-                                    value="New Customer Report" formnovalidate>
-                                New Customer Report
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-dark mr-2" type="submit" name="submit_button"
-                                    value="Create New Case" formnovalidate>
-                                Create New Case
-                            </button>
-                        </div>
-                    </div>
-
-
-                    <div class="row mt-5">
-                        <h4>Established Customers</h4>
-                        <div class="col">
-                            <button class="btn btn-dark mr-2" type="submit" name="submit_button"
-                                    value="Create Invoice"
-                                    formnovalidate>
-                                Create Invoice
-                            </button>
-                        </div>
-
-                        <div class="col">
-                            <button class="btn btn-dark mr-2" type="submit" name="submit_button"
-                                    value="Person of Interest" formnovalidate>
-                                Person of Interest
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="row mt-5 text-center">
-                        <div class="col"></div>
-                        <div class="col">
-                            <button class="btn btn-dark mr-2" type="submit" name="submit_button"
-                                    value="Search Database"
-                                    formnovalidate>
-                                Search Database
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-
-            <!--Investigation Data -->
-            <div class="tab-pane fade grid justify-content-center"
-                 id="Investigation"
-                 role="tabpanel"
-                 aria-labelledby="Investigation-data-tab">
-                <div class="row mt-5 text-center">
-                    <h2><b>Investigative Functions</b></h2>
-
-
-                    <div class="row mt-2">
-                        <div class="col">
-                            <button class="btn btn-dark mr-2" type="submit" name="submit_button"
-                                    value="Daily Activity Report">
-                                Daily Activity Report
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-dark mr-2" type="submit" name="submit_button"
-                                    value="Interview Report">
-                                Interview Report
-                            </button>
-                        </div>
-                    </div>
-
-
-                    <div class="row mt-5">
-                        <div class="col"></div>
-                        <div class="col">
-                            <button class="btn btn-dark mr-2" type="submit" name="submit_button"
-                                    value="Witness Statement">
-                                Witness Statement
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="row mt-5">
-                        <div class="col">
-                            <button class="btn btn-dark mr-2" type="submit" name="submit_button"
-                                    value="Create BOLO">
-                                Create BOLO
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-dark mr-2" type="submit" name="submit_button"
-                                    value="Capture Plate">
-                                Capture Plate
-                            </button>
-                        </div>
-
-                    </div>
-
-
-                </div>
-            </div>
-
-            <!--Investigation Data -->
-            <div class="tab-pane fade grid justify-content-center"
-                 id="Management"
-                 role="tabpanel"
-                 aria-labelledby="Management-data-tab">
-                <div class="row text-center">
-                    <h1><b>Coming Soon!</b></h1>
-                </div>
-            </div>
 
         </div>
-
+        <script>
+            create_Business_Header()
+        </script>
 
     </form>
+
 {% endblock %}
 
-<script>
-    create_Business_Header()
-</script>
 
-</body>
-</html>

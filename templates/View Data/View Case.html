@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+    {{ super() }}
+
+    <form action="{{ url_for('read_Case_Status', case_number=case_number) }}" enctype=multipart/form-data method="POST">
+        <div class="row">
+            <div class="col">
+                <div class="col">{% include "View Data/Non Admin Person of Interest Report.html" %}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">{% include "View Data/View Initial Case File.html" %}</div>
+            <div class="col">{% include "View Data/Non Admin Initial Report.html" %}</div>
+        </div>
+
+
+    </form>
+{% endblock %}

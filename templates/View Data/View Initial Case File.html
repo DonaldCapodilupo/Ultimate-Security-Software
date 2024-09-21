@@ -1,0 +1,123 @@
+{% block content %}
+    <div class="card border-white mb-3 mt-3 bg-dark">
+        <div class="card-header"><b><u>Case Information</u></b></div>
+        <div class="row card-body text-white">
+
+
+            <div class="col">
+
+                <table>
+                    <tr>
+                        <td>First Name:</td>
+                        <td>{{ infoDict["Complainant First Name"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name:</td>
+                        <td>{{ infoDict["Complainant Last Name"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Investigation Type:</td>
+                        <td>{{ infoDict["Investigation Type"] }}</td>
+
+                </table>
+            </div>
+
+            <div class="col text-center">
+                <table>
+                    <tr>
+                        <td>Case Number:</td>
+                        <td>{{ infoDict["Case Number"].replace(" ","-") }}</td>
+                    </tr>
+                </table>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="card border-white mb-3 mt-3 bg-dark">
+        <div class="card-header"><b><u>Case Purpose</u></b></div>
+        <div class="card-body text-white">
+
+            <p>{{ infoDict["Case Purpose"] }}</p>
+        </div>
+        <div class="card-header"><b><u>Case Scope</u></b></div>
+
+        <div class="card-body text-white">
+
+
+            <p>{{ infoDict["Case Scope"] }}</p>
+
+        </div>
+
+        <div class="card-header"><b><u>Legal Frameworks</u></b></div>
+        <div class="card-body text-white">
+
+
+            <p>{{ infoDict["Legal Frameworks"] }}</p>
+        </div>
+
+        <div class="card-header"><b><u>Available Resources</u></b>
+        </div>
+
+        <div class="card-body text-white">
+            <p>{{ infoDict["Available Resources"] }}</p>
+        </div>
+
+
+        <div class="card-header"><b><u>Known Risks</u></b>
+        </div>
+
+        <div class="card-body text-white">
+            <p>
+                {{ infoDict["Known Risks"] }}
+            </p>
+        </div>
+
+        <div class="card-header"><b><u>Recommended Techniques</u></b>
+
+        </div>
+        <div class="card-body text-white">
+            <p>{{ infoDict["Recommended Techniques"] }}</p>
+        </div>
+
+
+        <div class="card-header">
+            <b><u>Communication Plan</u></b>
+        </div>
+
+
+        <div class="card-body text-white">
+
+            <p>{{ infoDict["Communication Plan"] }}</p>
+        </div>
+
+
+        <div class="card-header">
+            <b><u>Are there any specific concerns or allegations that you would like the investigator to focus on
+                during the investigation?</u></b>
+
+        </div>
+        <div class="card-body text-white">
+            <p>{{ infoDict["Specific Concerns"] }}</p>
+        </div>
+
+
+        <div class="card-header">
+            <b><u>Do you have a desired timeline or budget for the investigation?</u></b>
+
+        </div>
+        <div class="card-body text-white">
+            <p>{{ infoDict["Timeline Budget"] }}</p>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}

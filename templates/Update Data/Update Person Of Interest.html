@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Person of Interest Form</title>
+
+    <link rel="stylesheet" href="../../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/main.css">
+    <script src="../../static/js/main.js"></script>
+    <!--<script src="../../static/js/Person%20of%20Interest.js"></script>
+    <script src="../../../Useful-Functions/Motor-Vehicle-Resources.js"></script>-->
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+    <!--Business Header-->
+
+    <div class="row text-center mt-3">
+
+        <div id="Business Header"></div>
+
+    </div>
+
+    <div class="row mb-3 block">
+        <div class="col" style="width: max-content">
+            <h5><b>Update Person of Interest</b></h5>
+        </div>
+
+        <div class="col">
+            <h5>Incident # {{ case_num }}</h5>
+        </div>
+
+        <div class="col float-right">
+            <button onclick="remove_Read_Only()" id="edit_button">Edit</button>
+        </div>
+        <div class="col text-center">
+            <button onclick="" id="edit_button">Return Home</button>
+        </div>
+    </div>
+
+
+    <form action="{{ url_for('create_Person_Of_Interest_Report', case_number=case_num) }}"
+          enctype="multipart/form-data"
+          method="POST">
+
+        <!--Info About The Person -->
+        <div class="row border border-info mb-2">
+
+
+            <div class="card text-white bg-dark mb-3" style="width: max-content;">
+                <div class="card-body bg-dark">
+                    <h5 class="card-title" style="text-align: center"><b>Don Curt Capodilupo Jr</b></h5>
+                    <div class="row text-center">
+                        <div class="col text-center">
+                            <img src="../../Test%20Data/People%20Images/Don%20Capodilupo.JPG"
+                                 style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="d-grid flex-row mt-2">
+                        <div class="row">
+
+                            <div class="col bg-dark" style="width: max-content">
+                                <div class="card-header text-center"><b>Identifying Info</b></div>
+                                <table>
+                                    <tr>
+                                        <td><b>Phone Number</b>:</td>
+                                        <td><input
+                                                name="Identifying Information Phone Number"
+                                                class="form-control" type="text"
+                                                id="Identifying Information Phone Number"
+                                                value="Donald"
+                                                readonly>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td><b>Home Address</b>:</td>
+                                        <td><input
+                                                name="Identifying Information Home Address"
+                                                class="form-control" type="text"
+                                                id="Identifying Information Home Address"
+                                                value="15 Elizabeth Rd"
+                                                readonly>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td><b>Town</b>:</td>
+                                        <td><input
+                                                name="Identifying Information Town"
+                                                class="form-control" type="text"
+                                                id="Identifying Information Town"
+                                                value="Billerica"
+                                                readonly>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td><b>State</b>:</td>
+                                        <td><select
+                                                name="Identifying Information State"
+                                                class="form-control" type="text"
+                                                id="Identifying Information State"
+                                                value="CA"
+                                                disabled>
+                                        </select>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td><b>VIN</b>:</td>
+                                        <td><input
+                                                name="Vehicle Information VIN"
+                                                class="form-control" type="text"
+                                                id="Vehicle Information VIN"
+                                                value="VASX45S34DBH2"
+                                                readonly>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <tr>
+                                        <td><b>Notable Marks</b>:</td>
+                                        <td><input
+                                                name="Vehicle Information Notable Marks"
+                                                class="form-control" type="text"
+                                                id="Vehicle Information Notable Marks"
+                                                value="Dark Windows, Drivers Side Damage"
+                                                readonly>
+
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+
+
+                                <!--<p class="card-text"><b>Phone Number</b>: 978/424/5947</p>
+                                <p class="card-text"><b>Home Address</b>: 15 Elizabeth Rd</p>
+                                <p class="card-text"><b>Town</b>: Billerica</p>
+                                <p class="card-text"><b>State</b>: MA</p>
+                                <p class="card-text"><b>ZIP</b>: 01821</p>
+                                <p class="card-text"><b>Marital Status</b>: Single</p>
+                                -->
+                            </div>
+
+                            <div class="col bg-dark m-1" style="width: max-content">
+                                <div class="card-header text-center"><b>Contact Info</b></div>
+                                <p class="card-text"><b>Height</b>: 5'8"</p>
+                                <p class="card-text"><b>Weight</b>: 200 lbs</p>
+                                <p class="card-text"><b>Hair Color</b>: Brown</p>
+                                <p class="card-text"><b>Eye Color</b>: Green</p>
+                                <p class="card-text"><b>Skin Color</b>: White</p>
+                                <p class="card-text"><b>Scar/Marks/Tattoos</b>: None</p>
+                                <p class="card-text"><b>Shoe Size</b>: 9.5</p>
+
+                            </div>
+
+                            <div class="col bg-dark m-1" style="width: max-content">
+                                <div class="card-header">Contact Info</div>
+                                <div class="card-body text-white">
+                                    <p class="card-text"><b>Phone Number</b>: 978/4245947</p>
+                                    <p class="card-text"><b>Email</b>: DonCapodilupo@aim.com</p>
+                                    <p class="card-text"><b>Hair Color</b>: Brown</p>
+                                </div>
+
+                            </div>
+
+                            <div class="col bg-danger m-1" style="width: max-content">
+                                <div class="card-header">Criminal Intentions</div>
+
+                                <table>
+                                    <tr>
+                                        <td><b>Prior Arrests:</b></td>
+                                        <td><input
+                                                name="Criminal Intentions Prior Arrests"
+                                                class="form-control" type="text"
+                                                id="Criminal Intentions Prior Arrests"
+                                                value="None"
+                                                readonly>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Own Firearm Arrests:</b></td>
+                                        <td><input
+                                                name="Criminal Intentions Prior Arrests"
+                                                class="form-control" type="text"
+                                                id="Criminal Intentions Prior Arrests"
+                                                value="None"
+                                                readonly>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="card-body text-white">
+                                    <p class="card-text"><b>Own Firearm</b>: Yes</p>
+                                    <p class="card-text"><b>Prior Felonies</b>: None</p>
+                                    <p class="card-text"><b>Martial Arts Experience</b>: None</p>
+                                    <p class="card-text"><b>Currently Under Investigation</b>: No</p>
+                                    <p class="card-text"><b>Outstanding Warrants</b>: None</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <!--Vehicle Information -->
+        <div class="row text-center border border-info">
+
+
+            <div class="col-lg align-center">
+
+                <div class="card border-success mb-3 mt-3 bg-primary">
+                    <div class="card-header">Vehicle Info</div>
+                    <div class="card-body text-white">
+                        <div class="row d-grid text-center">
+
+
+
+                            <div class="col col-sm-auto text-float-right">
+                                 <img src="../../Test%20Data/Vehicle%20Images/2016%20Nissan%20Sentra.JPG" alt=""
+                                 style="max-width: 500px">
+                                <table>
+                                    <tr>
+                                        <td><b>Color</b>:</td>
+                                        <td><select
+                                                name="Vehicle Information Color"
+                                                class="form-control" type="text"
+                                                id="Vehicle Information Color"
+                                                readonly>
+                                        </select>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td><b>Year</b>:</td>
+                                        <td><input
+                                                name="Vehicle Information Year"
+                                                class="form-control" type="text"
+                                                id="Vehicle Information Year"
+                                                value="2016"
+                                                readonly>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td><b>Make</b>:</td>
+                                        <td><input
+                                                name="Vehicle Information Make"
+                                                class="form-control" type="text"
+                                                id="Vehicle Information Make"
+                                                value="Nissan"
+                                                readonly>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td><b>Model</b>:</td>
+                                        <td><input
+                                                name="Vehicle Information Model"
+                                                class="form-control" type="text"
+                                                id="Vehicle Information Model"
+                                                value="Sentra"
+                                                readonly>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td><b>VIN</b>:</td>
+                                        <td><input
+                                                name="Vehicle Information VIN"
+                                                class="form-control" type="text"
+                                                id="Vehicle Information VIN"
+                                                value="VASX45S34DBH2"
+                                                readonly>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <tr>
+                                        <td><b>Notable Marks</b>:</td>
+                                        <td><input
+                                                name="Vehicle Information Notable Marks"
+                                                class="form-control" type="text"
+                                                id="Vehicle Information Notable Marks"
+                                                value="Dark Windows, Drivers Side Damage"
+                                                readonly>
+
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Employer Info-->
+            <div class="col-lg align-center">
+                <div class="card border-success mb-3 mt-3 bg-success" style="height: 600px">
+                    <div class="card-header">Employer Info</div>
+                    <div class="card-body text-white">
+                        <div class="row d-grid">
+                            <div class="col">
+                                <img src="../../Test%20Data/Employer%20Images/Town%20of%20Billerica.png" alt=""
+                                     style="max-width: 500px">
+                            </div>
+                            <div class="col">
+
+                                <p class="card-text"><b>Employer</b>: Town of Billerica</p>
+                                <p class="card-text"><b>Employer Address</b>: 70 Lechworth Ave, Billerica MA
+                                    01821
+                                </p>
+                                <p class="card-text"><b>Length of Employment</b>: 1 Year</p>
+                                <p class="card-text"><b>Job Title</b>: Plant Operator</p>
+                                <p class="card-text"><b>Work Phone</b>: 978/663/0713</p>
+                                <p class="card-text"><b>Prior Military Experience</b>: None</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+<script>
+    create_Business_Header();
+
+    //setUpHTML()
+
+    //populateModelList();
+
+    function populate_Lists() {
+        const table_structure = {
+            "Identifying Information State": ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA',
+                'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT',
+                'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD',
+                'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'],
+            "Vehicle Information Color": ["Black", "Silver", "White", "Grey", "Red", "Blue", "Brown", "Green", "Beige", "Orange", "Gold", "Yellow",
+                "Purple"],
+            "Marital Status": ["Single", "In a Relationship", "Married", "Divorced", "Infidelity"],
+            "Hair Color": ['Black', 'Brown', 'Blonde', 'Red', 'Gray', 'White', 'Auburn', 'Chestnut', 'Strawberry Blonde', 'Dirty Blonde', 'Platinum Blonde', 'Silver', 'Salt and Pepper', 'Blue', 'Green', 'Pink', 'Purple', 'Turquoise', 'Rainbow', 'Ombre', 'Balayage', 'Highlights', 'Lowlights', 'Natural', 'Bald', 'Balding', 'Shaved', 'Salt and Pepper',],
+            "Eye Color": ['Brown', 'Blue', 'Green', 'Hazel', 'Amber', 'Gray', 'Black', 'Red', 'Violet',],
+            "Skin Color": ['African', 'Asian', 'Caucasian', 'Hispanic', 'Latino', 'Native American', 'Pacific Islander', 'Middle Eastern', 'Mixed',],
+            "Currently Under Investigation": ["No", "Unknown", "Yes"],
+
+
+        }
+
+
+        for (let [element_id, list_of_values] of Object.entries(table_structure)) {
+            var select = document.getElementById(element_id);
+
+
+            console.log("selesct: " + select)
+
+            for (var i = 0; i < list_of_values.length; i++) {
+                var opt = list_of_values[i];
+                var el = document.createElement("option");
+                el.textContent = opt;
+                el.value = opt;
+                console.log("el: " + el)
+                select.appendChild(el);
+            }
+
+            const default_values = {
+                "Identifying Information State": "MA",
+                "Vehicle Information Color": "Grey"
+            }
+            select.value =default_values[element_id]
+
+
+        }
+
+
+    }
+
+    populate_Lists()
+
+    function remove_Read_Only() {
+
+        if (document.getElementById("edit_button").innerText === "Edit") {
+            let inputs = document.getElementsByTagName('input');
+            let selects = document.getElementsByTagName('select');
+
+
+            for (let index = 0; index < inputs.length; ++index) {
+
+
+                document.getElementById(inputs[index].id).readOnly = false;
+                console.log("Unlocking: " + inputs[index].id);
+            }
+
+            for (let index = 0; index < selects.length; ++index) {
+                console.log(selects[index].id)
+
+                document.getElementById(selects[index].id).disabled = false;
+                console.log("Unlocking: " + selects[index].toString());
+            }
+
+            document.getElementById("edit_button").innerText = "Lock"
+        } else {
+            let inputs = document.getElementsByTagName('input');
+            let selects = document.getElementsByTagName('select');
+
+            for (let index = 0; index < inputs.length; ++index) {
+
+
+                document.getElementById(inputs[index].id).readOnly = true;
+                console.log("Unlocking: " + inputs[index].id);
+            }
+
+            for (let index = 0; index < selects.length; ++index) {
+                console.log(selects[index].id)
+
+                document.getElementById(selects[index].id).disabled = true;
+                console.log("Unlocking: " + selects[index].toString());
+            }
+
+            document.getElementById("edit_button").innerText = "Edit"
+        }
+
+
+        //if (document.getElementById("read_only_button").readOnly) {
+//
+//
+        //    document.getElementById("read_only_button").readOnly = false
+        //    document.getElementById("edit_button").innerText = "Lock"
+        //} else {
+        //    document.getElementById("read_only_button").readOnly = true
+        //    document.getElementById("edit_button").innerText = "Edit"
+        //}
+
+        console.log(this)
+
+    }
+
+
+</script>
+
+
+</body>
+</html>

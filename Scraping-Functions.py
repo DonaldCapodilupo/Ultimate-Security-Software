@@ -1,5 +1,6 @@
 import os, time
 from Backend import Database_Modifier
+import pandas as pd
 
 with open("api-key.txt", "r") as file:
     key = file.read()
@@ -508,25 +509,80 @@ def address_To_Lat_Long():
     for i, value in data.items():
         gmaps = googlemaps.Client(key='AIzaSyAnRJvIU0LM1tPQCKgBZntZJn04ukyvp5o')
         geocode_result = gmaps.geocode(i + ", Billerica, MA")
-        print(str(geocode_result[0]["geometry"]["location"]["lat"]) + "," + str(geocode_result[0]["geometry"]["location"]["lng"]))
-         
-    #return geocode_result
+        print(str(geocode_result[0]["geometry"]["location"]["lat"]) + "," + str(
+            geocode_result[0]["geometry"]["location"]["lng"]))
+
+    # return geocode_result
+
 
 def facebook_OCR():
     from PIL import Image
     import pytesseract
-    
 
     print(pytesseract.image_to_string(Image.open('test.png')))
 
 
+def scrape_Billerica_Budget_PDF():
+    import PyPDF2
+    import json
+
+    pages_to_scrape = {"Administration": 203}
+    # ,
+    # ,
+    # ",
+    # "Fire Department": 188,
+    # "Accounting": 52}
+
+    pdf = open("Forms/2025 Billerica Budget.pdf", "rb")
+    reader = PyPDF2.PdfReader(pdf)
+
+    police_dict = {}
+
+    for department, page_num in pages_to_scrape.items():
+
+        page = reader.pages[page_num]
+
+        page_text = page.extract_text().split("\n")
+
+        for row in page_text:
+            print(row)
+
+            cat = row.strip("\n").split(" ")
+            print(cat)
+
+            try:
+                print("Attempting to add: " + cat[0] + " " + cat[1])
+                police_dict[cat[0] + " " + cat[1]] = {"Rank": cat[2],
+                                                      "Seniority": cat[3],
+                                                      "Anniversary Date": cat[4]}
+
+                print("{0} {1} was added successfully!".format(cat[0], cat[1]))
+
+            # print(text)
+            except IndexError:
+                print("Skipping: " + cat[0] + " " + cat[1])
+            print(police_dict)
 
 
-# manually_Record_Address_Vehicles()
-# scrape_Facebook_Friends()
+    with open(
+            "C:\\Users\Don\Documents\Github Folder\\Ultimate-Security-Software\Forms\Billerica Employee Records\\Administration Roster.json",
+            "w") as outfile:
+        json.dump(police_dict, outfile)
 
 
-# print(soup.prettify())
-
-
-# scrape_Billerica_Business_Listing()
+#return_dict = {}
+#with open("Forms/Billerica Employee Records/State Police Roster.csv", "r") as csv_file:
+#    for line in csv_file:
+#        line_data = line.replace("\n","").split(",")
+#
+#        print(line_data[2] +" " + line_data[3])
+#
+#        return_dict[line_data[2] +" " + line_data[3]] = {
+#            "Rank": line_data[5],
+#            "Department Zip": line_data[23],
+#        }
+#import json
+#
+#
+#with open('result.json', 'w') as fp:
+#    json.dump(return_dict, fp)

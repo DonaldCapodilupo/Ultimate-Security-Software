@@ -1,0 +1,147 @@
+{% block content %}
+
+    <form action="{{ url_for('read_POI_Information') }}" enctype=multipart/form-data method="POST">
+        <!--Info About The Person -->
+        <div class="row border border-info mb-2">
+            <div class="card text-white bg-dark mb-3 mt-3" >
+                <div class="card-header"><b class="display-3">{{ infoDict["Complainant First Name"] + " " + infoDict["Complainant Last Name"] }}</b></div>
+                <div class="card-body bg-dark">
+                    <h5 class="card-title">
+
+
+
+
+                        <div class="row">
+
+                            <div class="col text-end">
+                                <img src="../../static/Test%20Data/People%20Images/Don%20Capodilupo.JPG"
+                                     style="width: 300px">
+                            </div>
+
+                            <div class="col text-start">
+
+                                <p class="card-text"><b>Home Address</b>: {{ infoDict["Complainant Address"] }}</p>
+                                <p class="card-text"><b>Town</b>: {{ infoDict["Complainant Town"] }}</p>
+                                <p class="card-text"><b>State</b>: {{ infoDict["Complainant State"] }}</p>
+                                <p class="card-text"><b>ZIP</b>: {{ infoDict["Complainant Zip"] }}</p>
+                                <p class="card-text"><b>Marital Status</b>: Single</p>
+
+                            </div>
+                        </div>
+
+
+
+
+                    </h5>
+                    <div class="d-grid flex-row mt-2">
+                        <div class="row">
+
+
+                            <div class="col bg-dark m-1" style="width: max-content">
+                                <div class="card-header text-center"><b>Personal Info</b></div>
+                                <p class="card-text"><b>Height</b>: 5'8"</p>
+                                <p class="card-text"><b>Weight</b>: 200 lbs</p>
+                                <p class="card-text"><b>Hair Color</b>: Brown</p>
+                                <p class="card-text"><b>Eye Color</b>: Green</p>
+                                <p class="card-text"><b>Skin Color</b>: White</p>
+                                <p class="card-text"><b>Scar/Marks/Tattoos</b>: None</p>
+                                <p class="card-text"><b>Shoe Size</b>: 9.5</p>
+
+                            </div>
+
+                            <div class="col bg-dark m-1" style="width: max-content">
+                                <div class="card-header">Contact Info</div>
+                                <div class="card-body text-white">
+                                    <p class="card-text"><b>Phone Number</b>: {{ infoDict["Phone Number"] }}</p>
+                                    <p class="card-text"><b>Email</b>: DonCapodilupo@aim.com</p>
+                                </div>
+
+                            </div>
+
+                            <div class="col bg-danger m-1" style="width: max-content">
+                                <div class="card-header">Criminal Intentions</div>
+                                <div class="card-body text-white">
+                                    <p class="card-text"><b>Prior Arrests</b>: None</p>
+                                    <p class="card-text"><b>Own Firearm</b>: Yes</p>
+                                    <p class="card-text"><b>Prior Felonies</b>: None</p>
+                                    <p class="card-text"><b>Martial Arts Experience</b>: None</p>
+                                    <p class="card-text"><b>Currently Under Investigation</b>: No</p>
+                                    <p class="card-text"><b>Outstanding Warrants</b>: None</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <!--Vehicle Information -->
+        <div class="row text-center border border-info">
+            <div class="row">
+
+
+                <div class="col-lg align-center">
+
+                    <div class="card border-success mb-3 mt-3 bg-primary">
+                        <div class="card-header display-6">Vehicle Info</div>
+                        <div class="card-body text-white">
+                            <div class="row d-grid">
+                                <div class="col">
+                                    <img src="../../static/Test%20Data/Vehicle%20Images/2016%20Nissan%20Sentra.JPG"
+                                         alt=""
+                                         style="max-width: 500px">
+                                </div>
+                                <div class="col">
+
+                                    <p class="card-text"><b>Color</b>: Grey</p>
+                                    <p class="card-text"><b>Year</b>: 2016</p>
+                                    <p class="card-text"><b>Make</b>: Nissan</p>
+                                    <p class="card-text"><b>Model</b>: Sentra</p>
+                                    <p class="card-text"><b>VIN</b>: VASX45S34DBH2</p>
+                                    <p class="card-text"><b>Notable Marks</b>: Dark Windows, Driver Side Floor Panel
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg align-center">
+                    <div class="card border-success mb-3 mt-3 bg-success" style="height: 600px">
+                        <div class="card-header display-6">Employer Info</div>
+                        <div class="card-body text-white">
+                            <div class="row d-grid">
+                                <div class="col">
+                                    <img src="../../static/Test%20Data/Employer%20Images/Town%20of%20Billerica.png"
+                                         alt=""
+                                         style="max-width: 500px">
+                                </div>
+                                <div class="col">
+
+                                    <p class="card-text"><b>Employer</b>: Town of Billerica</p>
+                                    <p class="card-text"><b>Employer Address</b>: 70 Lechworth Ave, Billerica MA
+                                        01821
+                                    </p>
+                                    <p class="card-text"><b>Length of Employment</b>: 1 Year</p>
+                                    <p class="card-text"><b>Job Title</b>: Plant Operator</p>
+                                    <p class="card-text"><b>Work Phone</b>: 978/663/0713</p>
+                                    <p class="card-text"><b>Prior Military Experience</b>: None</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </form>
+{% endblock %}

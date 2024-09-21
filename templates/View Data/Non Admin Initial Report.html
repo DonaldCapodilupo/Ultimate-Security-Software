@@ -1,0 +1,257 @@
+{% extends "layout.html" %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+    {{ super() }}
+
+    <form action="{{ url_for('create_Initial_Customer_Report') }}" enctype=multipart/form-data method="POST">
+
+
+        <div class="card border-white mb-3 mt-3 bg-dark">
+            <div class="card-header"><b><u>Complainant Information</u></b></div>
+            <div class="row card-body text-white">
+
+
+                <div class="col">
+
+                    <table>
+                        <tr>
+                            <td>Complainant First Name:</td>
+                            <td>{{ infoDict["Complainant First Name"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Complainant Last Name:</td>
+                            <td>{{ infoDict["Complainant Last Name"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Complainant Phone Number:</td>
+                            <td>{{ infoDict["Complainant Phone Number"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{ infoDict["Complainant Email"] }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col">
+                    <table>
+                        <tr>
+                            <td>Employer:</td>
+                            <td>{{ infoDict["Complainant Employer"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Home Address:</td>
+                            <td>{{ infoDict["Complainant Address"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Town:</td>
+                            <td>{{ infoDict["Complainant Town"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>State:</td>
+                            <td>{{ infoDict["Complainant State"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>ZIP:</td>
+                            <td>{{ infoDict["Complainant Zip"] }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-sm-auto">
+                    <table>
+                        <tr>
+                            <td><b>Is Employer Customer:</b></td>
+                            <td>{{ infoDict["Employer Customer"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Employer Address:</td>
+                            <td>{{ infoDict["Employer Address"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Employer Town:</td>
+                            <td>{{ infoDict["Employer Town"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>State:</td>
+                            <td>{{ infoDict["Employer State"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>ZIP:</td>
+                            <td>{{ infoDict["Employer ZIP"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Employer Phone Number:</td>
+                            <td>{{ infoDict["Employer Phone Number"] }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="card border-white mb-3 mt-3 bg-dark">
+            <div class="card-header"><b><u>What led you to believe that there may be an issue that requires an
+                investigation?</u></b></div>
+            <div class="card-body text-white">
+
+                <p>{{ infoDict["Initial Belief"] }}</p>
+            </div>
+        </div>
+
+
+        <div class="card border-white mb-3 mt-3 bg-dark">
+            <div class="card-header"><b><u>Can you provide a brief overview of the situation or issue at
+                hand?</u></b></div>
+
+            <div class="card-body text-white">
+
+
+                <p>{{ infoDict["Brief Overview"] }}</p>
+
+            </div>
+        </div>
+
+        <div class="card border-white mb-3 mt-3 bg-dark">
+            <div class="card-header"><b><u>When did you first become aware of this issue?</u></b></div>
+            <div class="card-body text-white">
+
+
+                <p>{{ infoDict["First Become Aware"] }}</p>
+            </div>
+        </div>
+
+
+        <div class="card border-white mb-3 mt-3 bg-dark">
+            <div class="card-header"><b><u>Have you attempted to resolve this issue on your own? If so, what steps have
+                you taken?</u></b>
+            </div>
+
+            <div class="card-body text-white">
+                <p>{{ infoDict["Self Resolution Attempts"] }}</p>
+            </div>
+        </div>
+
+        <div class="card border-white mb-3 mt-3 bg-dark">
+            <div class="card-header"><b><u>Have you discussed this issue with anyone else, such as an attorney or law
+                enforcement?</u></b>
+            </div>
+
+            <div class="card-body text-white">
+                <p>
+                    {{ infoDict["Other Privy Entities"] }}
+                </p>
+            </div>
+        </div>
+
+        <div class="card border-white mb-3 mt-3 bg-dark">
+            <div class="card-header"><b><u>Have you identified any potential suspects or witnesses related to the
+                issue?</u></b>
+
+            </div>
+            <div class="card-body text-white">
+                <p>{{ infoDict["People of Interest"] }}</p>
+            </div>
+        </div>
+
+        <div class="card border-white mb-3 mt-3 bg-dark">
+            <div class="card-header">
+                <b><u>Do you have any documentation or evidence related to the issue, such as
+                    contracts,
+                    emails, or
+                    financial records?</u></b>
+            </div>
+
+
+            <div class="card-body text-white">
+
+                <p>None</p>
+            </div>
+        </div>
+
+
+        <div class="card border-white mb-3 mt-3 bg-dark">
+            <div class="card-header">
+                <b><u>Are there any specific concerns or allegations that you would like the investigator to focus on
+                    during the investigation?</u></b>
+
+            </div>
+            <div class="card-body text-white">
+                <p>{{ infoDict["Specific Concerns"] }}</p>
+            </div>
+        </div>
+
+        <div class="card border-white mb-3 mt-3 bg-dark">
+            <div class="card-header">
+                <b><u>Do you have a desired timeline or budget for the investigation?</u></b>
+
+            </div>
+            <div class="card-body text-white">
+                <p>{{ infoDict["Timeline Budget"] }}</p>
+            </div>
+        </div>
+
+        <div class="card border-white mb-3 mt-3 bg-dark">
+            <div class="card-header">
+                <b><u>Are there any other relevant details that you would like to share with the
+                    investigator?</u>
+                </b>
+            </div>
+            <div class="card-body text-white">
+                <p> {{ infoDict["Other Details"] }}</p>
+            </div>
+        </div>
+
+        <div class="row mt-3 border border-danger p-5 ">
+
+
+            <h1 class="text-center">NON-DISCLOSURE AGREEMENT SIGNED</h1>
+
+
+        </div>
+        <div class="row mt-3 border border-dark p-5">
+
+
+            <div class="row">
+
+                <div class="col">
+                    <b><u>Receiving Agent</u></b>
+                    <h5>{{ infoDict["Agent Receiving"] }}</h5>
+                </div>
+
+                <div class="col">
+                    <b><u>Investigating Agent</u></b>
+                    <h5>{{ infoDict["Investigating Agent"] }}</h5>
+                </div>
+                <div class="col">
+
+                </div>
+                <div class="col">
+                    <b><u>Agent Title</u></b>
+                    <h5>{{ infoDict["Agent Title"] }}</h5>
+                </div>
+                <div class="col">
+                    <b><u>ID Number</u></b>
+                    <h5>Placeholder</h5>
+                </div>
+                <div class="col">
+                    <b><u>Manager Review</u></b>
+                    <h5>{{ infoDict["Manager Reviewing"] }}</h5>
+                </div>
+                <div class="col">
+                    <b><u>Case Approved</u></b>
+                    <h5>Placeholder</h5>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </form>
+{% endblock %}

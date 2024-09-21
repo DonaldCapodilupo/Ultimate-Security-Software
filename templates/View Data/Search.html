@@ -1,0 +1,214 @@
+{% extends "layout.html" %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+    {{ super() }}
+
+    <form action="{{ url_for('search_Database') }}" enctype=multipart/form-data
+          method="POST" class="border border-white rounded-2 p-2">
+
+
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card bg-success mb-4">
+                    <div class="card-header"><b>Personal Info</b></div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="text" class="form-control" id="Basic Details First Name"
+                                           placeholder="John" name="Basic Details First Name">
+                                    <label for="Basic Details First Name">First Name</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating mb-3 text-dark">
+
+                                    <input type="text" class="form-control" id="Basic Details Last Name"
+                                           placeholder="Doe" name="Basic Details Last Name">
+                                    <label for="Basic Details Last Name">Last Name</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="text" class="form-control" id="Contact Info Phone Number"
+                                           name="Contact Info Phone Number" placeholder="9781234567">
+                                    <label for="Contact Info Phone Number">Phone Number</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="email" class="form-control" id="floatingInput"
+                                           placeholder="name@example.com" name="Contact Info Email Address">
+                                    <label for="floatingInput">Email address</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col text-center">
+                            <button type="submit" name="submit_button" class="btn btn-dark text-center"
+                                    value="Search Person">Search Person
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card bg-info mb-3">
+                    <div class="card-header"><b>Address Info</b></div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="text" class="form-control" id="Home Address" placeholder="123 Main St"
+                                    name="Basic Details Home Address">
+                                    <label for="Home Address">Home Address</label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col">
+                                <div class="form-floating mb-3 text-dark">
+                                    <input type="text" class="form-control" id="Basic Details Town"
+                                           placeholder="Orlando" name="Basic Details Town">
+                                    <label for="Basic Details Town">Town</label>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <select id="Basic Details State" style="height: 58px" class="form-select mb-3"
+                                        aria-label="Default select example" name="Basi Details Home Address">
+                                    <option id="State">State</option>
+                                    <option id="AL">AL</option>
+                                    <option id="AK">AK</option>
+                                    <option id="AS">AS</option>
+                                    <option id="AZ">AZ</option>
+                                    <option id="AR">AR</option>
+                                    <option id="CA">CA</option>
+                                    <option id="CO">CO</option>
+                                    <option id="CT">CT</option>
+                                    <option id="DE">DE</option>
+                                    <option id="DC">DC</option>
+                                    <option id="FM">FM</option>
+                                    <option id="FL">FL</option>
+                                    <option id="GA">GA</option>
+                                    <option id="GU">GU</option>
+                                    <option id="HI">HI</option>
+                                    <option id="ID">ID</option>
+                                    <option id="IL">IL</option>
+                                    <option id="IN">IN</option>
+                                    <option id="IA">IA</option>
+                                    <option id="KS">KS</option>
+                                    <option id="KY">KY</option>
+                                    <option id="LA">LA</option>
+                                    <option id="ME">ME</option>
+                                    <option id="MH">MH</option>
+                                    <option id="MD">MD</option>
+                                    <option id="MA">MA</option>
+                                    <option id="MI">MI</option>
+                                    <option id="MN">MN</option>
+                                    <option id="MS">MS</option>
+                                    <option id="MO">MO</option>
+                                    <option id="MT">MT</option>
+                                    <option id="NE">NE</option>
+                                    <option id="NV">NV</option>
+                                    <option id="NH">NH</option>
+                                    <option id="NJ">NJ</option>
+                                    <option id="NM">NM</option>
+                                    <option id="NY">NY</option>
+                                    <option id="NC">NC</option>
+                                    <option id="ND">ND</option>
+                                    <option id="MP">MP</option>
+                                    <option id="OH">OH</option>
+                                    <option id="OK">OK</option>
+                                    <option id="OR">OR</option>
+                                    <option id="PW">PW</option>
+                                    <option id="PA">PA</option>
+                                    <option id="PR">PR</option>
+                                    <option id="RI">RI</option>
+                                    <option id="SC">SC</option>
+                                    <option id="SD">SD</option>
+                                    <option id="TN">TN</option>
+                                    <option id="TX">TX</option>
+                                    <option id="UT">UT</option>
+                                    <option id="VT">VT</option>
+                                    <option id="VI">VI</option>
+                                    <option id="VA">VA</option>
+                                    <option id="WA">WA</option>
+                                    <option id="WV">WV</option>
+                                    <option id="WI">WI</option>
+                                    <option id="WY">WY</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="col text-center">
+                            <button type="submit" name="submit_button" class="btn btn-dark text-center"
+                                    value="Search Address">Search Address
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="card bg-primary">
+                    <div class="card-header"><b>Vehicle Info</b></div>
+                    <div class="card-body">
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="number" class="form-control" id="Vehicle Info Year"
+                                   name="Vehicle Info Year" placeholder="2012">
+                            <label for="Vehicle Info Year">Year</label>
+                        </div>
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control" id="Vehicle Info Make"
+                                   name="Vehicle Info Make" placeholder="Nissan">
+                            <label for="Vehicle Info Make">Make</label>
+                        </div>
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control" id="Vehicle Info Model"
+                                   name="Vehicle Info Model" placeholder="Sentra">
+                            <label for="Vehicle Info Model">Model</label>
+                        </div>
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control" id="Vehicle Info License Plate Number"
+                                   name="Vehicle Info License Plate Number" placeholder="ABC123">
+                            <label for="Vehicle Info License Plate #">License Plate #</label>
+                        </div>
+
+                        <div class="form-floating mb-3 text-dark">
+                            <input type="text" class="form-control" id="Vehicle Info VIN"
+                                   name="Vehicle Info VIN" placeholder="ABCDEFG1234567">
+                            <label for="Vehicle Info VIN">VIN</label>
+                        </div>
+
+                        <div class="col text-center">
+                            <button type="submit" name="submit_button" class="btn btn-dark text-center"
+                                    value="Search Vehicle">Search Vehicle
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </form>
+
+{% endblock %}

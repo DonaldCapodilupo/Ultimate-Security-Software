@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+{% block head %}
+    {{ super() }}
+    <title>View Interview Report</title>
+{% endblock %}
+{% block body %}
+    {{ super() }}
+
+<form action="{{ url_for('create_Interview_Report', case_number=case_num) }}" enctype=multipart/form-data
+      method="POST">
+
+    <div class="container">
+
+        <div class="row mt-3 border border-dark p-5">
+
+            <div class="row">
+                <div class="row text-center">
+                    <h1><b>Interview Report</b></h1>
+                </div>
+
+                <div class="col text-center">
+                    <h3>Capodilupo Investigation's</h3>
+                    <h5>15 Elizabeth Rd, Billerica MA 01821</h5>
+                </div>
+
+                <div class="col align-self-end">
+                    <h4>Case Number: B17-11201992</h4>
+                </div>
+            </div>
+
+
+            <div class="row mt-3">
+                <div class="card border-primary mb-3 mt-3 bg-dark">
+                    <div class="card-header">Interviewee Information</div>
+                    <div class="card-body text-white">
+                        <div class="row">
+                            <div class="col-sm-auto text-center">
+
+                                <img src="../../Test%20Data/People%20Images/Sarah%20Jones.jpg" alt=""
+                                     style="text-align: left">
+
+
+                                <table class="table table-dark">
+                                    <tr>
+                                        <td>Interviewee Name:</td>
+                                        <td>Sarah Jones</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Interviewer Name:</td>
+                                        <td>Don Capodilupo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date:</td>
+                                        <td>7/12/2023</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Location:</td>
+                                        <td>Wastewater Plant</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date:</td>
+                                        <td>7/12/2023</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg ">
+                                <div class="row">
+                                    <h1 class="text-center">Statement
+
+                                        <h5 class="text-center">
+                                            <audio controls>
+                                            <source src="horse.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                            <a href="../../Test%20Data/People%20Images/Laura%20Scott.jpg" download>Download MP3</a>
+
+                                        </h5>
+                                    </h1>
+                                    <p>I am writing this witness statement to provide an account of an incident I
+                                        witnessed on [Date], wherein I observed an individual stealing a car. I believe
+                                        it is my civic duty to share the details of this incident to assist law
+                                        enforcement in their investigation and to help bring the responsible party to
+                                        justice.
+
+                                        On the aforementioned date, at approximately [Time], I was walking along [Street
+                                        Name] in [City Name], when I noticed a suspicious activity unfolding before my
+                                        eyes. I saw a person whom I can describe as a [Physical Description, if
+                                        available] individual, wearing [Description of Clothing] clothing, behaving in a
+                                        manner that immediately drew my attention.
+
+                                        The individual in question was standing next to a parked vehicle, a [Car Make
+                                        and Model], which was parked in front of [Location] at the time. I found this
+                                        unusual as the area is generally safe, and I hadn't seen</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+
+    function get_Current_Time() {
+        const date = new Date();
+
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        // This arrangement can be altered based on how we want the date's format to appear.
+        let today = year + "-" + month + "-" + day;
+        console.log(today); // "17-6-2022"
+
+        return today;
+    }
+
+    document.getElementById("date").value = get_Current_Time();
+
+
+</script>
+
+
+</body>
+</html>
